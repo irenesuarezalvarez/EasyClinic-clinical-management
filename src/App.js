@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "styled-components";
+import { ResetStyles, ProjectTheme } from "./utils/globalStyles";
+import { Switch, Route, Link } from "react-router-dom";
+
+
+import Signup from "./pages/authentication/Signup";
+import Login from "./pages/authentication/Login";
+import Navbar from "./components/layouts/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <ThemeProvider theme={ProjectTheme}>
+      <ResetStyles />
+      <Navbar/>
+      <nav>
+        <Link to="/">Log iiiin</Link>
+        <Link to="/signup">Sign uuup</Link>
+      </nav>
+      
+        <Switch>
+        {/*  <Route exact path="/">
+            <Link to="/form">
+              <Home />
+            </Link>
+          </Route>
+
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/logout">
+            <Logout />
+          </Route>
+
+          <PrivateRoute path="/form">
+            <ComplaintsForm myFormData={handleFormData} />
+          </PrivateRoute>
+
+          <PrivateRoute path="/overview">
+            <ComplaintsCards cards={formData} />
+          </PrivateRoute> */}
+          <Route exact path="/">
+            <Login/>
+          </Route>
+          
+          <Route path="/signup">
+            <Signup/>
+          </Route>
+
+        </Switch>
+    </ThemeProvider>
   );
 }
 
