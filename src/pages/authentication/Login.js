@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import Input from "./../../components/forms/Input.js"
 import Container from "./../../components/layouts/Container";
@@ -23,13 +24,13 @@ function Login() {
       email: input.email,
       password: input.password
     }
- /*    try {
-      await axios.post('http://localhost:8888/test', newUser)
-      setRedirect(true)
-      console.log('WORKIIIIIING', redirect)
+     try {
+      await axios.post('http://localhost:5000/login', newUser)
+    /*   setRedirect(true) */
+      console.log('WORKIIIIIING')
     } catch (err) {
       console.error(err)
-    } */
+    } 
   } 
 
 
@@ -68,6 +69,7 @@ function Login() {
           <button onClick= {handleClick}>Create account</button>
         </Card>
       </form>
+
     </Container>
   );
 }
