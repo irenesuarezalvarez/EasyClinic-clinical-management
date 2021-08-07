@@ -22,6 +22,8 @@ function Navbar() {
     <StyledNavbar>
         <StyledLink to="/signup">Sign up</StyledLink>
         <StyledLink to="/">Log in</StyledLink>
+        <StyledLink to="/patients">Patients</StyledLink>
+        <StyledLink to="/create">Create</StyledLink>
     </StyledNavbar>
     
   );

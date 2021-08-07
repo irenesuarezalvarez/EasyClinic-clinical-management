@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import axios from 'axios';
 
 import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
 
+
 function Create() {
   const [input, setInput] = useState({});
+  const [redirect, setRedirect] = useState(false); 
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,14 +30,18 @@ function Create() {
         email: input.email,
         password: input.password
     }
- /*    try {
-      await axios.post('http://localhost:8888/test', newUser)
-      setRedirect(true)
-      console.log('WORKIIIIIING', redirect)
+    try {
+      await axios.post('http://localhost:5000/create', newPatient)
+      setRedirect(true) 
+      console.log('Create page iiiiiiiis working baby!', redirect )
     } catch (err) {
       console.error(err)
-    } */
+    } 
   } 
+
+  if(redirect){
+    return <Redirect to='/patients'></Redirect>
+  }
 
 
   return (
