@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
@@ -11,8 +11,19 @@ import Card from "../../components/layouts/Card";
 function Create() {
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false); 
+  const [professionals, setProfessionals] = useState([]);
 
+ /*  Possible use for the dropdown
+    useEffect(() => {
+    const fetchUsers = async () => {
+      const result = await fetch("http://localhost:5000/professionals"); //HELP NEEDED HERE
+      const professionals = await result.json();
+      setProfessionals([...professionals]);
+    };
 
+    fetchUsers();
+  }, []);
+   */
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -28,12 +39,22 @@ function Create() {
         name: input.name,
         surname: input.surname,
         email: input.email,
-        password: input.password
+        phone: input.phone,
+        address: input.address,
+        city: input.city, 
+        state: input.state,
+        postal: input.postal,
+        contactname: input.contactname,
+        contactsurname: input.contactsurname,
+        contactemail: input.contactemail,
+        contactphone: input.contactphone,
+        professional: input.professional,
+        history: input.history 
     }
     try {
-      await axios.post('http://localhost:5000/create', newPatient)
+      await axios.post('http://localhost:5000/patients/create', newPatient)
       setRedirect(true) 
-      console.log('Create page iiiiiiiis working baby!', redirect )
+      console.log('New patient created', newPatient )
     } catch (err) {
       console.error(err)
     } 
@@ -73,7 +94,7 @@ function Create() {
                     name= "email"
                     required
                     value={input.email} 
-                    placeholder= "Enter your email"
+                    placeholder= "Email"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -145,7 +166,7 @@ function Create() {
                     name= "contactemail"
                     required
                     value={input.contactemail} 
-                    placeholder= "Enter your email"
+                    placeholder= "Email"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -160,7 +181,9 @@ function Create() {
                 />
             </Card>
             <Card title="Professional Assistance">
-                <Select
+                
+               {/*  OLD SELECT (Not working for the dropdown) */}
+                <Select 
                     label="Professional"
                     name= "professional"
                     required
@@ -172,8 +195,25 @@ function Create() {
                     <option value="prof1">Professional1</option>
                     <option value="prof">Professional</option>
                 </Select>
+
+                {/* Possible new select option. Help needed in the dropdown
+                <Select
+                    name="professional"
+                    required
+                    onChange={handleChange}
+                    disabled={professionals.length <= 0}
+                    >
+                        <option>--select professional--</option>
+                        {professionals.length > 0 &&
+                         professionals.map((professional) => (
+                            <option value={professional.id} key={professional.id}>
+                            {professional.name}
+                            </option>
+                         ))}
+                </Select>  */}
+                
             </Card>
-            <button onClick= {handleClick}>Create account</button>
+            <button onClick= {handleClick}>Create new Patient</button>
         </div>
 
         </form>
