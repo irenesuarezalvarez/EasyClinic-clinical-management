@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 const Card = ({ title, children }) => {
   return (
-    <cardContainer>
+    <CardContainer>
       <Title>{title}</Title>
       {children}
-    </cardContainer>
+    </CardContainer>
   );
 };
 
-const cardContainer = styled.fieldset`
+const CardContainer = styled.fieldset`
   background-color: white;
   padding: 1rem 2rem;
   border-radius: 4px;

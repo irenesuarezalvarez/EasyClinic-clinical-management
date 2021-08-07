@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 import Input from "./../../components/forms/Input";
 import Select from "./../../components/forms/Select";
@@ -27,13 +28,13 @@ function Signup() {
       role: input.role,
       password: input.password
     } 
- /*    try {
-      await axios.post('http://localhost:8888/test', newUser)
-      setRedirect(true)
-      console.log('WORKIIIIIING', redirect)
+     try {
+      await axios.post('http://localhost:5000/signup', newUser)
+      /* setRedirect(true) */
+
     } catch (err) {
       console.error(err)
-    } */
+    } 
   } 
 
 
@@ -90,7 +91,7 @@ function Signup() {
             value={input.password} 
             placeholder= "Enter your password"
             onChange= {handleChange}
-            type = "text"
+            type = "password"
           />
           <button onClick= {handleClick}>Create account</button>
         </Card>
