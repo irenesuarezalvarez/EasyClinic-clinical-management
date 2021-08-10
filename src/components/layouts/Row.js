@@ -7,7 +7,7 @@ const Line = styled.div`
   justify-content: space-between;
   padding: 5px;
   margin: 2px;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   backgroundColor: red;
 `;
 

@@ -13,7 +13,6 @@ function Create() {
   const [redirect, setRedirect] = useState(false); 
   const [professionals, setProfessionals] = useState([]);
 
- /*  Possible use for the dropdown
     useEffect(() => {
     const fetchUsers = async () => {
       const result = await fetch("http://localhost:5000/professionals"); //HELP NEEDED HERE
@@ -22,9 +21,9 @@ function Create() {
     };
 
     fetchUsers();
-  }, []);
-   */
-  const handleChange = (event) => {
+    }, []);
+    
+    const handleChange = (event) => {
     const { name, value } = event.target;
 
     setInput((prevState) => ({
@@ -182,21 +181,6 @@ function Create() {
             </Card>
             <Card title="Professional Assistance">
                 
-               {/*  OLD SELECT (Not working for the dropdown) */}
-                <Select 
-                    label="Professional"
-                    name= "professional"
-                    required
-                    value={input.professional} 
-                    placeholder= "Professional Assigned"
-                    onChange= {handleChange}
-                    type = "text"
-                >
-                    <option value="prof1">Professional1</option>
-                    <option value="prof">Professional</option>
-                </Select>
-
-                {/* Possible new select option. Help needed in the dropdown
                 <Select
                     name="professional"
                     required
@@ -206,11 +190,11 @@ function Create() {
                         <option>--select professional--</option>
                         {professionals.length > 0 &&
                          professionals.map((professional) => (
-                            <option value={professional.id} key={professional.id}>
-                            {professional.name}
+                            <option value={professional.id} key={professional._id}>
+                            {professional.username}
                             </option>
                          ))}
-                </Select>  */}
+                </Select> 
                 
             </Card>
             <button onClick= {handleClick}>Create new Patient</button>

@@ -29,7 +29,7 @@ function Signup() {
       password: input.password
     } 
      try {
-      await axios.post('http://localhost:5000/signup', newUser)
+      await axios.post('http://localhost:5000/auth/signup', newUser)
       /* setRedirect(true) */
 
     } catch (err) {

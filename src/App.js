@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Signup from "./pages/authentication/Signup";
 import Login from "./pages/authentication/Login";
 import Navbar from "./components/layouts/Navbar";
-import Row from "./components/layouts/Row";
+import Table from "./components/forms/Table";
 import Create from "./pages/patients/Create-new-patient";
 
 function App() {
@@ -26,9 +26,7 @@ function App() {
           </Route>
           
           <Route path="/patients">
-            <Row>Antonia Macarena de los Angeles</Row>
-            <Row>Antonia Macarena de los Angeles</Row>
-            <Row>Antonia Macarena de los Angeles</Row>
+            <Table/>
           </Route>
 
           <Route path="/create">
