@@ -1,23 +1,68 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import axios from 'axios'
 
-import axios from 'axios';
+const URL = 'http://localhost:5000/patients/all'
 
-import Container from "./../../components/layouts/Container";
-import Card from "../../components/layouts/Card";
-import Row from "../../components/layouts/Row";
-import Table from "../../components/layout/Table"
+const ListAllPatients = () => {
+    const [employees, setEmployees] = useState([])
 
-//COPIED FROM CREATE, NEED TO BE CHANGED TO RECEIVE THE PATIENTS DATA
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const getData = async () => {
+        const response = await axios.get(URL)
+        setEmployees(response.data)
+    }
+
+    const removeData = (id) => {
+
+        axios.delete(`${URL}/${id}`).then(res => {
+            const del = employees.filter(employee => id !== employee.id)
+            setEmployees(del)
+        })
+    }
+
+    const renderHeader = () => {
+        let headerElement = ['History number', 'Surname', 'Name', 'Operation']
+
+        return headerElement.map((key, index) => {
+            return <th key={index}>{key.toUpperCase()}</th>
+        })
+    }
+
+    const renderBody = () => {
+        return employees && employees.map(({ _id, surname, name }) => {
+            return (
+                <tr key={_id}>
+                    <td>{_id}</td>
+                    <td>{surname}</td>
+                    <td>{name}</td>
+                    <td>
+                        <button onClick={() => removeData(_id)}>Delete</button>
+                    </td>
+                </tr>
+            )
+        })
+    }
+
+    return (
+        <>
+            <h1 id='title'>List of Patients</h1>
+            <Link to="/create">New Patient</Link>
+            <table id='employee'>
+                <thead>
+                    <tr>{renderHeader()}</tr>
+                </thead>
+                <tbody>
+                    {renderBody()}
+                </tbody>
+            </table>
+        </>
+    )
+}
 
 
-function List() {
-  return (
-    <Container>
-        <Row>Casamor, Mar</Row>
-        <Row>Torres, Ainara</Row>
-        <Row>Buenvaron, Carla</Row>
-        <Row>Amigo, Èlia</Row>
-    </Container>
-  );
-};
-
-export default List;
+export default ListAllPatients;

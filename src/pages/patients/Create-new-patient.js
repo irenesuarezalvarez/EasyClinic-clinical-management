@@ -15,7 +15,7 @@ function Create() {
 
     useEffect(() => {
     const fetchUsers = async () => {
-      const result = await fetch("http://localhost:5000/professionals"); //HELP NEEDED HERE
+      const result = await fetch("http://localhost:5000/professionals"); 
       const professionals = await result.json();
       setProfessionals([...professionals]);
     };
@@ -34,6 +34,7 @@ function Create() {
 
   const handleClick = async event => {
     event.preventDefault()
+    
     const newPatient = {
         name: input.name,
         surname: input.surname,
@@ -53,7 +54,7 @@ function Create() {
     try {
       await axios.post('http://localhost:5000/patients/create', newPatient)
       setRedirect(true) 
-      console.log('New patient created', newPatient )
+      console.log('New patient was created', newPatient)
     } catch (err) {
       console.error(err)
     } 
@@ -183,21 +184,22 @@ function Create() {
                 
                 <Select
                     name="professional"
+                    label="Professional"
                     required
                     onChange={handleChange}
                     disabled={professionals.length <= 0}
                     >
-                        <option>--select professional--</option>
+                        <option value="">--select professional--</option>
                         {professionals.length > 0 &&
                          professionals.map((professional) => (
-                            <option value={professional.id} key={professional._id}>
+                            <option value={professional._id} key={professional._id}>
                             {professional.username}
                             </option>
                          ))}
                 </Select> 
                 
             </Card>
-            <button onClick= {handleClick}>Create new Patient</button>
+            <button onClick= {handleClick}>Create</button>
         </div>
 
         </form>

@@ -27,7 +27,7 @@ function Login() {
       password: input.password
     }
      try {
-      const result = await axios.post('http://localhost:5000/auth/login', newUser)
+      const result = await axios.post('http://localhost:5000/auth/login', {withCredentials: true}, newUser)
       const data = await result;
       console.log(data)
       setRedirect(true)

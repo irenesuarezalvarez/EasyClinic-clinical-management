@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Signup from "./pages/authentication/Signup";
 import Login from "./pages/authentication/Login";
 import Navbar from "./components/layouts/Navbar";
-import Table from "./components/forms/Table";
 import Create from "./pages/patients/Create-new-patient";
+import ListAllPatients from "./pages/patients/List-all-patients"
 
 function App() {
   return (
@@ -26,12 +26,15 @@ function App() {
           </Route>
           
           <Route path="/patients">
-            <Table/>
+          <ListAllPatients/>
           </Route>
 
           <Route path="/create">
            <Create/>
           </Route>
+
+         
+
         </Switch>
 
       </ThemeProvider>
