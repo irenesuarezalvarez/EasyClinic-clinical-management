@@ -6,6 +6,7 @@ import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
+import Button from "../../components/layouts/Button.js";
 
 
 function Create() {
@@ -199,7 +200,7 @@ function Create() {
                 </Select> 
                 
             </Card>
-            <button onClick= {handleClick}>Create</button>
+            <Button onClick= {handleClick}>Create</Button>
         </div>
 
         </form>

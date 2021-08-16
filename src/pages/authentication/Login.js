@@ -5,6 +5,7 @@ import axios from "axios";
 import Input from "./../../components/forms/Input.js"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
+import Button from "../../components/layouts/Button.js";
 
 function Login() {
   const [input, setInput] = useState({});
@@ -73,7 +74,7 @@ function Login() {
             onChange= {handleChange}
             type = "password"
           />
-          <button onClick= {handleClick}>Create account</button>
+          <Button onClick= {handleClick}>Log in</Button>
         </Card>
       </form>
       <div>

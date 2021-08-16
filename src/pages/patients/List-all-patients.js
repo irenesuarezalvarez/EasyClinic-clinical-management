@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from 'axios'
 
+import Container from '../../components/layouts/Container';
+import Card from '../../components/layouts/Card';
+import Button from '../../components/layouts/Button';
+
+
+
 const URL = 'http://localhost:5000/patients/all'
 
 const ListAllPatients = () => {
@@ -29,7 +35,7 @@ const ListAllPatients = () => {
         let headerElement = ['History number', 'Surname', 'Name', 'Operation']
 
         return headerElement.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
+            return <Styledth key={index}>{key.toUpperCase()}</Styledth>
         })
     }
 
@@ -37,32 +43,87 @@ const ListAllPatients = () => {
         return employees && employees.map(({ _id, surname, name }) => {
             return (
                 <tr key={_id}>
-                    <td>{_id}</td>
-                    <td>{surname}</td>
-                    <td>{name}</td>
-                    <td>
+                    <Styledtd>{_id}</Styledtd>
+                    <Styledtd>{surname}</Styledtd>
+                    <Styledtd>{name}</Styledtd>
+                    <Styledtd>
                         <button onClick={() => removeData(_id)}>Delete</button>
-                    </td>
+                    </Styledtd>
                 </tr>
             )
         })
     }
 
     return (
-        <>
-            <h1 id='title'>List of Patients</h1>
-            <Link to="/create">New Patient</Link>
-            <table id='employee'>
-                <thead>
-                    <tr>{renderHeader()}</tr>
-                </thead>
-                <tbody>
-                    {renderBody()}
-                </tbody>
-            </table>
-        </>
+        <Container>
+            <Card>
+                <StyledTitle>List of Patients</StyledTitle>
+
+                <StyledBtn>
+                    <StyledLink to="/create">New Patient</StyledLink>
+                </StyledBtn>
+                
+                <StyledTable>
+                    <thead>
+                        <tr>{renderHeader()}</tr>
+                    </thead>
+                    <tbody>
+                        {renderBody()}
+                    </tbody>
+                </StyledTable>
+
+            </Card>
+        </Container>
     )
 }
 
+const StyledTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  width:100%;
+  margin: 1rem;
+  padding: 0.5rem;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: white;
+ `;
+
+//NOT WORKING: (TO BE CHECKED)
+const StyledBtn = styled(Button)`
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: black;
+    backgroundColor:red;
+ `;
+
+
+//TABLE STYLES
+const StyledTable = styled.table`
+    border-collapse: collapse;
+    border-radius: 0.5em;
+    overflow: hidden;
+    margin: 25px 0;
+    width: 100%;
+    font-size: 0.9em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+`;
+
+
+const Styledth = styled.th`
+    background-color: #FFC300;
+    padding: 0.5rem;
+    text-align: center;
+`;
+
+const Styledtd = styled.td`
+    background-color: secondary_light;
+    padding: 0.9rem;
+    text-align: left;
+`;
 
 export default ListAllPatients;
