@@ -5,6 +5,7 @@ import axios from "axios";
 import Input from "./../../components/forms/Input.js"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
+import Button from "../../components/layouts/Button.js";
 
 function Login() {
   const [input, setInput] = useState({});
@@ -27,7 +28,9 @@ function Login() {
       password: input.password
     }
      try {
-      await axios.post('http://localhost:5000/login', newUser)
+      const result = await axios.post('http://localhost:5000/auth/login', {withCredentials: true}, newUser)
+      const data = await result;
+      console.log(data)
       setRedirect(true)
       console.log('WORKIIIIIING')
     } catch (err) {
@@ -36,7 +39,7 @@ function Login() {
   } 
 
   if(redirect){
-    return <Redirect to='/test'/>
+    return <Redirect to='/patients'/>
   }
 
   return (
@@ -71,7 +74,7 @@ function Login() {
             onChange= {handleChange}
             type = "password"
           />
-          <button onClick= {handleClick}>Create account</button>
+          <Button onClick= {handleClick}>Log in</Button>
         </Card>
       </form>
       <div>

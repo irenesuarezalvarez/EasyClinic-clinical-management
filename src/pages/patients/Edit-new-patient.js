@@ -19,19 +19,19 @@ function Edit() {
 
   const handleClick = async event => {
     event.preventDefault()
-    const newPatient = {
+    const editUser = {
         name: input.name,
         surname: input.surname,
         email: input.email,
         password: input.password
     }
- /*    try {
-      await axios.post('http://localhost:5000/test', newUser)
+    try {
+      await axios.post('http://localhost:5000/edit', editUser)
       setRedirect(true)
-      console.log('WORKIIIIIING', redirect)
+      console.log('Edit is woooorking')
     } catch (err) {
       console.error(err)
-    } */
+    } 
   } 
 
 

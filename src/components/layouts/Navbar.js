@@ -5,7 +5,7 @@ const StyledNavbar = styled.nav`
     display:flex;
     flexDirection: row;
     justify-content: flex-end;
-    background: lightgrey;
+    background: rgb(218, 247, 166);
 `
  const StyledLink = styled(Link)`
     color: black;

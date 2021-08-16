@@ -57,6 +57,7 @@ const reset = css`
   }
   body {
     background-color: white;
+    font-family: "Helvetica", "Verdana", "Lucida Console", "monospace"; 
   }
   #root {
     height: 100%;
@@ -69,9 +70,12 @@ const ResetStyles = createGlobalStyle`${reset}`;
 
 const ProjectTheme = {
   color: {
-    primary: "#f90",
-    secondary: "#212353",
-    secondary_light: "#bcbde3",
+    primary: "#FFF8DC	",
+    secondary: "##66CDAA",
+    secondary_light: "#AFEEEE",
+    secondary_dark: "#20B2AA",
+    secondary_dark_dark: "#008B8B",
+    danger: ""
   },
 };
 

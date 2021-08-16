@@ -5,6 +5,7 @@ import Input from "./../../components/forms/Input";
 import Select from "./../../components/forms/Select";
 import Container from "./../../components/layouts/Container";
 import Card from "./../../components/layouts/Card";
+import Button from "../../components/layouts/Button";
 
 
 function Signup() {
@@ -29,7 +30,7 @@ function Signup() {
       password: input.password
     } 
      try {
-      await axios.post('http://localhost:5000/signup', newUser)
+      await axios.post('http://localhost:5000/auth/signup', newUser)
       /* setRedirect(true) */
 
     } catch (err) {
@@ -93,7 +94,7 @@ function Signup() {
             onChange= {handleChange}
             type = "password"
           />
-          <button onClick= {handleClick}>Create account</button>
+          <Button onClick= {handleClick}>Create account</Button>
         </Card>
       </form>
     </Container>

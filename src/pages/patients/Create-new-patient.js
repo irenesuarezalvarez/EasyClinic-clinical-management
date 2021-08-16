@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
@@ -6,14 +6,25 @@ import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
+import Button from "../../components/layouts/Button.js";
 
 
 function Create() {
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false); 
+  const [professionals, setProfessionals] = useState([]);
 
+    useEffect(() => {
+    const fetchUsers = async () => {
+      const result = await fetch("http://localhost:5000/professionals"); 
+      const professionals = await result.json();
+      setProfessionals([...professionals]);
+    };
 
-  const handleChange = (event) => {
+    fetchUsers();
+    }, []);
+    
+    const handleChange = (event) => {
     const { name, value } = event.target;
 
     setInput((prevState) => ({
@@ -24,16 +35,27 @@ function Create() {
 
   const handleClick = async event => {
     event.preventDefault()
+    
     const newPatient = {
         name: input.name,
         surname: input.surname,
         email: input.email,
-        password: input.password
+        phone: input.phone,
+        address: input.address,
+        city: input.city, 
+        state: input.state,
+        postal: input.postal,
+        contactname: input.contactname,
+        contactsurname: input.contactsurname,
+        contactemail: input.contactemail,
+        contactphone: input.contactphone,
+        professional: input.professional,
+        history: input.history 
     }
     try {
-      await axios.post('http://localhost:5000/create', newPatient)
+      await axios.post('http://localhost:5000/patients/create', newPatient)
       setRedirect(true) 
-      console.log('Create page iiiiiiiis working baby!', redirect )
+      console.log('New patient was created', newPatient)
     } catch (err) {
       console.error(err)
     } 
@@ -73,7 +95,7 @@ function Create() {
                     name= "email"
                     required
                     value={input.email} 
-                    placeholder= "Enter your email"
+                    placeholder= "Email"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -145,7 +167,7 @@ function Create() {
                     name= "contactemail"
                     required
                     value={input.contactemail} 
-                    placeholder= "Enter your email"
+                    placeholder= "Email"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -160,20 +182,25 @@ function Create() {
                 />
             </Card>
             <Card title="Professional Assistance">
+                
                 <Select
+                    name="professional"
                     label="Professional"
-                    name= "professional"
                     required
-                    value={input.professional} 
-                    placeholder= "Professional Assigned"
-                    onChange= {handleChange}
-                    type = "text"
-                >
-                    <option value="prof1">Professional1</option>
-                    <option value="prof">Professional</option>
-                </Select>
+                    onChange={handleChange}
+                    disabled={professionals.length <= 0}
+                    >
+                        <option value="">--select professional--</option>
+                        {professionals.length > 0 &&
+                         professionals.map((professional) => (
+                            <option value={professional._id} key={professional._id}>
+                            {professional.username}
+                            </option>
+                         ))}
+                </Select> 
+                
             </Card>
-            <button onClick= {handleClick}>Create account</button>
+            <Button onClick= {handleClick}>Create</Button>
         </div>
 
         </form>
