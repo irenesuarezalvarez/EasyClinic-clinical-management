@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   padding: 0
     ${({ horizontalPadding }) => horizontalPadding && horizontalPadding};
 `;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 const Container = ({
   verticalPadding,
   horizontalPadding = "2rem",
-  type = "section",
+  type = "section", //default
   children,
 }) => {
   return (

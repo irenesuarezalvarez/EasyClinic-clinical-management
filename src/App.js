@@ -9,6 +9,7 @@ import Login from "./pages/authentication/Login";
 import Navbar from "./components/layouts/Navbar";
 import Create from "./pages/patients/Create-new-patient";
 import ListAllPatients from "./pages/patients/List-all-patients"
+import ListMyPatients from "./pages/patients/List-my-patients";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
 
           <Route path="/create">
            <Create/>
+          </Route>
+
+          <Route path="/mypatients">
+           <ListMyPatients/>
           </Route>
 
          

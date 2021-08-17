@@ -17,10 +17,10 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 
-const URL = 'http://localhost:5000/patients/all'
+const URL = 'http://localhost:5000/patients/mypatients'
 
-const ListAllPatients = () => {
-    const [employees, setEmployees] = useState([])
+const ListMyPatients = () => {
+    const [patients, setPatients] = useState([])
 
     useEffect(() => {
         getData()
@@ -28,14 +28,14 @@ const ListAllPatients = () => {
 
     const getData = async () => {
         const response = await axios.get(URL)
-        setEmployees(response.data)
+        setPatients(response.data.patients)
     }
 
     const removeData = (id) => {
 
         axios.delete(`${URL}/${id}`).then(res => {
-            const del = employees.filter(employee => id !== employee.id)
-            setEmployees(del)
+            const del = patients.filter(patient => id !== patient.id)
+            setPatients(del)
         })
     }
 
@@ -48,7 +48,7 @@ const ListAllPatients = () => {
     }
 
     const renderBody = () => {
-        return employees && employees.map(({ _id, surname, name }) => {
+        return patients && patients.map(({ _id, surname, name }) => {
             return (
                 <tr key={_id}>
                     <Styledtd>{_id}</Styledtd>
@@ -97,24 +97,23 @@ const StyledTitle = styled.h1`
 
 const StyledLink = styled(Link)`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   text-decoration: none;
   color: white;
- `;
- 
- const StyledSpan = styled.span`
-  padding-left: 15px;
  `;
 
 //NOT WORKING: (TO BE CHECKED)
 const StyledBtn = styled(Button)`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     text-decoration: none;
     color: black;
     backgroundColor:red;
  `;
 
+ const StyledSpan = styled.span`
+  padding-left: 15px;
+ `;
 
 //TABLE STYLES
 const StyledTable = styled.table`
@@ -140,4 +139,4 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-export default ListAllPatients;
+export default ListMyPatients;

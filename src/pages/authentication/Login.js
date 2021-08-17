@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+/* import axios from "axios";  */
 
 import Input from "./../../components/forms/Input.js"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
+import axiosApi from "../../utils/AxiosApi";
 
 function Login() {
   const [input, setInput] = useState({});
@@ -21,6 +22,7 @@ function Login() {
   };
 
   const handleClick = async event => {
+    console.log('WORKIIIIIING')
     event.preventDefault()
     const newUser = {
       username: input.username,
@@ -28,11 +30,11 @@ function Login() {
       password: input.password
     }
      try {
-      const result = await axios.post('http://localhost:5000/auth/login', {withCredentials: true}, newUser)
+      const result = await axiosApi.post('/auth/login', newUser)
       const data = await result;
       console.log(data)
       setRedirect(true)
-      console.log('WORKIIIIIING')
+      
     } catch (err) {
       console.error(err)
     } 
@@ -45,7 +47,7 @@ function Login() {
   return (
     
     <Container horizontalPadding="1.5rem">
-      <form >
+      <form onSubmit={handleClick}>
         <Card title="Log In">
           <Input
             label="Username "
@@ -74,7 +76,7 @@ function Login() {
             onChange= {handleChange}
             type = "password"
           />
-          <Button onClick= {handleClick}>Log in</Button>
+          <Button type="submit" >Log in</Button>
         </Card>
       </form>
       <div>
