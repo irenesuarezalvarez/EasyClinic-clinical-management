@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import axios from 'axios';
+/* import axios from 'axios'; */
 
 import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
 import Container from "./../../components/layouts/Container";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
-
+import axiosApi from "../../utils/AxiosApi";
 
 function Create() {
   const [input, setInput] = useState({});
@@ -16,14 +16,15 @@ function Create() {
 
     useEffect(() => {
     const fetchUsers = async () => {
-      const result = await fetch("http://localhost:5000/professionals"); 
-      const professionals = await result.json();
-      setProfessionals([...professionals]);
+      const result = await axiosApi.get("/professionals"); 
+      const professionals = result.data;
+      setProfessionals([...professionals]); 
     };
 
     fetchUsers();
     }, []);
-    
+
+        
     const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -53,7 +54,7 @@ function Create() {
         history: input.history 
     }
     try {
-      await axios.post('http://localhost:5000/patients/create', newPatient)
+      await axiosApi.post('/patients/create', newPatient)
       setRedirect(true) 
       console.log('New patient was created', newPatient)
     } catch (err) {
@@ -68,7 +69,7 @@ function Create() {
 
   return (
     <Container horizontalPadding="1.5rem">
-        <form>
+        <form onSubmit={handleClick}>
 
         <div>   
             <Card title="Personal Information">
@@ -200,7 +201,7 @@ function Create() {
                 </Select> 
                 
             </Card>
-            <Button onClick= {handleClick}>Create</Button>
+            <Button type="submit">Create</Button>
         </div>
 
         </form>
