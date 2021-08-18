@@ -10,7 +10,7 @@ function Button ({type, children}) {
   );
 };
 
-const StyledBtn = styled.button`
+export const StyledBtn = styled.button`
   background-color: rgb(102, 205, 170);
   color: white;
   padding: 0.7rem 1rem;

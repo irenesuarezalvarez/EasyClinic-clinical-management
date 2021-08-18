@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-/* import axios from "axios";  */
+
 
 import Input from "./../../components/forms/Input.js"
 import Container from "./../../components/layouts/Container";
@@ -22,7 +22,6 @@ function Login() {
   };
 
   const handleClick = async event => {
-    console.log('WORKIIIIIING')
     event.preventDefault()
     const newUser = {
       username: input.username,
@@ -32,7 +31,6 @@ function Login() {
      try {
       const result = await axiosApi.post('/auth/login', newUser)
       const data = await result;
-      console.log(data)
       setRedirect(true)
       
     } catch (err) {

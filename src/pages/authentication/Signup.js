@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import styled from "styled-components";
+
 
 import Input from "./../../components/forms/Input";
 import Select from "./../../components/forms/Select";
 import Card from "./../../components/layouts/Card";
 import Button from "../../components/layouts/Button";
+import PageWrapper from "../../components/layouts/PageWrapper";
 
 
 function Signup() {
@@ -41,8 +42,6 @@ function Signup() {
 
   return (
     <PageWrapper>
-      <FormContainer>
-        <FormWrapper>
         <form>
           <Card title="Sign Up">
             <Input
@@ -98,38 +97,9 @@ function Signup() {
             <Button onClick= {handleClick}>Create account</Button>
           </Card>
         </form>
-        </FormWrapper>
-        
-      </FormContainer>
-      <Aside>Block</Aside>
     </PageWrapper>
 
   );
 }
 
-/* const FormWrapper = styled.section`
-  width: 50%;
-  margin: 0 auto;
-` */
-
-const PageWrapper = styled.section`
-  display:flex;
-`
-const FormContainer = styled.section`
-  flex: 2;
-  display: flex;
-  justify-content: flex-end;
-  margin: 0.8rem;
-`
-const Aside = styled.aside`
-  width: 100%;
-  height: 200px;
-  background-color: orange;
-  border: 1px solid black;
-  flex: 1;
-  margin: 0.8rem;
-`
-const FormWrapper = styled.section`
-  width: 50%;
-`
 export default Signup;
