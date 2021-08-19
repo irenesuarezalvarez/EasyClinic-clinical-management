@@ -55,6 +55,7 @@ const ListAllPatients = () => {
                     <Styledtd>
                         <LinkIcon to="/calendar"><FontAwesomeIcon icon={faCalendar} /></LinkIcon>
                         <LinkIcon to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></LinkIcon>
+                        <LinkIcon to={`sessions/${_id}`}>session</LinkIcon>
                         <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
                     </Styledtd>
                 </tr>

@@ -26,8 +26,8 @@ export const StyledBtn = styled.button`
     color: #989393;
   }
   &:hover{
-    background-color:#DAF7A6;
-    color: black;
+    background-color:rgb(28, 130, 112 );
+   
   }
 `;
 

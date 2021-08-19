@@ -9,6 +9,7 @@ const Input = ({
   onChange,
   type = "text",
   disabled,
+  ...restProps
 }) => {
   return (
     <StyledContainer>
@@ -20,6 +21,7 @@ const Input = ({
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
+        {...restProps}
       />
     
     </StyledContainer>

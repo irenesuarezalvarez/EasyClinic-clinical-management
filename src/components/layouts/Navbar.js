@@ -53,6 +53,7 @@ function Navbar() {
         <StyledLink to="/create">Create</StyledLink>
         <StyledLink to="/mypatients">My Patients</StyledLink>
         <StyledLink to="/edit">Edit</StyledLink>
+        
         <form onSubmit={handleLogOut}><button type="submit">Log out</button></form>
         
     </StyledNavbar>

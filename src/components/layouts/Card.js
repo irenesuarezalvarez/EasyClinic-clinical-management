@@ -11,7 +11,7 @@ const Card = ({ title, children }) => {
   );
 };
 
-const CardContainer = styled.fieldset`
+export const CardContainer = styled.fieldset`
   background-color: white;
   padding: 1rem 2rem;
   border-radius: 4px;

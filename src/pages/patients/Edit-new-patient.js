@@ -14,7 +14,7 @@ import Container from "../../components/layouts/Container.js";
 
 
 function Edit() {
-    let { id } = useParams();
+    const { id } = useParams();
     const [input, setInput] = useState({});
     const [patient, setPatient] = useState([]);
     const [redirect, setRedirect] = useState(false); 
@@ -23,11 +23,11 @@ function Edit() {
     //Get data 
 
     useEffect(() => {
-        getPatients()
+        getPatient()
         getProfessionals()
     }, [])
     
-    const getPatients = async () => {
+    const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
         console.log('Frontend get patients', response.data);
         setPatient(response.data)
@@ -44,7 +44,7 @@ function Edit() {
     const handleClick = async event => {
         event.preventDefault()
             
-        const editPatient = {
+      /*   const editPatient = {
             name: input.name,
             surname: input.surname,
             email: input.email,
@@ -60,10 +60,11 @@ function Edit() {
             professional: input.professional,
             history: input.history 
         }
+         */
         try {
             setRedirect(true) 
-            await axiosApi.post(`/patients/edit/${id}`, patient)
-            console.log('The patient was edited', patient)
+            await axiosApi.post(`/patients/edit/${id}`, input)
+            console.log('The patient was edited', input)
         } catch (err) {
             console.error(err)
         } 
@@ -93,149 +94,135 @@ function Edit() {
             })) */
         };
 
-
+        console.log('Input and patients', input, patient)
      
                 
         return(
-            <div>
-                <form onSubmit={handleClick}>
-                    <Card title="Personal Information">
-                        <Input
-                            label="Name "
-                            name="name"
-                            required
-                            value={input.name} 
-                            placeholder={name}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Surname "
-                            name="surname"
-                            required
-                            value={input.surname} 
-                            placeholder={surname}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Email "
-                            name= "email"
-                            required
-                            value={input.email} 
-                            placeholder={email}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Phone"
-                            name="phone"
-                            required
-                            value={input.phone} 
-                            placeholder={phone}
-                            onChange={handleChange}
-                            type ="number"
-                        />
-                        <Input
-                            label="Address "
-                            name= "adress"
-                            value={input.adress} 
-                            placeholder={adress}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="City "
-                            name="city"
-                            value={input.city} 
-                            placeholder={city}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="State "
-                            name="state"
-                            value={input.state} 
-                            placeholder={state}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Postal code "
-                            name="postal"
-                            required
-                            value={input.postal} 
-                            placeholder={postal}
-                            onChange={handleChange}
-                            type="number"
-                        />
-                    </Card>
+            <div> 
+                {Object.keys(patient).length > 0  && 
+                    <form onSubmit={handleClick}>
+                        <Card title="Personal Information">
+                            <Input
+                                label="Name"
+                                name="name"
+                                required
+                                defaultValue={name}
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Surname "
+                                name="surname"
+                                required
+                                defaultValue={surname}
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Email "
+                                name= "email"
+                                required
+                                defaultValue={email} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Phone"
+                                name="phone"
+                                required
+                                defaultValue={phone} 
+                                onChange={handleChange}
+                                type ="number"
+                            />
+                            <Input
+                                label="Address "
+                                name= "adress"
+                                defaultValue={adress} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="City "
+                                name="city"
+                                defaultValue={city} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="State "
+                                name="state"
+                                defaultValue={state} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Postal code "
+                                name="postal"
+                                required
+                                defaultValue={postal} 
+                                onChange={handleChange}
+                                type="number"
+                            />
+                        </Card>
 
-                    <Card title="Contact Details">
-                        <Input
-                            label="Name "
-                            name="contactname"
-                            required
-                            value={input.contactname} 
-                            placeholder={contactname}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Surname "
-                            name="contactsurname"
-                            required
-                            value={input.contactsurname} 
-                            placeholder={contactsurname}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Email "
-                            name="contactemail"
-                            required
-                            value={input.contactemail} 
-                            placeholder={contactemail}
-                            onChange={handleChange}
-                            type="text"
-                        />
-                        <Input
-                            label="Phone"
-                            name="contactphone"
-                            required
-                            value={input.contactphone} 
-                            placeholder={contactphone}
-                            onChange={handleChange}
-                            type="number"
-                        />
-                    </Card>
+                        <Card title="Contact Details">
+                            <Input
+                                label="Name "
+                                name="contactname"
+                                required
+                                defaultValue={contactname} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Surname "
+                                name="contactsurname"
+                                required
+                                defaultValue={contactsurname} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Email "
+                                name="contactemail"
+                                required
+                                defaultValue={contactemail} 
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <Input
+                                label="Phone"
+                                name="contactphone"
+                                required
+                                defaultValue={contactphone} 
+                                onChange={handleChange}
+                                type="number"
+                            />
+                        </Card>
 
-                    <Card title="Professional Assistance">
-                   
-                    {/*     <Select
-                            name="professional"
-                            label={professional[0].username}
-                            required
-                            onChange={handleChange}
-                            disabled={professionals.length <= 0}
-                        >
-                        
-                            <option value="">--select professional--</option>
-                                {professionals.length > 0 &&
-                                    professionals.map((professional) => (
-                                        <option value={professional._id} key={professional._id}>
-                                        {professional.username}
-                                        </option>
-                                ))}
-                        </Select>  */}
-             
-                    </Card>
-             
-            
-
-                    <Button type="submit">Edit</Button>
-                </form>
-         
+                        <Card title="Professional Assistance">
+                    
+                            <Select
+                                name="professional"
+                                label= "Professional"
+                                required
+                                onChange={handleChange}
+                                disabled={professionals.length <= 0}
+                            >
+                            
+                                <option value="">--select professional--</option>
+                                    {professionals.length > 0 &&
+                                        professionals.map((prof) => (
+                                            <option value={prof._id} key={prof._id} selected={prof._id === professional[0]._id}>
+                                            {prof.username}
+                                            </option>
+                                    ))}
+                            </Select> 
+                
+                        </Card>
+                        <Button type="submit">Edit</Button>
+                    </form>
+                }
             </div>
         )
         
