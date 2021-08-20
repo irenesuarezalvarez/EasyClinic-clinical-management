@@ -28,11 +28,11 @@ function Create() {
     const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+        setInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+        }));
+    };
 
   const handleClick = async event => {
     event.preventDefault()

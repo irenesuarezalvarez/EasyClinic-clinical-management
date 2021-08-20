@@ -10,6 +10,8 @@ import Navbar from "./components/layouts/Navbar";
 import Create from "./pages/patients/Create-new-patient";
 import ListAllPatients from "./pages/patients/List-all-patients"
 import ListMyPatients from "./pages/patients/List-my-patients";
+import Edit from "./pages/patients/Edit-new-patient"
+import History from "./pages/patients/Clinical-history";
 
 function App() {
   return (
@@ -27,15 +29,23 @@ function App() {
           </Route>
           
           <Route path="/patients">
-          <ListAllPatients/>
+            <ListAllPatients/>
           </Route>
 
           <Route path="/create">
-           <Create/>
+            <Create/>
           </Route>
 
           <Route path="/mypatients">
-           <ListMyPatients/>
+            <ListMyPatients/>
+          </Route>
+
+          <Route path="/edit/:id">
+            <Edit/>
+          </Route>
+
+          <Route path="/sessions/:id">
+            <History/>
           </Route>
 
          
