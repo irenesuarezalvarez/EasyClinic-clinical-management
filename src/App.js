@@ -12,6 +12,7 @@ import ListAllPatients from "./pages/patients/List-all-patients"
 import ListMyPatients from "./pages/patients/List-my-patients";
 import Edit from "./pages/patients/Edit-new-patient"
 import History from "./pages/patients/Clinical-history";
+import Home from "./pages/general/Home";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Navbar/>
         <Switch>
           <Route exact path="/">
-            <Login/>
+            <Home/>
           </Route>
 
           <Route path="/signup">
@@ -47,8 +48,7 @@ function App() {
           <Route path="/sessions/:id">
             <History/>
           </Route>
-
-         
+       
 
         </Switch>
 

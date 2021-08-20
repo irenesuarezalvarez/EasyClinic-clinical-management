@@ -11,34 +11,36 @@ import Button from '../../components/layouts/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
+import { faStickyNote } from '@fortawesome/free-solid-svg-icons'
+import { faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
+
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
+import axiosApi from '../../utils/AxiosApi';
 
-
-
-const URL = 'http://localhost:5000/patients/mypatients'
 
 const ListMyPatients = () => {
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
-        getData()
+        getPatients()
     }, [])
 
-    const getData = async () => {
-        const response = await axios.get(URL)
+    const getPatients = async () => {
+        const response = await axiosApi.get(`/patients/mypatients`)
         setPatients(response.data.patients)
     }
 
-    const removeData = (id) => {
-
+   /*  const removeData = (id) => {
         axios.delete(`${URL}/${id}`).then(res => {
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
         })
     }
-
+ */
     const renderHeader = () => {
         let headerElement = ['History number', 'Surname', 'Name', 'Operation']
 
@@ -55,9 +57,13 @@ const ListMyPatients = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
-                        <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faCalendar} /></Button>
-                        <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faEdit} /></Button>
-                        <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                       
+                        <LinkIcon to={`edit/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></LinkIcon>
+                       {/*  <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faNotesMedical}/></LinkIcon> */}
+                      {/*   <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faStickyNote}/></LinkIcon> */}
+                        <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></LinkIcon>
+                        <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faFileAlt}/></LinkIcon>
+                        {/* <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt}/></Button> */}
                     </Styledtd>
                 </tr>
             )
@@ -67,7 +73,7 @@ const ListMyPatients = () => {
     return (
         <Container>
             <Card>
-                <StyledTitle>List of Patients</StyledTitle>
+                <StyledTitle>My Patients</StyledTitle>
 
                 <StyledBtn>
                     <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
@@ -138,5 +144,24 @@ const Styledtd = styled.td`
     padding: 0.9rem;
     text-align: center;
 `;
-
+const LinkIcon = styled(Link)`
+  background-color: rgb(102, 205, 170);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: backgroud-color ease-out 0.35s;
+  border-radius: 5px;
+  &:disabled {
+    background-color: #bdbbbb;
+    cursor: not-allowed;
+    color: #989393;
+  }
+  &:hover{
+    background-color:#DAF7A6;
+    color: black;
+  }
+`;
 export default ListMyPatients;

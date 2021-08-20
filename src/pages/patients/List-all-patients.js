@@ -4,8 +4,7 @@ import styled from "styled-components";
 import axios from 'axios'
 
 import Card from '../../components/layouts/Card';
-import Button from '../../components/layouts/Button';
-import PageWrapper from '../../components/layouts/PageWrapper';
+import Button, {StyledBtn} from '../../components/layouts/Button';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -52,12 +51,11 @@ const ListAllPatients = () => {
                     <Styledtd>{_id}</Styledtd>
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
-                    <Styledtd>
+                    <ButtonBox>
                         <LinkIcon to="/calendar"><FontAwesomeIcon icon={faCalendar} /></LinkIcon>
                         <LinkIcon to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></LinkIcon>
-                        <LinkIcon to={`sessions/${_id}`}>session</LinkIcon>
                         <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                    </Styledtd>
+                    </ButtonBox>
                 </tr>
             )
         })
@@ -68,9 +66,9 @@ const ListAllPatients = () => {
             <Card>
                 <StyledTitle>List of Patients</StyledTitle>
 
-                <StyledBtn>
+                <NewPatientBtn>
                     <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
-                </StyledBtn>
+                </NewPatientBtn>
                 
                 <StyledTable>
                     <thead>
@@ -121,17 +119,15 @@ const LinkIcon = styled(Link)`
     color: black;
   }
 `;
+
  const StyledSpan = styled.span`
   padding-left: 15px;
  `;
 
-//NOT WORKING: (TO BE CHECKED)
-const StyledBtn = styled(Button)`
-    display: flex;
-    justify-content: space-between;
-    text-decoration: none;
-    color: black;
-    backgroundColor:red;
+//NOT WORKING JUSTIFY SELF RIGHT (TO BE CHECKED)
+const NewPatientBtn = styled(StyledBtn)`
+    justify-self: right;
+    background-color:red;
  `;
 
 
@@ -159,4 +155,12 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
+//NO WRAP NOT WORKING
+const ButtonBox = styled(Styledtd)`
+    isplay:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+`
 export default ListAllPatients;

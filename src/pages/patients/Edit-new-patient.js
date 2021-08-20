@@ -42,25 +42,8 @@ function Edit() {
 
     //Send patient edited
     const handleClick = async event => {
-        event.preventDefault()
-            
-      /*   const editPatient = {
-            name: input.name,
-            surname: input.surname,
-            email: input.email,
-            phone: input.phone,
-            address: input.address,
-            city: input.city, 
-            state: input.state,
-            postal: input.postal,
-            contactname: input.contactname,
-            contactsurname: input.contactsurname,
-            contactemail: input.contactemail,
-            contactphone: input.contactphone,
-            professional: input.professional,
-            history: input.history 
-        }
-         */
+        event.preventDefault()          
+   
         try {
             setRedirect(true) 
             await axiosApi.post(`/patients/edit/${id}`, input)

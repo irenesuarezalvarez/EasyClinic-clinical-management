@@ -4,22 +4,6 @@ import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi";
 
-
-const StyledNavbar = styled.nav`
-    display:flex;
-    flexDirection: row;
-    justify-content: flex-end;
-    background: rgb(218, 247, 166);
-`
- const StyledLink = styled(Link)`
-    color: black;
-    text-decoration: none;
-    backgroundColor:blue;
-    padding:5px;
-    margin:5px 25px ;
- `
-
-
 function Navbar() {
   const [redirect, setRedirect] = useState(false);
 
@@ -28,7 +12,7 @@ function Navbar() {
   const handleLogOut = async event => {
     event.preventDefault()
     try {
-      console.log('hola')
+      console.log('Logged out')
       history.push('/')
       await axiosApi.post('/auth/logout')
       setRedirect(true)
@@ -47,19 +31,50 @@ function Navbar() {
   return (
     
     <StyledNavbar>
-        <StyledLink to="/signup">Sign up</StyledLink>
-        <StyledLink to="/">Log in</StyledLink>
-        <StyledLink to="/patients">Patients</StyledLink>
-        <StyledLink to="/create">Create</StyledLink>
-        <StyledLink to="/mypatients">My Patients</StyledLink>
-        <StyledLink to="/edit">Edit</StyledLink>
-        
-        <form onSubmit={handleLogOut}><button type="submit">Log out</button></form>
+        <StyledLogo  src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo>
+        <StyledUl>
+          <li><StyledLink to="/signup">Sign up</StyledLink></li>
+          <li><StyledLink to="/create">Create</StyledLink></li>
+          <li><StyledLink to="/patients">Patients</StyledLink></li>
+          <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
+          <li><StyledLink to="/edit">Edit</StyledLink></li>
+          <li><StyledLink to="/">Home</StyledLink></li>
+          <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
+        </StyledUl>
+       
         
     </StyledNavbar>
     
   );
 }
+const StyledLogo = styled.img`
+  height: 50px;
+  padding:5px;
+  margin:5px 25px ;
+`
+const StyledUl = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const StyledNavbar = styled.nav`
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background: rgb(218, 247, 166);
+`
+ const StyledLink = styled(Link)`
+    color: black;
+    text-decoration: none;
+    padding:5px;
+    margin:5px 10px ;
+ `
+
 
 export default Navbar;
 
