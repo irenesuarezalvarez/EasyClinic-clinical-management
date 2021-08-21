@@ -57,8 +57,8 @@ const ListMyPatients = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
-                       
-                        <LinkIcon to={`edit/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></LinkIcon>
+                   
+                        <LinkIcon to={`details/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></LinkIcon>
                        {/*  <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faNotesMedical}/></LinkIcon> */}
                       {/*   <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faStickyNote}/></LinkIcon> */}
                         <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></LinkIcon>

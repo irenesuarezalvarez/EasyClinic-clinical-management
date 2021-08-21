@@ -26,7 +26,7 @@ export const CardContainer = styled.fieldset`
   }
 `;
 
-const Title = styled.h2`
+export const Title = styled.h2`
   font-weight: bold;
   color: black;
   margin-bottom: 1rem;

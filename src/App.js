@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 
 import Signup from "./pages/authentication/Signup";
-import Login from "./pages/authentication/Login";
 import Navbar from "./components/layouts/Navbar";
 import Create from "./pages/patients/Create-new-patient";
 import ListAllPatients from "./pages/patients/List-all-patients"
@@ -13,10 +12,15 @@ import ListMyPatients from "./pages/patients/List-my-patients";
 import Edit from "./pages/patients/Edit-new-patient"
 import History from "./pages/patients/Clinical-history";
 import Home from "./pages/general/Home";
+import Details from "./pages/patients/Details-patient";
+import AuthContext from "./utils/AuthContext";
+import PrivateRoute from "./utils/PrivateRoutes";
 
 function App() {
   return (
-    <Router>
+    <AuthContext>
+      <Router>
+      
       <ThemeProvider theme={ProjectTheme}>
         <ResetStyles />
         <Navbar/>
@@ -37,8 +41,12 @@ function App() {
             <Create/>
           </Route>
 
-          <Route path="/mypatients">
+          <PrivateRoute path="/mypatients">
             <ListMyPatients/>
+          </PrivateRoute>
+
+          <Route path="/details/:id">
+            <Details/>
           </Route>
 
           <Route path="/edit/:id">
@@ -48,12 +56,17 @@ function App() {
           <Route path="/sessions/:id">
             <History/>
           </Route>
-       
+
+
+      
 
         </Switch>
 
       </ThemeProvider>
     </Router>
+
+    </AuthContext>
+   
   );
 }
 

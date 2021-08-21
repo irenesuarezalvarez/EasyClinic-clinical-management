@@ -6,6 +6,7 @@ import Input from "./../../components/forms/Input";
 import Select from "./../../components/forms/Select";
 import Card from "./../../components/layouts/Card";
 import Button from "../../components/layouts/Button";
+import BtnDiv from "../../components/layouts/BtnDiv";
 import PageWrapper from "../../components/layouts/PageWrapper";
 
 
@@ -94,7 +95,10 @@ function Signup() {
               onChange= {handleChange}
               type = "password"
             />
-            <Button onClick= {handleClick}>Create account</Button>
+            <BtnDiv>
+              <Button onClick= {handleClick}>Create account</Button>
+            </BtnDiv>
+           
           </Card>
         </form>
     </PageWrapper>

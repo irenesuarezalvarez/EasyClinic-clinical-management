@@ -8,6 +8,10 @@ import Login from "../authentication/Login"
 const Home = () => {
   return (
     <HeaderStyled>
+        <LogoDiv>
+         <StyledLogo src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo>
+        </LogoDiv>
+        
         <LoginBox>
             <Login/>
             <DivSignUp>
@@ -22,7 +26,7 @@ const Home = () => {
 
 const HeaderStyled = styled.fieldset`
     display:flex;
-    justify-content: flex-end; 
+    justify-content: center; 
     background-image: url("../images/clinic-management.jpg");
     height: 100vh;
     width: 100%; 
@@ -36,9 +40,27 @@ const HeaderStyled = styled.fieldset`
     }
 `;
 
+const LogoDiv = styled.div`
+    display: flex;
+    flex:2;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 2 rem;
+    padding: 1rem 2 rem;
+    
+`
+
+const StyledLogo = styled.img`
+    height:50%;
+    margin: 1rem 2 rem;
+    padding: 1rem 2 rem;
+    
+`
+
 const LoginBox = styled.div`
-    background-color: rgba(255, 255, 255, 0.5);;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 1rem 2rem;
+    margin: 1rem 2rem;
     border-radius: 4px;
     display: flex;
     justify-content: center;

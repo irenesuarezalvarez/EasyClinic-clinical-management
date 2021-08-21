@@ -1,10 +1,13 @@
-/* import { Route, Redirect, useLocation } from "react-router-dom";
+import { Route, Redirect, useLocation } from "react-router-dom";
+import {useContext} from "react";
 
-import { useAuth } from "./AuthContext";
+import {CreateAuthContext} from "./AuthContext"
+
 
 const PrivateRoute = ({ children, ...props }) => {
+  
   const location = useLocation();
-  const { isAuth } = useAuth();
+  const { isAuth } = useContext(CreateAuthContext) 
 
   console.log(location);
 
@@ -21,4 +24,4 @@ const PrivateRoute = ({ children, ...props }) => {
   );
 };
 
-export default PrivateRoute; */
+export default PrivateRoute;

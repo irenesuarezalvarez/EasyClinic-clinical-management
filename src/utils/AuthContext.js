@@ -1,38 +1,39 @@
-/* import React, { useState, useContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
+import axiosApi from "./AxiosApi"
 
-const AuthContext = React.createContext(false);
+export const CreateAuthContext = createContext({});
 
-// my custom hook
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-const AuthProvider = ({ children }) => {
+const AuthContext = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    console.log(user, !!user);
-    setIsAuth(!!user);
-  }, [isAuth]);
+  async function logIn(credentials){
+    try {
+      const result = await axiosApi.post('/auth/login', credentials)
+      const data = await result;
+      console.log(data)
 
-  const login = (dataCredentials) => {
-    const { username, password } = dataCredentials;
-    localStorage.setItem("user", JSON.stringify({ username, password }));
-    // Your Axios call
-    setIsAuth(true);
-  };
+      setIsAuth(data.status === 200);
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    setIsAuth(false);
-  };
+     /*  if(data.status === 200){
+        setIsAuth(true);
+      } */
+      
+      
+    } catch (err) {
+      console.error(err)
+    } 
 
-  return (
-    <AuthContext.Provider value={{ isAuth, login, logout }}>
+    return(
+      'is authenticated', credentials
+    )
+  }
+
+  return(
+    <CreateAuthContext.Provider value={{isAuth, logIn}}>
       {children}
-    </AuthContext.Provider>
-  );
-};
+    </CreateAuthContext.Provider>
+  )
+} 
 
-export default AuthProvider; */
+
+export default AuthContext;

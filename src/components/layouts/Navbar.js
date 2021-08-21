@@ -1,10 +1,13 @@
 import { Link, Redirect, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi";
+/* import {CreateAuthContext} from "../../utils/AuthContext" */
+
 
 function Navbar() {
+/*   const useAuth = useContext(CreateAuthContext) */
   const [redirect, setRedirect] = useState(false);
 
   const history = useHistory()
@@ -37,11 +40,10 @@ function Navbar() {
           <li><StyledLink to="/create">Create</StyledLink></li>
           <li><StyledLink to="/patients">Patients</StyledLink></li>
           <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
-          <li><StyledLink to="/edit">Edit</StyledLink></li>
           <li><StyledLink to="/">Home</StyledLink></li>
           <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
         </StyledUl>
-       
+      {/*  <div>{useAuth}</div> */}
         
     </StyledNavbar>
     

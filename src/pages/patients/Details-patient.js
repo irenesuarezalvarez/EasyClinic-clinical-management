@@ -1,185 +1,185 @@
 import React, { useState, useEffect } from "react";
+import {  Redirect, useParams } from "react-router-dom";
+import styled from "styled-components";
 
-import axios from 'axios';
 
-import Input from "./../../components/forms/Input.js";
-import Select from "./../../components/forms/Select"
-import Container from "./../../components/layouts/Container";
-import Card from "../../components/layouts/Card";
+import axiosApi from "../../utils/AxiosApi.js";
+import Input from "../../components/forms/Input.js";
+import Button from "../../components/layouts/Button.js";
+import BtnDiv from "../../components/layouts/BtnDiv.js";
+import Card, {Title, CardContainer} from "../../components/layouts/Card.js";
 
-//COPIED FROM CREATE, NEED TO BE CHANGED TO RECEIVE THE PATIENTS DATA
+import PageWrapper from "../../components/layouts/PageWrapper.js";
+
+
+
 
 function Details() {
-  const [input, setInput] = useState({});
-  const [redirect, setRedirect] = useState(false); 
-  const [professionals, setProfessionals] = useState([]);
+    const { id } = useParams();
+    const [patient, setPatient] = useState([]);
+    const [redirect, setRedirect] = useState(false); 
+    const [professionals, setProfessionals] = useState([]);
 
- /*  Possible use for the dropdown
+    //Get data 
+
     useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await fetch("http://localhost:5000/professionals"); //HELP NEEDED HERE
-      const professionals = await result.json();
-      setProfessionals([...professionals]);
-    };
+        getPatient()
+        getProfessionals()
+    }, [])
+    
+    const getPatient = async () => {
+        const response = await axiosApi.get(`/patients/edit/${id}`);
+        setPatient(response.data)
+    }
 
-    fetchUsers();
-  }, []);
-   */
+    //Get professionals for dropdown
+      const getProfessionals = async () =>{
+        const result = await axiosApi.get("/professionals"); 
+        const professionals = result.data;
+        setProfessionals([...professionals]); 
+    }
 
 
-  const handleClick = async event => {
-    event.preventDefault()
+    //Redirect
+    if(redirect){
+        return <Redirect to='/patients'></Redirect>
+    }
+
   
-    try {
-      await axios.post('http://localhost:5000/patients/create', newPatient)
-      setRedirect(true) 
-      console.log('New patient created', newPatient )
-    } catch (err) {
-      console.error(err)
-    } 
-  } 
 
+    function renderMyBody(){
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history } = patient;
+                  
+        return(
+            <div> 
+                {Object.keys(patient).length > 0  && 
+                    <section >
+                        <Card title="Personal Information">
+                            <StyledArticle>
+                            <div>Photo</div>
+                            <LeftCard>
+                            <Row>
+                                <h3>Name: </h3>
+                                <p>{name}</p>
+                            </Row>
+                            <Row>
+                                <h3>Surname: </h3>
+                                <p>{surname}</p>
+                            </Row>
+                            <Row>
+                                <h3>Email: </h3>
+                                <p>{email}</p>
+                            </Row>
+                            <Row>
+                                <h3>Phone: </h3>
+                                <p>{phone}</p>
+                            </Row>
+                            <Row>
+                                <h3>Address: </h3>
+                                <p>{address}</p>
+                            </Row>
+                            <Row>
+                                <h3>City: </h3>
+                                <p>{city}</p>
+                            </Row>
+                            <Row>
+                                <h3>State: </h3>
+                                <p>{state}</p>
+                            </Row>
+                            <Row>
+                                <h3>Postal code: </h3>
+                                <p>{postal}</p>
+                            </Row>
+                          
+                            </LeftCard>
+                            </StyledArticle>
+                        </Card>
 
-  return (
-    <Container horizontalPadding="1.5rem">
-        <form>
+                        <Card title="Contact Details">
+                            <Input
+                                label="Name "
+                                name="contactname"
+                                required
+                                defaultValue={contactname} 
+                                type="text"
+                            />
+                            <Input
+                                label="Surname "
+                                name="contactsurname"
+                                required
+                                defaultValue={contactsurname} 
+                                type="text"
+                            />
+                            <Input
+                                label="Email "
+                                name="contactemail"
+                                required
+                                defaultValue={contactemail} 
+                                type="text"
+                            />
+                            <Input
+                                label="Phone"
+                                name="contactphone"
+                                required
+                                defaultValue={contactphone} 
+                                type="number"
+                            />
+                        </Card>
 
-        <div>   
-            <Card title="Personal Information">
-                <Input
-                    label="Name "
-                    name= "name"
-                    required
-                    value={input.name} 
-                    placeholder= "Name"
-                    type = "text"
-                />
-                <Input
-                    label="Surname "
-                    name= "surname"
-                    required
-                    value={input.surname} 
-                    placeholder= "Surname"
-                    type = "text"
-                />
-                <Input
-                    label="Email "
-                    name= "email"
-                    required
-                    value={input.email} 
-                    placeholder= "Email"
-                    type = "text"
-                />
-                <Input
-                    label="Phone"
-                    name= "phone"
-                    required
-                    value={input.phone} 
-                    placeholder= "Phone number"
-                    type = "number"
-                />
-                <Input
-                    label="Address "
-                    name= "adress"
-                    value={input.adress} 
-                    placeholder= "Adress"
-                    type = "text"
-                />
-                <Input
-                    label="City "
-                    name= "city"
-                    value={input.city} 
-                    placeholder= "City"
-                    type = "text"
-                />
-                <Input
-                    label="State "
-                    name= "state"
-                    value={input.state} 
-                    placeholder= "State"
-                    type = "text"
-                />
-                <Input
-                    label="Postal code "
-                    name= "postal"
-                    required
-                    value={input.postal} 
-                    placeholder= "Postal code"
-                    type = "number"
-                />
-            </Card>
+                        <Card title="Professional Assistance">
+                            <Input
+                                label="Professional"
+                                name="professional"
+                                required
+                                defaultValue={professional[0].username} 
+                                type="string"
 
-            <Card title="Contact Details">
-                <Input
-                    label="Name "
-                    name= "contactname"
-                    required
-                    value={input.contactname} 
-                    placeholder= "Name"
-                    type = "text"
-                />
-                <Input
-                    label="Surname "
-                    name= "contactsurname"
-                    required
-                    value={input.contactsurname} 
-                    placeholder= "Surname"
-                    type = "text"
-                />
-                <Input
-                    label="Email "
-                    name= "contactemail"
-                    required
-                    value={input.contactemail} 
-                    placeholder= "Email"
-                    type = "text"
-                />
-                <Input
-                    label="Phone"
-                    name= "contactphone"
-                    required
-                    value={input.contactphone} 
-                    placeholder= "Phone number"
-                    type = "number"
-                />
-            </Card>
-            <Card title="Professional Assistance">
-                
-               {/*  OLD SELECT (Not working for the dropdown) */}
-                <Select 
-                    label="Professional"
-                    name= "professional"
-                    required
-                    value={input.professional} 
-                    placeholder= "Professional Assigned"
-                    type = "text"
-                >
-                    <option value="prof1">Professional1</option>
-                    <option value="prof">Professional</option>
-                </Select>
+                            />
+                                   
+                        </Card>
+                        <BtnDiv>
+                            <Button type="submit">Edit</Button>
+                        </BtnDiv>
+                        
+                    </section>
+                }
+            </div>
+        )
+        
 
-                {/* Possible new select option. Help needed in the dropdown
-                <Select
-                    name="professional"
-                    required
-                    disabled={professionals.length <= 0}
-                    >
-                        <option>--select professional--</option>
-                        {professionals.length > 0 &&
-                         professionals.map((professional) => (
-                            <option value={professional.id} key={professional.id}>
-                            {professional.name}
-                            </option>
-                         ))}
-                </Select>  */}
-                
-            </Card>
-            {/* ADD CLINICAL HISTORY */}
-        </div>
+    }
 
-        </form>
-    </Container>
-  );
-}
+    return(
+        <PageWrapper>
+            <p>{renderMyBody()}</p>    
+        </PageWrapper>
+    )
+  
+  }
+const StyledArticle = styled.article`
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row;
 
+`
+const LeftCard = styled(CardContainer)`
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: orange;
+`
+
+const Row = styled.div`
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    margin: 2px;
+    padding: 0.7rem;
+    border-radius: 5px;
+    background-color: red;
+`
 export default Details;

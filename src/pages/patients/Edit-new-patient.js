@@ -7,8 +7,10 @@ import axiosApi from "../../utils/AxiosApi.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
 import Button from "../../components/layouts/Button.js";
+import BtnDiv from "../../components/layouts/BtnDiv.js";
 import Card from "../../components/layouts/Card.js";
-import Container from "../../components/layouts/Container.js";
+
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 
 
 
@@ -61,7 +63,7 @@ function Edit() {
   
 
     function renderMyBody(){
-        const { name, surname, email, phone, adress, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history } = patient;
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -119,8 +121,8 @@ function Edit() {
                             />
                             <Input
                                 label="Address "
-                                name= "adress"
-                                defaultValue={adress} 
+                                name= "address"
+                                defaultValue={address} 
                                 onChange={handleChange}
                                 type="text"
                             />
@@ -203,33 +205,22 @@ function Edit() {
                             </Select> 
                 
                         </Card>
-                        <Button type="submit">Edit</Button>
+                        <BtnDiv>
+                            <Button type="submit">Edit</Button>
+                        </BtnDiv>
+                        
                     </form>
                 }
             </div>
         )
         
-    /*     
-    return patients && (({  _id, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history }) = patients {
-        return (
-            <div>
-                <h1>Hello</h1>
-                <p>Id: {_id}</p>
-                <p>Name: {name}</p>
-                <p>Surname: {surname}</p>
-                <p>{email}</p>
-                <p>{phone}</p>
-            </div>
-          
-        )
-    })
-   */
+
     }
 
     return(
-        <Container>
+        <PageWrapper>
             <p>{renderMyBody()}</p>    
-        </Container>
+        </PageWrapper>
     )
   
   }

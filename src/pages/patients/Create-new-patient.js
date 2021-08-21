@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-/* import axios from 'axios'; */
+import styled from "styled-components";
 
 import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
-import Container from "./../../components/layouts/Container";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
+import BtnDiv from "../../components/layouts/BtnDiv";
 import axiosApi from "../../utils/AxiosApi";
 
 function Create() {
@@ -68,7 +69,7 @@ function Create() {
 
 
   return (
-    <Container horizontalPadding="1.5rem">
+    <PageWrapper>
         <form onSubmit={handleClick}>
 
         <div>   
@@ -111,9 +112,9 @@ function Create() {
                 />
                 <Input
                     label="Address "
-                    name= "adress"
-                    value={input.adress} 
-                    placeholder= "Adress"
+                    name= "address"
+                    value={input.address} 
+                    placeholder= "Address"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -201,12 +202,17 @@ function Create() {
                 </Select> 
                 
             </Card>
-            <Button type="submit">Create</Button>
+            <BtnDiv>
+                <Button type="submit">Create</Button>
+            </BtnDiv>
+            
         </div>
 
         </form>
-    </Container>
+    </PageWrapper>
   );
 }
+
+
 
 export default Create;

@@ -20,7 +20,7 @@ const Wrapper = styled.section`
   display:flex;
 `
 const FormContainer = styled.section`
-  flex: 3;
+  flex: 2;
   margin: 0.8rem;
   width:100%
 `
