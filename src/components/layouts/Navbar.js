@@ -3,12 +3,13 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi";
-/* import {CreateAuthContext} from "../../utils/AuthContext" */
+import {AuthContext} from "../../utils/AuthContext"
 
 
 function Navbar() {
-/*   const useAuth = useContext(CreateAuthContext) */
+  const contextAuth = useContext(AuthContext)
   const [redirect, setRedirect] = useState(false);
+  const { isAuth } = contextAuth;
 
   const history = useHistory()
 
@@ -19,7 +20,6 @@ function Navbar() {
       history.push('/')
       await axiosApi.post('/auth/logout')
       setRedirect(true)
-      
       
     } catch (err) {
       console.error(err)
@@ -41,9 +41,12 @@ function Navbar() {
           <li><StyledLink to="/patients">Patients</StyledLink></li>
           <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
           <li><StyledLink to="/">Home</StyledLink></li>
-          <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
+        {/*  { isAuth && <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>} */}
+        <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
+
         </StyledUl>
-      {/*  <div>{useAuth}</div> */}
+       <div>{isAuth}</div>
+     
         
     </StyledNavbar>
     

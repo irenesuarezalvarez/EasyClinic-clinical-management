@@ -1,15 +1,16 @@
 import { Route, Redirect, useLocation } from "react-router-dom";
 import {useContext} from "react";
 
-import {CreateAuthContext} from "./AuthContext"
+import {AuthContext} from "./AuthContext"
 
 
 const PrivateRoute = ({ children, ...props }) => {
   
   const location = useLocation();
-  const { isAuth } = useContext(CreateAuthContext) 
+  const { isAuth } = useContext(AuthContext) 
 
-  console.log(location);
+  console.log('ENTRAAA?? Front end private routes js12')
+
 
   return isAuth ? (
     <Route {...props}>{children}</Route>
@@ -20,7 +21,6 @@ const PrivateRoute = ({ children, ...props }) => {
         state: { from: location },
       }}
     />
-    // https://reactrouter.com/web/api/Redirect
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  Redirect, useParams } from "react-router-dom";
+import { Redirect, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -138,7 +138,7 @@ function Details() {
                                    
                         </Card>
                         <BtnDiv>
-                            <Button type="submit">Edit</Button>
+                            <Link to={`edit/${id}`}>Edit</Link>
                         </BtnDiv>
                         
                     </section>

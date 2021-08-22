@@ -3,14 +3,14 @@ import {  Redirect, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi";
-import Card, { CardContainer } from "../../components/layouts/Card";
+import { CardContainer } from "../../components/layouts/Card";
 import Button, { StyledBtn } from "../../components/layouts/Button";
 import Input from "../../components/forms/Input";
 import PageWrapper from "../../components/layouts/PageWrapper";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
+ */
 
 const History = () => {
     let { id } = useParams();

@@ -13,12 +13,12 @@ import Edit from "./pages/patients/Edit-new-patient"
 import History from "./pages/patients/Clinical-history";
 import Home from "./pages/general/Home";
 import Details from "./pages/patients/Details-patient";
-import AuthContext from "./utils/AuthContext";
+import AuthProvider from "./utils/AuthContext";
 import PrivateRoute from "./utils/PrivateRoutes";
 
 function App() {
   return (
-    <AuthContext>
+    <AuthProvider>
       <Router>
       
       <ThemeProvider theme={ProjectTheme}>
@@ -65,7 +65,7 @@ function App() {
       </ThemeProvider>
     </Router>
 
-    </AuthContext>
+    </AuthProvider>
    
   );
 }

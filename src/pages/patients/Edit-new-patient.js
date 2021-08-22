@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import {  Redirect, useParams } from "react-router-dom";
 
-
 import axiosApi from "../../utils/AxiosApi.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
@@ -13,8 +12,6 @@ import Card from "../../components/layouts/Card.js";
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 
 
-
-
 function Edit() {
     const { id } = useParams();
     const [input, setInput] = useState({});
@@ -23,12 +20,12 @@ function Edit() {
     const [professionals, setProfessionals] = useState([]);
 
     //Get data 
-
     useEffect(() => {
         getPatient()
         getProfessionals()
     }, [])
     
+    //Get Patient
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
         console.log('Frontend get patients', response.data);
@@ -43,9 +40,8 @@ function Edit() {
     }
 
     //Send patient edited
-    const handleClick = async event => {
+    const editPatient = async event => {
         event.preventDefault()          
-   
         try {
             setRedirect(true) 
             await axiosApi.post(`/patients/edit/${id}`, input)
@@ -73,19 +69,15 @@ function Edit() {
                 [name]: value,
             }));
 
-            /* setPatient((prevPatient)=> ({
-                ...prevPatient,
-               input
-            })) */
         };
 
-        console.log('Input and patients', input, patient)
+        console.log('Input and patients', patient)
      
                 
         return(
             <div> 
                 {Object.keys(patient).length > 0  && 
-                    <form onSubmit={handleClick}>
+                    <form onSubmit={editPatient}>
                         <Card title="Personal Information">
                             <Input
                                 label="Name"
@@ -193,15 +185,14 @@ function Edit() {
                                 required
                                 onChange={handleChange}
                                 disabled={professionals.length <= 0}
-                            >
-                            
-                                <option value="">--select professional--</option>
+                            >                       
+                              {/*   <option value="">--select professional--</option>
                                     {professionals.length > 0 &&
                                         professionals.map((prof) => (
                                             <option value={prof._id} key={prof._id} selected={prof._id === professional[0]._id}>
                                             {prof.username}
                                             </option>
-                                    ))}
+                                    ))} */}
                             </Select> 
                 
                         </Card>

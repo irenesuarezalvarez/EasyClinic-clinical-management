@@ -1,39 +1,52 @@
 import React, { useState, createContext } from "react";
 import axiosApi from "./AxiosApi"
 
-export const CreateAuthContext = createContext({});
+export const AuthContext = createContext({});
 
-const AuthContext = ({children}) =>{
+const AuthProvider = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
 
+  //Log in function
   async function logIn(credentials){
     try {
       const result = await axiosApi.post('/auth/login', credentials)
       const data = await result;
-      console.log(data)
+      console.log('role', data.data.role)
 
-      setIsAuth(data.status === 200);
-
-     /*  if(data.status === 200){
-        setIsAuth(true);
-      } */
-      
-      
+      setIsAuth(data.status === 200); //setIsAuth to true if status is 200
+     /*  setIsAuth(data.data.role === "prof") */
     } catch (err) {
       console.error(err)
     } 
 
     return(
-      'is authenticated', credentials
-    )
+      'User is authenticated', credentials
+    ) 
+  }
+
+  //Sign up function
+  async function signUp(credentials){
+    try {
+      const result = await axiosApi.post('/auth/signup', credentials)
+      const data = await result;
+      console.log('aqui deberia tener el user de req session', data.data._id, data.status )
+
+      setIsAuth(data.status === 200); //setIsAuth to true if status is 200
+    } catch (err) {
+      console.error(err)
+    } 
+
+    return(
+      'User is authenticated', credentials //WHY???
+    ) 
   }
 
   return(
-    <CreateAuthContext.Provider value={{isAuth, logIn}}>
+    <AuthContext.Provider value={{isAuth, logIn, signUp}}>
       {children}
-    </CreateAuthContext.Provider>
+    </AuthContext.Provider>
   )
 } 
 
 
-export default AuthContext;
+export default AuthProvider;

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useState, useContext } from "react";
+import { Redirect } from "react-router";
+import {AuthContext} from "../../utils/AuthContext"
 
 
 import Input from "./../../components/forms/Input";
@@ -8,10 +9,13 @@ import Card from "./../../components/layouts/Card";
 import Button from "../../components/layouts/Button";
 import BtnDiv from "../../components/layouts/BtnDiv";
 import PageWrapper from "../../components/layouts/PageWrapper";
+/* import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"; */
 
 
 function Signup() {
+  const { signUp } = useContext(AuthContext)
   const [input, setInput] = useState({});
+  const [redirect, setRedirect] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,28 +26,27 @@ function Signup() {
     }));
   };
 
-  const handleClick = async event => {
+  const createUser =  event => {
     event.preventDefault()
     const newUser = {
       username: input.username,
       email: input.email,
-      id: input.id,
       role: input.role,
       password: input.password
     } 
-     try {
-      await axios.post('http://localhost:5000/auth/signup', newUser)
-      /* setRedirect(true) */
-
-    } catch (err) {
-      console.error(err)
-    } 
+    console.log('Entra', newUser)
+    
+    signUp(newUser)
+    setRedirect(true) 
   } 
 
+  if(redirect){
+    return <Redirect to='/'/>
+  }
 
   return (
     <PageWrapper>
-        <form>
+        <form onSubmit={createUser}>
           <Card title="Sign Up">
             <Input
               label="Username"
@@ -63,15 +66,7 @@ function Signup() {
               onChange= {handleChange}
               type = "text"
             />
-            <Input
-              label="Id "
-              name= "id"
-              required
-              value={input.id} 
-              placeholder= "Enter your id"
-              onChange= {handleChange}
-              type = "text"
-            />
+       
             <Select
               label="Role position "
               name= "role"
@@ -96,7 +91,7 @@ function Signup() {
               type = "password"
             />
             <BtnDiv>
-              <Button onClick= {handleClick}>Create account</Button>
+              <Button type="submit">Create account</Button>
             </BtnDiv>
            
           </Card>

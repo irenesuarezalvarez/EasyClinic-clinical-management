@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios'
 
 import Container from '../../components/layouts/Container';
 import Card from '../../components/layouts/Card';
@@ -10,14 +9,14 @@ import Button from '../../components/layouts/Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { faCalendar } from '@fortawesome/free-solid-svg-icons'
+/* import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
-import { faStickyNote } from '@fortawesome/free-solid-svg-icons'
+import { faStickyNote } from '@fortawesome/free-solid-svg-icons' */
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+/* import { faTrashAlt } from '@fortawesome/free-solid-svg-icons' */
 
 import axiosApi from '../../utils/AxiosApi';
 
@@ -121,7 +120,7 @@ const StyledBtn = styled(Button)`
   padding-left: 15px;
  `;
 
-//TABLE STYLES
+//Table Styles
 const StyledTable = styled.table`
     border-collapse: collapse;
     border-radius: 0.5em;

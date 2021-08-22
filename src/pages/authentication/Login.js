@@ -4,14 +4,14 @@ import { Redirect } from "react-router-dom";
 import Input from "./../../components/forms/Input.js"
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
-import axiosApi from "../../utils/AxiosApi";
-import {CreateAuthContext} from "../../utils/AuthContext"
+import {AuthContext} from "../../utils/AuthContext"
 
 
 function Login() {
+  const { logIn } = useContext(AuthContext)
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
-  const { logIn } = useContext(CreateAuthContext)
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,25 +22,17 @@ function Login() {
     }));
   };
 
-  const handleClick = /* async */ event => {
+  const handleLogIn = event => {
     event.preventDefault()
 
-    const newUser = {
+    const checkUser = {
       username: input.username,
       email: input.email,
       password: input.password
     }
 
-    logIn(newUser);
+    logIn(checkUser);
 
-   /*   try {
-      const result = await axiosApi.post('/auth/login', newUser)
-      const data = await result;
-      setRedirect(true)
-      
-    } catch (err) {
-      console.error(err)
-    }  */
     setRedirect(true)
   } 
 
@@ -49,7 +41,7 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleClick}>
+    <form onSubmit={handleLogIn}>
       <Card title="Log In">
         <Input
           label="Username "
