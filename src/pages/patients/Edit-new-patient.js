@@ -142,7 +142,7 @@ function Edit() {
                             />
                         </Card>
 
-                        <Card title="Contact Details">
+                        <Card title="Contact Person">
                             <Input
                                 label="Name "
                                 name="contactname"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import styled from "styled-components";
+
 
 import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
@@ -35,7 +35,7 @@ function Create() {
         }));
     };
 
-  const handleClick = async event => {
+  const createPatient = async event => {
     event.preventDefault()
     
     const newPatient = {
@@ -70,9 +70,9 @@ function Create() {
 
   return (
     <PageWrapper>
-        <form onSubmit={handleClick}>
+        <form onSubmit={createPatient}>
 
-        <div>   
+      
             <Card title="Personal Information">
                 <Input
                     label="Name "
@@ -206,8 +206,6 @@ function Create() {
                 <Button type="submit">Create</Button>
             </BtnDiv>
             
-        </div>
-
         </form>
     </PageWrapper>
   );

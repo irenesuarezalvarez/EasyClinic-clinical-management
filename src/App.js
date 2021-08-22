@@ -41,9 +41,10 @@ function App() {
             <Create/>
           </Route>
 
-          <PrivateRoute path="/mypatients">
+        {/*   PRIVATE ROUTES REMOVED */}
+          <Route path="/mypatients">
             <ListMyPatients/>
-          </PrivateRoute>
+          </Route>
 
           <Route path="/details/:id">
             <Details/>

@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 
 import axiosApi from "../../utils/AxiosApi.js";
-import Input from "../../components/forms/Input.js";
-import Button from "../../components/layouts/Button.js";
 import BtnDiv from "../../components/layouts/BtnDiv.js";
-import Card, {Title, CardContainer} from "../../components/layouts/Card.js";
+import { Title } from "../../components/layouts/Card.js";
+import BoxCenter from "../../components/layouts/Box-Center.js";
+import BoxRow, { BoxRowContainer } from "../../components/layouts/Box-Row.js";
+import StyledLink from "../../components/layouts/StyledLink.js";
 
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 
@@ -53,100 +54,93 @@ function Details() {
         return(
             <div> 
                 {Object.keys(patient).length > 0  && 
-                    <section >
-                        <Card title="Personal Information">
-                            <StyledArticle>
-                            <div>Photo</div>
-                            <LeftCard>
-                            <Row>
-                                <h3>Name: </h3>
-                                <p>{name}</p>
-                            </Row>
-                            <Row>
-                                <h3>Surname: </h3>
-                                <p>{surname}</p>
-                            </Row>
-                            <Row>
-                                <h3>Email: </h3>
-                                <p>{email}</p>
-                            </Row>
-                            <Row>
-                                <h3>Phone: </h3>
-                                <p>{phone}</p>
-                            </Row>
-                            <Row>
-                                <h3>Address: </h3>
-                                <p>{address}</p>
-                            </Row>
-                            <Row>
-                                <h3>City: </h3>
-                                <p>{city}</p>
-                            </Row>
-                            <Row>
-                                <h3>State: </h3>
-                                <p>{state}</p>
-                            </Row>
-                            <Row>
-                                <h3>Postal code: </h3>
-                                <p>{postal}</p>
-                            </Row>
-                          
-                            </LeftCard>
-                            </StyledArticle>
-                        </Card>
-
-                        <Card title="Contact Details">
-                            <Input
-                                label="Name "
-                                name="contactname"
-                                required
-                                defaultValue={contactname} 
-                                type="text"
-                            />
-                            <Input
-                                label="Surname "
-                                name="contactsurname"
-                                required
-                                defaultValue={contactsurname} 
-                                type="text"
-                            />
-                            <Input
-                                label="Email "
-                                name="contactemail"
-                                required
-                                defaultValue={contactemail} 
-                                type="text"
-                            />
-                            <Input
-                                label="Phone"
-                                name="contactphone"
-                                required
-                                defaultValue={contactphone} 
-                                type="number"
-                            />
-                        </Card>
-
-                        <Card title="Professional Assistance">
-                            <Input
-                                label="Professional"
-                                name="professional"
-                                required
-                                defaultValue={professional[0].username} 
-                                type="string"
-
-                            />
-                                   
-                        </Card>
-                        <BtnDiv>
-                            <Link to={`edit/${id}`}>Edit</Link>
-                        </BtnDiv>
+                    <div>
+                    <StyledSection>
                         
-                    </section>
+                        <BoxCenter>
+                            <Title>Personal Information</Title>
+                            <BoxRow>
+                                <img src="../images/person-profile.jpg" alt="Profile picture"></img>
+                                <LeftCard>
+                                    <Row>
+                                        <h3>Name: </h3>
+                                        <p>{name}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Surname: </h3>
+                                        <p>{surname}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Email: </h3>
+                                        <p>{email}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Phone: </h3>
+                                        <p>{phone}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Address: </h3>
+                                        <p>{address}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>City: </h3>
+                                        <p>{city}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>State: </h3>
+                                        <p>{state}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Postal code: </h3>
+                                        <p>{postal}</p>
+                                    </Row>
+                                </LeftCard>
+                            </BoxRow>
+
+                        </BoxCenter>
+
+                        <BoxCenter>
+                            <BoxCenter>
+                                <Title>Contact Person</Title>
+                                <LeftCard>
+                                    <Row>
+                                        <h3>Name: </h3>
+                                        <p>{contactname}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Surname: </h3>
+                                        <p>{contactsurname}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Email: </h3>
+                                        <p>{contactemail}</p>
+                                    </Row>
+                                    <Row>
+                                        <h3>Phone: </h3>
+                                        <p>{contactphone}</p>
+                                    </Row>
+                                </LeftCard>
+                            </BoxCenter>
+
+                            <BoxCenter>
+                                    <Title>Professional Assistant</Title>
+                                    <LeftCard>
+                                        <Row>
+                                            <h3>Professional: </h3>
+                                            <p>{professional[0].username}</p>
+                                        </Row> 
+                                    </LeftCard>   
+                            </BoxCenter>
+                            
+                        </BoxCenter>                        
+                    </StyledSection>
+                    <BtnDiv>
+                            <StyledLink to={`edit/${id}`}>Edit</StyledLink>
+                    </BtnDiv>
+                    </div>
                 }
             </div>
         )
-        
-
     }
 
     return(
@@ -156,30 +150,35 @@ function Details() {
     )
   
   }
-const StyledArticle = styled.article`
+
+const StyledSection = styled.section`
     display:flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     flex-direction: row;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
 
 `
-const LeftCard = styled(CardContainer)`
+
+const LeftCard = styled.section`
     display:flex;
     justify-content: center;
     align-items: start;
     flex-direction: column;
+    padding: 0.5rem 2rem;
+    margin: 1rem;
     border-radius: 5px;
-    background-color: orange;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+  
 `
 
-const Row = styled.div`
-    display:flex;
+const Row = styled(BoxRowContainer)`
     justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    margin: 2px;
-    padding: 0.7rem;
-    border-radius: 5px;
-    background-color: red;
+    margin: 1px;
+    padding: 0.4rem;
+    
 `
 export default Details;

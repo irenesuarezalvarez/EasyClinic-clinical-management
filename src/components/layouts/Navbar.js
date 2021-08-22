@@ -41,6 +41,7 @@ function Navbar() {
           <li><StyledLink to="/patients">Patients</StyledLink></li>
           <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
           <li><StyledLink to="/">Home</StyledLink></li>
+         
         {/*  { isAuth && <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>} */}
         <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Container from '../../components/layouts/Container';
 import Card from '../../components/layouts/Card';
 import Button from '../../components/layouts/Button';
+import StyledLink from '../../components/layouts/StyledLink';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -57,11 +58,11 @@ const ListMyPatients = () => {
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
                    
-                        <LinkIcon to={`details/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></LinkIcon>
+                        <StyledLink to={`details/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></StyledLink>
                        {/*  <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faNotesMedical}/></LinkIcon> */}
                       {/*   <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faStickyNote}/></LinkIcon> */}
-                        <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></LinkIcon>
-                        <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faFileAlt}/></LinkIcon>
+                        <StyledLink to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></StyledLink>
+                        <StyledLink to={`sessions/${_id}`}><FontAwesomeIcon icon={faFileAlt}/></StyledLink>
                         {/* <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt}/></Button> */}
                     </Styledtd>
                 </tr>
@@ -75,7 +76,7 @@ const ListMyPatients = () => {
                 <StyledTitle>My Patients</StyledTitle>
 
                 <StyledBtn>
-                    <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                    <MyStyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></MyStyledLink>
                 </StyledBtn>
                 
                 <StyledTable>
@@ -100,7 +101,7 @@ const StyledTitle = styled.h1`
   padding: 0.5rem;
 `;
 
-const StyledLink = styled(Link)`
+const MyStyledLink = styled(Link)`
   display: flex;
   justify-content: flex-end;
   text-decoration: none;
@@ -143,24 +144,5 @@ const Styledtd = styled.td`
     padding: 0.9rem;
     text-align: center;
 `;
-const LinkIcon = styled(Link)`
-  background-color: rgb(102, 205, 170);
-  color: white;
-  padding: 0.7rem 1rem;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: backgroud-color ease-out 0.35s;
-  border-radius: 5px;
-  &:disabled {
-    background-color: #bdbbbb;
-    cursor: not-allowed;
-    color: #989393;
-  }
-  &:hover{
-    background-color:#DAF7A6;
-    color: black;
-  }
-`;
+
 export default ListMyPatients;
