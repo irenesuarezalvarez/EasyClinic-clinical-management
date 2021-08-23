@@ -63,12 +63,12 @@ const History = () => {
             <form onSubmit={handleClick}>
                 <SessionBackground>
                     <input
-                        name= "data"
+                        name= "date"
                         required
                         value={input.data} 
                         placeholder= "Data"
                         onChange= {handleChange}
-                        type = "text"
+                        type = "date"
                     />
                 
                    <StyledSection>
@@ -76,7 +76,7 @@ const History = () => {
                             name= "notes"
                             required
                             value={input.notes} 
-                            placeholder= "Data"
+                            placeholder= "Notes"
                             onChange= {handleChange}
                             type = "text"
                         />

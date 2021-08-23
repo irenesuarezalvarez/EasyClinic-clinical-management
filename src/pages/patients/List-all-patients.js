@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Card from '../../components/layouts/Card';
-import BoxRow from '../../components/layouts/Box-Row';
+import BoxRow, {BoxRowContainer} from '../../components/layouts/Box-Row';
 import Button, {StyledBtn} from '../../components/layouts/Button';
 import Input from '../../components/forms/Input';
 import StyledLink from '../../components/layouts/StyledLink';
@@ -18,24 +18,30 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Container from '../../components/layouts/Container';
 import axiosApi from '../../utils/AxiosApi';
+import BoxCenter from '../../components/layouts/Box-Center';
 
 
 const URL = '/patients/all'
 
 const ListAllPatients = () => {
     const [patients, setPatients] = useState([])
-    const [searched, setSearched] = useState([])
+   
 
     useEffect(() => {
-        getData()
+        getPatients();
     }, [])
 
-    const getData = async () => {
+    //Refresh the page after deleting a patient
+    useEffect(()=> {
+        getPatients();
+    }, [patients]);
+ 
+    const getPatients = async () => {
         const response = await axiosApi.get(URL)
         setPatients(response.data)
     }
 
-    const removeData = (id) => {
+    const deletePatient = (id) => {
         axiosApi.delete(`${URL}/${id}`).then(res => {
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
@@ -49,8 +55,8 @@ const ListAllPatients = () => {
             return <Styledth key={index}>{key.toUpperCase()}</Styledth>
         })
     }
-    //SEARCH
 
+    //SEARCH
     const [input, setInput] = useState({});
     const [searchPatients, setsearchPatients] = useState([]);
 
@@ -68,12 +74,12 @@ const ListAllPatients = () => {
         console.log('search clicked')
         
         try {
-        const response = await axiosApi.post('/patients/search', input)
-        const data = await response;
-        console.log('New patient was found', data.data)//data.data devuelve un []
-        setsearchPatients(data.data)
+            const response = await axiosApi.post('/patients/search', input)
+            const data = await response;
+            console.log('New patient was found', data.data)//data.data devuelve un []
+            setsearchPatients(data.data)
         } catch (err) {
-        console.error(err)
+            console.error(err)
         } 
     } 
   
@@ -82,16 +88,16 @@ const ListAllPatients = () => {
     const renderSearch = () => {
         return searchPatients && searchPatients.map(({ _id, surname, name }) => {
             return (
-                <tr key={_id}>
+                <SearchDiv key={_id}>
                     <Styledtd>{_id}</Styledtd>
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
-                    <ButtonBox>
+                    <BoxRow>
                         <StyledLink to="/calendar"><FontAwesomeIcon icon={faCalendar} /></StyledLink>
                         <StyledLink to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></StyledLink>
-                        <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                    </ButtonBox>
-                </tr>
+                        <Button onClick={() => deletePatient(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                    </BoxRow>
+                </SearchDiv>
             )
         })
     }
@@ -106,14 +112,14 @@ const ListAllPatients = () => {
                     <ButtonBox>
                         <StyledLink to="/calendar"><FontAwesomeIcon icon={faCalendar} /></StyledLink>
                         <StyledLink to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></StyledLink>
-                        <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                        <Button onClick={() => deletePatient(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
                     </ButtonBox>
                 </tr>
             )
         })
     }
 
-
+  
     return (
         <Container>
             <Card>
@@ -153,14 +159,11 @@ const ListAllPatients = () => {
             
               
 
-                <StyledTable>
-                    <thead>
-                        <tr>{renderHeader()}</tr>
-                    </thead>
-                    <tbody>
+                <BoxCenter>
+                    <StyledRow>
                         {renderSearch()}
-                    </tbody>
-                </StyledTable>
+                    </StyledRow>
+                </BoxCenter>
 
                 <StyledTable>
                     <thead>
@@ -195,7 +198,7 @@ const StyledSpan = styled.span`
   padding-left: 15px;
  `;
 
-//NOT WORKING JUSTIFY SELF RIGHT (TO BE CHECKED)
+//JUSTIFY SELF RIGHT - Not working
 const NewPatientBtn = styled(StyledBtn)`
     justify-self: right;
     background-color:red;
@@ -226,17 +229,25 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-//NO WRAP NOT WORKING
-const ButtonBox = styled(Styledtd)`
-    isplay:flex;
+//SENDING BACK AN ERROR
+const ButtonBox = styled.td`
+    background-color: secondary_light;
+    padding: 0.9rem;
+    text-align: center;
+    display:flex;
     align-items:center;
     justify-content:center;
     flex-direction: row;
     flex-wrap: nowrap;
 `
 
-const SearchBar = styled.section`
-    background-color: red;
-
+const StyledRow = styled(BoxRowContainer)`
+    background-color: orange;
+    
+`
+const SearchDiv = styled(BoxRowContainer)`
+    background-color:green;
+    padding: 0.5rem;
+    width: 100%;
 `
 export default ListAllPatients;

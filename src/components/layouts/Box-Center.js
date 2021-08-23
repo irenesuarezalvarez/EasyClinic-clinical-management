@@ -15,7 +15,7 @@ export const BoxContainer = styled.fieldset`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-radius: 4px;
+  border-radius: 5px;
 `;
 
 

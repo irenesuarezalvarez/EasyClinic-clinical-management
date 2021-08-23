@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 
-function Button ({type, children}) {
+function Button ({type, children, ...props}) {
   return (
-    <StyledBtn type={type}>
+    <StyledBtn type={type} {...props}>
      {children}
     </StyledBtn>
   );

@@ -25,6 +25,7 @@ function Edit() {
         getProfessionals()
     }, [])
     
+   
     //Get Patient
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
@@ -53,7 +54,7 @@ function Edit() {
 
     //Redirect
     if(redirect){
-        return <Redirect to='/patients'></Redirect>
+        return <Redirect to='/patients'/>
     }
 
   
@@ -178,7 +179,7 @@ function Edit() {
                         </Card>
 
                         <Card title="Professional Assistance">
-                    
+                      
                             <Select
                                 name="professional"
                                 label= "Professional"
@@ -186,14 +187,15 @@ function Edit() {
                                 onChange={handleChange}
                                 disabled={professionals.length <= 0}
                             >                       
-                              {/*   <option value="">--select professional--</option>
+                                <option value="">--select professional--</option>
                                     {professionals.length > 0 &&
                                         professionals.map((prof) => (
                                             <option value={prof._id} key={prof._id} selected={prof._id === professional[0]._id}>
                                             {prof.username}
                                             </option>
-                                    ))} */}
+                                    ))}
                             </Select> 
+                            
                 
                         </Card>
                         <BtnDiv>
@@ -213,7 +215,6 @@ function Edit() {
             <p>{renderMyBody()}</p>    
         </PageWrapper>
     )
-  
   }
 
 export default Edit;
