@@ -3,15 +3,16 @@ import {  Redirect, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi";
-import { CardContainer } from "../../components/layouts/Card";
+import Card, { CardContainer } from "../../components/layouts/Card";
 import Button, { StyledBtn } from "../../components/layouts/Button";
 import Input from "../../components/forms/Input";
 import PageWrapper from "../../components/layouts/PageWrapper";
 
-/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
- */
 
+const URL = "/api/history"
+ 
 const History = () => {
     let { id } = useParams();
     const [input, setInput] = useState({});
@@ -24,8 +25,9 @@ const History = () => {
     
     
     const getHistory = async () =>{
-        const response = await axiosApi.get(`/api/history/${id}`);
-        setHistory(response.data)
+        const response = await axiosApi.get(`${URL}/${id}`);
+        const patientHistory = await response
+        setHistory(patientHistory.data.history)
     } 
    
        
@@ -37,11 +39,11 @@ const History = () => {
             }));
         };
     
-      const handleClick = async event => {
+      const createSession = async event => {
         event.preventDefault()
         
         const newSession = {
-            data: input.data,
+            date: input.date,
             notes: input.notes,
             content: input.content,
         }
@@ -49,24 +51,53 @@ const History = () => {
         try {
           setRedirect(true) 
           console.log('New session was saved', newSession)
-          await axiosApi.post(`/api/${id}/session`, newSession)
+          await axiosApi.post(`${URL}/${id}`, newSession)
         } catch (err) {
           console.error(err)
         } 
       } 
+
+      const deleteSession = (id) => {
+          console.log('delete cliiicked')
+        axiosApi.delete(`${URL}/${id}`).then(res => {
+            const del = history.filter(session => id !== session.id)
+            setHistory(del)
+        })
+    }
+      //Render previous sessions
+      const renderSessions = () => {
+        return history && history.map(({ date, notes, content, _id }) => {
+            return (
+                <SessionBackground>
+                    <h3>Date: {date}</h3>
+                    <StyledSection>
+                        <NotesStyled>{notes}</NotesStyled>
+                        <Card>{content}</Card>
+                    </StyledSection>
+      
+                    <div>
+                        <DeleteBtn  onClick={() => deleteSession(_id)}><FontAwesomeIcon icon={faTrashAlt} /></DeleteBtn>
+                        <Button>Edit</Button>
+                    </div>
+                </SessionBackground>
+            )
+        })
+    }
+    //
+
       if(redirect){
         return <Redirect to='/mypatients'></Redirect>
       }
 
     return (
         <PageWrapper>
-            <form onSubmit={handleClick}>
+            <form onSubmit={createSession}>
                 <SessionBackground>
                     <input
                         name= "date"
                         required
-                        value={input.data} 
-                        placeholder= "Data"
+                        value={input.date} 
+                        placeholder= "Date"
                         onChange= {handleChange}
                         type = "date"
                     />
@@ -99,21 +130,9 @@ const History = () => {
                     </div>
                 </SessionBackground>
             </form>
-          {/*  {history && history.map((session) => (
-                <SessionBackground>
-                    <h2>{session.date}</h2>
-
-                    <StyledSection>
-                        <NotesStyled>{session.notes}</NotesStyled>
-                        <Card>{session.content}</Card>
-                    </StyledSection>
-                  
-                    <div>
-                        <DeleteBtn><FontAwesomeIcon icon={faTrashAlt} /></DeleteBtn>
-                        <Button>Edit</Button>
-                    </div>
-                </SessionBackground>
-            ))}  */}
+            <article>
+                {renderSessions()}
+            </article>
         </PageWrapper>
     );
 };

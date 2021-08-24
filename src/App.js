@@ -14,7 +14,10 @@ import History from "./pages/patients/Clinical-history";
 import Home from "./pages/general/Home";
 import Details from "./pages/patients/Details-patient";
 import AuthProvider from "./utils/AuthContext";
-import PrivateRoute from "./utils/PrivateRoutes";
+import PrivateRoute from "./utils/PrivateRoutes"; 
+import Calendar from "./pages/general/CalendarVideo";
+import Test from "./pages/general/Test";
+import Sample from "./pages/general/Sample";
 
 function App() {
   return (
@@ -25,6 +28,7 @@ function App() {
         <ResetStyles />
         <Navbar/>
         <Switch>
+       
           <Route exact path="/">
             <Home/>
           </Route>
@@ -42,9 +46,9 @@ function App() {
           </Route>
 
         {/*   PRIVATE ROUTES REMOVED */}
-          <Route path="/mypatients">
+          <PrivateRoute path="/mypatients">
             <ListMyPatients/>
-          </Route>
+          </PrivateRoute>
 
           <Route path="/details/:id">
             <Details/>
@@ -56,6 +60,18 @@ function App() {
 
           <Route path="/sessions/:id">
             <History/>
+          </Route>
+
+          <Route path="/calendar">
+            <Calendar/>
+          </Route>
+
+          <Route path="/test">
+            <Test/>
+          </Route>
+
+          <Route path="/sample">
+            <Sample/>
           </Route>
 
 

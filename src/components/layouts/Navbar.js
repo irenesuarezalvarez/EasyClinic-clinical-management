@@ -9,28 +9,33 @@ import {AuthContext} from "../../utils/AuthContext"
 function Navbar() {
   const contextAuth = useContext(AuthContext)
   const [redirect, setRedirect] = useState(false);
-  const { isAuth } = contextAuth;
+  const { isAuth, logOut, role, setRole } = contextAuth;
 
-  const history = useHistory()
-
-  const handleLogOut = async event => {
-    event.preventDefault()
-    try {
-      console.log('Logged out')
-      history.push('/')
-      await axiosApi.post('/auth/logout')
-      setRedirect(true)
-      
-    } catch (err) {
-      console.error(err)
-    } 
-  } 
-
-  if(redirect){
-    console.log('reeedirect')
-    return <Redirect to='/'/> 
-  } 
+  /* const history = useHistory() */
  
+  const handleLogOut = async event => {
+
+    try{
+      setRole(undefined)
+      //why redirect here render the component but not the navbar
+      await logOut()
+      //WHy redirect here does not work?
+     
+    }
+   catch(err){
+     console.log(err)
+   }
+   
+    
+  }  
+/*   const handleLogOut = async event => {
+    event.preventDefault()
+    await logOut()
+    history.push('/') 
+    setRedirect(true) 
+  }   */
+  console.log('Cambio??', role)
+
   return (
     
     <StyledNavbar>
@@ -41,9 +46,12 @@ function Navbar() {
           <li><StyledLink to="/patients">Patients</StyledLink></li>
           <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
           <li><StyledLink to="/">Home</StyledLink></li>
+          <li><StyledLink to="/calendar">Calendar</StyledLink></li>
+          <li><StyledLink to="/test">Test</StyledLink></li>
+          <li><StyledLink to="/sample">Sample</StyledLink></li>
          
         {/*  { isAuth && <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>} */}
-        <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>
+        <li><button onClick={handleLogOut}>Log out</button></li>
 
         </StyledUl>
        <div>{isAuth}</div>

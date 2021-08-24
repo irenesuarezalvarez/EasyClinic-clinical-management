@@ -10,7 +10,7 @@ const BoxCenter = ({ children }) => {
   );
 };
 
-export const BoxContainer = styled.fieldset`
+export const BoxContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;

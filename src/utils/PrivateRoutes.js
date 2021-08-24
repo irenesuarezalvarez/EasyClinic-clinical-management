@@ -7,12 +7,22 @@ import {AuthContext} from "./AuthContext"
 const PrivateRoute = ({ children, ...props }) => {
   
   const location = useLocation();
-  const { isAuth } = useContext(AuthContext) 
+  const { isAuth, role } = useContext(AuthContext) 
 
-  console.log('ENTRAAA?? Front end private routes js12')
+  console.log('ENTRAAA?? Front end private routes js12', role)
+  if(role === "prof"){
+    return    <Route {...props}>{children}</Route>
+  }
+  if(role === undefined){
+    return  <Redirect
+      to={{
+      pathname: "/",
+      state: { from: location },
+    }}
+  />
+  }
 
-
-  return isAuth ? (
+/*   return isAuth ? (
     <Route {...props}>{children}</Route>
   ) : (
     <Redirect
@@ -21,7 +31,7 @@ const PrivateRoute = ({ children, ...props }) => {
         state: { from: location },
       }}
     />
-  );
+  ); */
 };
 
 export default PrivateRoute;

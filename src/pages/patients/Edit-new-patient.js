@@ -3,13 +3,12 @@ import React, { useState, useEffect } from "react";
 import {  Redirect, useParams } from "react-router-dom";
 
 import axiosApi from "../../utils/AxiosApi.js";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
 import Button from "../../components/layouts/Button.js";
 import BtnDiv from "../../components/layouts/BtnDiv.js";
 import Card from "../../components/layouts/Card.js";
-
-import PageWrapper from "../../components/layouts/PageWrapper.js";
 
 
 function Edit() {
@@ -25,11 +24,11 @@ function Edit() {
         getProfessionals()
     }, [])
     
+    
    
     //Get Patient
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
-        console.log('Frontend get patients', response.data);
         setPatient(response.data)
     }
 
@@ -59,8 +58,8 @@ function Edit() {
 
   
 
-    function renderMyBody(){
-        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history } = patient;
+    function renderPatient(){
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -71,8 +70,6 @@ function Edit() {
             }));
 
         };
-
-        console.log('Input and patients', patient)
      
                 
         return(
@@ -212,7 +209,7 @@ function Edit() {
 
     return(
         <PageWrapper>
-            <p>{renderMyBody()}</p>    
+            <div>{renderPatient()}</div>    
         </PageWrapper>
     )
   }

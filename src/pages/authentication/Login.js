@@ -22,7 +22,7 @@ function Login() {
     }));
   };
 
-  const handleLogIn = event => {
+  const handleLogIn = async event => {
     event.preventDefault()
 
     const checkUser = {
@@ -31,9 +31,15 @@ function Login() {
       password: input.password
     }
 
-    logIn(checkUser);
-
-    setRedirect(true)
+ 
+    const data =  await  logIn(checkUser);
+    console.log('TEEEST', data)
+    if(data.status === 200){
+      setRedirect(true) 
+    }else{
+      alert('Please provide the right credentials')
+    }
+  
   } 
 
   if(redirect){
@@ -73,7 +79,6 @@ function Login() {
         <Button type="submit" >Log in</Button>
       </Card>
     </form>
-
 
   );
 }

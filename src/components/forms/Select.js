@@ -9,7 +9,7 @@ const Select = ({
   onChange,
   type = "text",
   disabled,
-  children
+  children,
 }) => {
   return (
     <StyledContainer>
