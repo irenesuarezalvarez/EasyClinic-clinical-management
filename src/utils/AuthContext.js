@@ -8,6 +8,7 @@ const AuthProvider = ({children}) =>{
   const [ role, setRole] = useState(undefined);
 
   console.log('contexMounting')
+  
   //Log in function
   async function logIn(credentials){
     try {
@@ -19,7 +20,7 @@ const AuthProvider = ({children}) =>{
       if(data.status === 200){
         setIsAuth(true);
       }
-
+      console.log('rooole', role, data.data.role) //aqui noooo
      /*  setIsAuth(data.status === 200);  *///setIsAuth to true if status is 200
      /*  setIsAuth(data.data.role === "prof") */
      return data
@@ -38,8 +39,11 @@ const AuthProvider = ({children}) =>{
       const result = await axiosApi.post('/auth/signup', credentials)
       const data = await result;
       console.log('aqui deberia tener el user de req session', data.data._id, data.status )
-
-      setIsAuth(data.status === 200); //setIsAuth to true if status is 200
+      setRole(data.data.role);
+     
+      if(data.status === 200){
+        setIsAuth(true);
+      } //setIsAuth to true if status is 200
     } catch (err) {
       console.error(err)
     } 

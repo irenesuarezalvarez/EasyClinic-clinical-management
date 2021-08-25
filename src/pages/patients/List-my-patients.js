@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 import Container from '../../components/layouts/Container';
 import Card from '../../components/layouts/Card';
-import Button from '../../components/layouts/Button';
 import StyledLink from '../../components/layouts/StyledLink';
+import Button, { StyledBtn, BoxButtonLeft, BoxButtonCenter, BoxButtonRight, NewBtnRight } from '../../components/layouts/Button';
+
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -58,11 +59,11 @@ const ListMyPatients = () => {
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
                    
-                        <StyledLink to={`details/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></StyledLink>
+                        <InfoBtn to={`details/${_id}`}><FontAwesomeIcon icon={faInfoCircle}/></InfoBtn>
                        {/*  <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faNotesMedical}/></LinkIcon> */}
                       {/*   <LinkIcon to={`sessions/${_id}`}><FontAwesomeIcon icon={faStickyNote}/></LinkIcon> */}
-                        <StyledLink to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></StyledLink>
-                        <StyledLink to={`sessions/${_id}`}><FontAwesomeIcon icon={faFileAlt}/></StyledLink>
+                        <BoxButtonCenter to={`sessions/${_id}`}><FontAwesomeIcon icon={faFolder}/></BoxButtonCenter>
+                        <HistoryBtn to={`sessions/${_id}`}><FontAwesomeIcon icon={faFileAlt}/></HistoryBtn>
                         {/* <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt}/></Button> */}
                     </Styledtd>
                 </tr>
@@ -75,9 +76,9 @@ const ListMyPatients = () => {
             <Card>
                 <StyledTitle>My Patients</StyledTitle>
 
-                <StyledBtn>
-                    <MyStyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></MyStyledLink>
-                </StyledBtn>
+                <NewBtnRight>
+                    <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                </NewBtnRight>
                 
                 <StyledTable>
                     <thead>
@@ -108,7 +109,7 @@ const MyStyledLink = styled(Link)`
   color: white;
  `;
 
-//NOT WORKING: (TO BE CHECKED)
+/* //NOT WORKING: (TO BE CHECKED)
 const StyledBtn = styled(Button)`
     display: flex;
     justify-content: flex-end;
@@ -116,7 +117,7 @@ const StyledBtn = styled(Button)`
     color: black;
     backgroundColor:red;
  `;
-
+ */
  const StyledSpan = styled.span`
   padding-left: 15px;
  `;
@@ -145,4 +146,18 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
+const InfoBtn = styled(BoxButtonLeft)`
+    background-color: rgba(225, 183, 65);
+    &:hover{
+        background-color: rgb(187, 135, 20 );
+    }
+`
+
+const HistoryBtn = styled(BoxButtonLeft)`
+    border-radius: 0 5px 5px 0;
+    background-color: rgb(107, 142, 35);
+    &:hover{
+        background-color: rgb(85, 107, 47);
+    }
+`
 export default ListMyPatients;

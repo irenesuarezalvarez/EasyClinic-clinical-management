@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
+import Calendar from "../../pages/general/Calendar";
+
 
 
 function PageWrapper({children}) {
     return (
     <Wrapper>
-    <Aside>Aside</Aside>
+      <Aside><Calendar/></Aside>
       <FormContainer>
        {children}
       </FormContainer>
-      <Aside>Aside</Aside>
+      <Aside></Aside>
     </Wrapper>
 
   );
@@ -27,8 +29,6 @@ const FormContainer = styled.section`
 const Aside = styled.aside`
   width: 100%;
   height: 200px;
-  background-color: orange;
-  border: 1px solid black;
   flex: 1;
   margin: 0.8rem;
 `

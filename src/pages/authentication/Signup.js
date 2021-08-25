@@ -2,18 +2,16 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router";
 import {AuthContext} from "../../utils/AuthContext"
 
-
 import Input from "./../../components/forms/Input";
 import Select from "./../../components/forms/Select";
 import Card from "./../../components/layouts/Card";
 import Button from "../../components/layouts/Button";
 import BtnDiv from "../../components/layouts/BtnDiv";
 import PageWrapper from "../../components/layouts/PageWrapper";
-/* import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"; */
 
 
 function Signup() {
-  const { signUp } = useContext(AuthContext)
+  const { signUp, role } = useContext(AuthContext)
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
 
@@ -34,14 +32,15 @@ function Signup() {
       role: input.role,
       password: input.password
     } 
-    console.log('Entra', newUser)
-    
+     
     signUp(newUser)
     setRedirect(true) 
   } 
 
-  if(redirect){
-    return <Redirect to='/'/>
+  if(redirect && role === "prof"){
+    return <Redirect to='/mypatients'/>
+  }else if(redirect && role === "admin"){
+    return <Redirect to='/patients'/>
   }
 
   return (
@@ -76,6 +75,7 @@ function Signup() {
               onChange= {handleChange}
               type = "text"
             >
+                 <option value="">--select professional--</option>
                 <option value="admin">Administrative</option>
                 <option value="prof">Professional</option>
             </Select>

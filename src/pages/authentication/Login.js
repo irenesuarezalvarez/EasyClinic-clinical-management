@@ -8,7 +8,7 @@ import {AuthContext} from "../../utils/AuthContext"
 
 
 function Login() {
-  const { logIn } = useContext(AuthContext)
+  const { logIn, role } = useContext(AuthContext)
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
   
@@ -33,18 +33,30 @@ function Login() {
 
  
     const data =  await  logIn(checkUser);
-    console.log('TEEEST', data)
+    console.log('CUIDADO', redirect, 'role', role)
+
+      
     if(data.status === 200){
-      setRedirect(true) 
+      setRedirect(true)
+     
     }else{
       alert('Please provide the right credentials')
     }
   
   } 
-
-  if(redirect){
-    return <Redirect to='/patients'/>
+/*   if(redirect){
+    return <Redirect to='/mypatients'/>
   }
+  if(role === "prof"){
+    console.log('entra again')
+    return <Redirect to='/mypatients'/>
+  }else if(role === "admin"){
+    return <Redirect to='/patients'/>
+  } */
+
+  
+  
+ 
 
   return (
     <form onSubmit={handleLogIn}>

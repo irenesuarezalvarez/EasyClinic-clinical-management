@@ -11,7 +11,7 @@ const StyledLink = ({ children, ...props }) => {
   );
 };
 
-const LinkIcon = styled(Link)`
+export const LinkIcon = styled(Link)`
   background-color: rgb(102, 205, 170);
   color: white;
   padding: 0.7rem 1rem;
@@ -28,8 +28,7 @@ const LinkIcon = styled(Link)`
     color: #989393;
   }
   &:hover{
-    background-color:#DAF7A6;
-    color: black;
+    background-color:rgb(28, 130, 112 );
   }
 `;
 

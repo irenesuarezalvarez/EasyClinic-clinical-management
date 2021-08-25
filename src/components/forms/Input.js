@@ -35,7 +35,7 @@ const StyledContainer = styled.label`
   margin-bottom: 0.5rem;
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   display: block;
   width: 100%;
   height: calc(1.5em + 0.75rem + 2px);

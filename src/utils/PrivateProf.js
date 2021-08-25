@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {AuthContext} from "./AuthContext"
 
 
-const PrivateRoute = ({ children, ...props }) => {
+const PrivateProf = ({ children, ...props }) => {
   
   const location = useLocation();
   const { isAuth, role } = useContext(AuthContext) 
@@ -34,4 +34,4 @@ const PrivateRoute = ({ children, ...props }) => {
   ); */
 };
 
-export default PrivateRoute;
+export default PrivateProf;

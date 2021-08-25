@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Card from '../../components/layouts/Card';
-import BoxRow, {BoxRowContainer} from '../../components/layouts/Box-Row';
-import Button, {StyledBtn} from '../../components/layouts/Button';
-import Input from '../../components/forms/Input';
+import {BoxRowContainer} from '../../components/layouts/Box-Row';
+import Button, { StyledBtn, BoxButtonLeft, BoxButtonCenter, BoxButtonRight, NewBtnRight } from '../../components/layouts/Button';
 import StyledLink from '../../components/layouts/StyledLink';
-/* import Searcher from '../../components/layouts/Search'; */
+import Searcher from '../../components/layouts/Search';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { faCalendar } from '@fortawesome/free-solid-svg-icons'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+/* import { faSearch } from '@fortawesome/free-solid-svg-icons' */
 import Container from '../../components/layouts/Container';
 import axiosApi from '../../utils/AxiosApi';
-import BoxCenter from '../../components/layouts/Box-Center';
+
 
 
 const URL = '/patients/all'
@@ -56,8 +51,34 @@ const ListAllPatients = () => {
         })
     }
 
+    //REPETIDO
+  /*   const [input, setInput] = useState({});
+    const [searchPatients, setsearchPatients] = useState([]);
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+    
+        setInput((prevState) => ({
+        ...prevState,
+        [name]: value,
+        }));
+    };
+
+    
+    const searchPatient = async event => {
+        event.preventDefault()
+        console.log('search clicked')
+        
+        try {
+            const response = await axiosApi.post('/patients/search', input)
+            const data = await response;
+            console.log('New patient was found', data.data)//data.data devuelve un []
+            setsearchPatients(data.data)
+        } catch (err) {
+            console.error(err)
+        } 
+    }  */
     //SEARCH
-    const [input, setInput] = useState({});
+   /*  const [input, setInput] = useState({});
     const [searchPatients, setsearchPatients] = useState([]);
 
     const handleChange = (event) => {
@@ -81,11 +102,11 @@ const ListAllPatients = () => {
         } catch (err) {
             console.error(err)
         } 
-    } 
+    }  */
   
     //
     
-    const renderSearch = () => {
+/*     const renderSearch = () => {
         return searchPatients && searchPatients.map(({ _id, surname, name }) => {
             return (
                 <SearchDiv key={_id}>
@@ -100,7 +121,7 @@ const ListAllPatients = () => {
                 </SearchDiv>
             )
         })
-    }
+    } */
 
     const renderBody = () => {
         return patients && patients.map(({ _id, surname, name }) => {
@@ -110,9 +131,9 @@ const ListAllPatients = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <ButtonBox>
-                        <StyledLink to="/calendar"><FontAwesomeIcon icon={faCalendar} /></StyledLink>
-                        <StyledLink to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></StyledLink>
-                        <Button onClick={() => deletePatient(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                        <BoxButtonLeft to="/calendar"><FontAwesomeIcon icon={faCalendar} /></BoxButtonLeft>
+                        <BoxButtonCenter to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></BoxButtonCenter>
+                        <BoxButtonRight onClick={() => deletePatient(_id)}><FontAwesomeIcon icon={faTrashAlt} /></BoxButtonRight>
                     </ButtonBox>
                 </tr>
             )
@@ -126,15 +147,15 @@ const ListAllPatients = () => {
                 <StyledTitle>List of Patients</StyledTitle>
                
 
-                <NewPatientBtn>
-                    <MyStyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></MyStyledLink>
-                </NewPatientBtn>
+                <NewBtnRight>
+                    <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                </NewBtnRight>
                 
                 
-                <form onSubmit={searchPatient}>
-                    <BoxRow>
-                        <FontAwesomeIcon icon={faSearch} />
-                        <Input
+          {/*       <SearchBar onSubmit={searchPatient}>
+                    
+                        <IconDiv><FontAwesomeIcon icon={faSearch} /></IconDiv>
+                        <SearchInput
                             name= "name"
                             required
                             value={input.name} 
@@ -142,7 +163,7 @@ const ListAllPatients = () => {
                             onChange= {handleChange}
                             type = "text"
                         />
-                        <Input
+                        <SearchInput
                             name= "surname"
                             required
                             value={input.surname} 
@@ -150,20 +171,18 @@ const ListAllPatients = () => {
                             onChange= {handleChange}
                             type = "text"
                         />
-                    
-                        <Button type="submit">Seach</Button>
-                    
-                    </BoxRow>
+                        <BtnSearch type="submit">Seach</BtnSearch>                 
 
-                </form>
+                </SearchBar> */}
+                
             
               
-
-                <BoxCenter>
-                    <StyledRow>
-                        {renderSearch()}
-                    </StyledRow>
-                </BoxCenter>
+               {/*  //NEWWWWWWWWWWWWWWWWWWWWWW */}
+            
+                <Searcher>
+                      
+                </Searcher>
+                
 
                 <StyledTable>
                     <thead>
@@ -187,23 +206,36 @@ const StyledTitle = styled.h1`
   padding: 0.5rem;
 `;
 
-const MyStyledLink = styled(Link)`
-  display: flex;
-  justify-content: space-between;
-  text-decoration: none;
-  color: white;
-`;
-
 const StyledSpan = styled.span`
   padding-left: 15px;
  `;
 
-//JUSTIFY SELF RIGHT - Not working
-const NewPatientBtn = styled(StyledBtn)`
-    justify-self: right;
-    background-color:red;
- `;
 
+//Search
+/* const SearchBar = styled.form`
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: row;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+`
+
+const IconDiv = styled.div`
+    padding: 0.7rem;
+    border-radius: 5px 0px 0px 5px;
+    background-color: lightgrey;
+    height: calc(1.5em + 0.75rem + 2px);
+`
+
+const SearchInput = styled(StyledInput)`
+  border-radius: 0;
+` */
+const BtnSearch = styled(StyledBtn)`
+    border-radius: 0 5px 5px 0;
+` 
 
 //Table Styles
 const StyledTable = styled.table`
@@ -242,12 +274,17 @@ const ButtonBox = styled.td`
 `
 
 const StyledRow = styled(BoxRowContainer)`
-    background-color: orange;
+    width: 100%;
     
 `
 const SearchDiv = styled(BoxRowContainer)`
-    background-color:green;
+    width:100%;
     padding: 0.5rem;
+    margin-top: 25px;
     width: 100%;
+    justify-content:space-around;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: lightgrey;
 `
+
 export default ListAllPatients;

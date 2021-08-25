@@ -14,10 +14,9 @@ import History from "./pages/patients/Clinical-history";
 import Home from "./pages/general/Home";
 import Details from "./pages/patients/Details-patient";
 import AuthProvider from "./utils/AuthContext";
-import PrivateRoute from "./utils/PrivateRoutes"; 
-import Calendar from "./pages/general/CalendarVideo";
-import Test from "./pages/general/Test";
-import Sample from "./pages/general/Sample";
+import PrivateProf from "./utils/PrivateProf"; 
+import Calendar from "./pages/general/Calendar";
+
 
 function App() {
   return (
@@ -45,37 +44,27 @@ function App() {
             <Create/>
           </Route>
 
-        {/*   PRIVATE ROUTES REMOVED */}
-          <PrivateRoute path="/mypatients">
+    {/* private routes deleted */}
+          <PrivateProf path="/mypatients">
             <ListMyPatients/>
-          </PrivateRoute>
+          </PrivateProf>
 
-          <Route path="/details/:id">
+          <PrivateProf path="/details/:id">
             <Details/>
-          </Route>
+          </PrivateProf>
 
           <Route path="/edit/:id">
             <Edit/>
           </Route>
 
-          <Route path="/sessions/:id">
+          <PrivateProf path="/sessions/:id">
             <History/>
-          </Route>
+          </PrivateProf>
 
           <Route path="/calendar">
             <Calendar/>
           </Route>
-
-          <Route path="/test">
-            <Test/>
-          </Route>
-
-          <Route path="/sample">
-            <Sample/>
-          </Route>
-
-
-      
+     
 
         </Switch>
 

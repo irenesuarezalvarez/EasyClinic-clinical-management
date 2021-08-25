@@ -1,14 +1,13 @@
-import { Link, Redirect, useHistory } from "react-router-dom";
-import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom"; //, Redirect, useHistory deleted
+import React, { useContext } from "react"; //useState deleted
 import styled from "styled-components";
 
-import axiosApi from "../../utils/AxiosApi";
-import {AuthContext} from "../../utils/AuthContext"
-
+import {AuthContext} from "../../utils/AuthContext";
+import Button from "./Button";
 
 function Navbar() {
   const contextAuth = useContext(AuthContext)
-  const [redirect, setRedirect] = useState(false);
+ /*  const [redirect, setRedirect] = useState(false); */
   const { isAuth, logOut, role, setRole } = contextAuth;
 
   /* const history = useHistory() */
@@ -39,24 +38,18 @@ function Navbar() {
   return (
     
     <StyledNavbar>
-        <StyledLogo  src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo>
+        <Link to="/"><StyledLogo  src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo></Link>
         <StyledUl>
+          <li><StyledLink to="/">Home</StyledLink></li> 
           <li><StyledLink to="/signup">Sign up</StyledLink></li>
-          <li><StyledLink to="/create">Create</StyledLink></li>
-          <li><StyledLink to="/patients">Patients</StyledLink></li>
-          <li><StyledLink to="/mypatients">My Patients</StyledLink></li>
-          <li><StyledLink to="/">Home</StyledLink></li>
+          <li><StyledLink to="/create">Create</StyledLink></li>    
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
-          <li><StyledLink to="/test">Test</StyledLink></li>
-          <li><StyledLink to="/sample">Sample</StyledLink></li>
-         
-        {/*  { isAuth && <li><form onSubmit={handleLogOut}><button type="submit">Log out</button></form></li>} */}
-        <li><button onClick={handleLogOut}>Log out</button></li>
-
-        </StyledUl>
-       <div>{isAuth}</div>
-     
+      
+          { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
+          { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
+          { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>}
         
+        </StyledUl>     
     </StyledNavbar>
     
   );
