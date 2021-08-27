@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import axios from 'axios';
@@ -34,4 +34,4 @@ const PatientsTable = () => {
 
 /* onClick={() => removeData(id)} */
 
-export default PatientsTable;
+export default PatientsTable; */

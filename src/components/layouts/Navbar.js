@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"; //, Redirect, useHistory deleted
-import React, { useContext } from "react"; //useState deleted
+import { Link, Redirect } from "react-router-dom"; //, Redirect, useHistory deleted
+import React, { useContext, useState } from "react"; //useState deleted
 import styled from "styled-components";
 
 import {AuthContext} from "../../utils/AuthContext";
@@ -7,7 +7,7 @@ import Button from "./Button";
 
 function Navbar() {
   const contextAuth = useContext(AuthContext)
- /*  const [redirect, setRedirect] = useState(false); */
+  const [redirect, setRedirect] = useState(false); 
   const { isAuth, logOut, role, setRole } = contextAuth;
 
   /* const history = useHistory() */
@@ -18,6 +18,8 @@ function Navbar() {
       setRole(undefined)
       //why redirect here render the component but not the navbar
       await logOut()
+    
+      setRedirect(true)
       //WHy redirect here does not work?
      
     }
@@ -27,6 +29,10 @@ function Navbar() {
    
     
   }  
+  console.log('redirectttttt', redirect)
+  if(redirect){
+    return <Redirect to="/"/>
+  }
 /*   const handleLogOut = async event => {
     event.preventDefault()
     await logOut()
@@ -43,11 +49,14 @@ function Navbar() {
           <li><StyledLink to="/">Home</StyledLink></li> 
           <li><StyledLink to="/signup">Sign up</StyledLink></li>
           <li><StyledLink to="/create">Create</StyledLink></li>    
+          <li><StyledLink to="/createclou">Clou</StyledLink></li> 
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
       
           { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
           { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
-          { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>}
+        {/*   { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>} */}
+
+          <li><Button onClick={handleLogOut}>Log out</Button></li>
         
         </StyledUl>     
     </StyledNavbar>

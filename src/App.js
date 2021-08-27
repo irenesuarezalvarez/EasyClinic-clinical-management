@@ -16,13 +16,13 @@ import Details from "./pages/patients/Details-patient";
 import AuthProvider from "./utils/AuthContext";
 import PrivateProf from "./utils/PrivateProf"; 
 import Calendar from "./pages/general/Calendar";
+import CreateCloudi from "./pages/patients/Create-Cloudinary";
 
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-      
       <ThemeProvider theme={ProjectTheme}>
         <ResetStyles />
         <Navbar/>
@@ -44,7 +44,11 @@ function App() {
             <Create/>
           </Route>
 
-    {/* private routes deleted */}
+          <Route path="/createclou">
+            <CreateCloudi/>
+          </Route>
+
+
           <PrivateProf path="/mypatients">
             <ListMyPatients/>
           </PrivateProf>

@@ -6,6 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "@syncfusion/ej2-react-buttons": "^19.2.55",
     "@syncfusion/ej2-react-schedule": "^19.2.56",
     "axios": "^0.21.1",
     "prettier": "^2.3.2",

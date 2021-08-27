@@ -30,29 +30,37 @@ function Login() {
       email: input.email,
       password: input.password
     }
+    try{
+      const data =  await  logIn(checkUser);
+           if(data.status === 200){
+        setRedirect(true)       
+      }else{
+        alert('Please provide the right credentials')
+      }
 
- 
-    const data =  await  logIn(checkUser);
-    console.log('CUIDADO', redirect, 'role', role)
-
-      
-    if(data.status === 200){
-      setRedirect(true)
-     
-    }else{
-      alert('Please provide the right credentials')
     }
-  
+    catch(error){
+      console.log(error);
+    }
+ 
+    
+    
+      
+   
   } 
-/*   if(redirect){
+  /*  if(redirect){
     return <Redirect to='/mypatients'/>
-  }
-  if(role === "prof"){
+  } */
+
+  console.log('este es el role', role)
+  
+  if(redirect && role === "prof"){
     console.log('entra again')
     return <Redirect to='/mypatients'/>
-  }else if(role === "admin"){
+
+  }else if(redirect && role === "admin"){
     return <Redirect to='/patients'/>
-  } */
+  }  
 
   
   
