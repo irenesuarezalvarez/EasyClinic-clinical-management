@@ -27,7 +27,7 @@ function CreateCloudi() {
 
         
     const handleChange = (event) => {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
 
         setInput((prevState) => ({
         ...prevState,
@@ -56,7 +56,7 @@ function CreateCloudi() {
     }
     try {
       await axiosApi.post('/patients/create', newPatient)
-      setRedirect(true) 
+      setRedirect(data.status === 200)  //CHANGED
       console.log('New patient was created', newPatient)
     } catch (err) {
       console.error(err)
@@ -64,7 +64,7 @@ function CreateCloudi() {
   } 
 
   if(redirect){
-    return <Redirect to='/patients'></Redirect>
+    return <Redirect to='/patients'/>
   }
 
 

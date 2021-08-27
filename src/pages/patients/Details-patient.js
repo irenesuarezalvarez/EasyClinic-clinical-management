@@ -15,7 +15,7 @@ import PageWrapper from "../../components/layouts/PageWrapper.js";
 
 
 
-function Details() {
+function DetailsPage() {
     const { id } = useParams();
     const [patient, setPatient] = useState([]);
 
@@ -169,4 +169,4 @@ const Padding = styled.div`
     padding: 0.7rem;
 
 `
-export default Details;
+export default DetailsPage;

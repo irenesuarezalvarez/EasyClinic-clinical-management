@@ -10,7 +10,7 @@ import Button from "../../components/layouts/Button.js";
 import BtnDiv from "../../components/layouts/BtnDiv";
 import axiosApi from "../../utils/AxiosApi";
 
-function Create() {
+function CreatePatient() {
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false); 
   const [professionals, setProfessionals] = useState([]);
@@ -213,4 +213,4 @@ function Create() {
 
 
 
-export default Create;
+export default CreatePatient;

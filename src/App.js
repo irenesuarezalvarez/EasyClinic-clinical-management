@@ -6,15 +6,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import Signup from "./pages/authentication/Signup";
 import Navbar from "./components/layouts/Navbar";
-import Create from "./pages/patients/Create-new-patient";
+import CreatePatient from "./pages/patients/Create-new-patient";
 import ListAllPatients from "./pages/patients/List-all-patients"
 import ListMyPatients from "./pages/patients/List-my-patients";
 import Edit from "./pages/patients/Edit-new-patient"
 import History from "./pages/patients/Clinical-history";
 import Home from "./pages/general/Home";
-import Details from "./pages/patients/Details-patient";
+import DetailsPage from "./pages/patients/Details-patient";
 import AuthProvider from "./utils/AuthContext";
-import PrivateProf from "./utils/PrivateProf"; 
+import PrivateRoute from "./utils/PrivateRoute"; 
 import Calendar from "./pages/general/Calendar";
 import CreateCloudi from "./pages/patients/Create-Cloudinary";
 
@@ -41,7 +41,7 @@ function App() {
           </Route>
 
           <Route path="/create">
-            <Create/>
+            <CreatePatient/>
           </Route>
 
           <Route path="/createclou">
@@ -49,21 +49,21 @@ function App() {
           </Route>
 
 
-          <PrivateProf path="/mypatients">
+          <PrivateRoute path="/mypatients">
             <ListMyPatients/>
-          </PrivateProf>
+          </PrivateRoute>
 
-          <PrivateProf path="/details/:id">
-            <Details/>
-          </PrivateProf>
+          <PrivateRoute path="/details/:id">
+            <DetailsPage/>
+          </PrivateRoute>
 
           <Route path="/edit/:id">
             <Edit/>
           </Route>
 
-          <PrivateProf path="/sessions/:id">
+          <PrivateRoute path="/sessions/:id">
             <History/>
-          </PrivateProf>
+          </PrivateRoute>
 
           <Route path="/calendar">
             <Calendar/>
