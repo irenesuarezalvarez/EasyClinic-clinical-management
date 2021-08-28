@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import {  Redirect, useParams } from "react-router-dom";
 
-
 import axiosApi from "../../utils/AxiosApi.js";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
 import Button from "../../components/layouts/Button.js";
+import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
-import Container from "../../components/layouts/Container.js";
 
 
-
-
-function Edit() {
+const EditPatientPage = () => {
     const { id } = useParams();
     const [input, setInput] = useState({});
     const [patient, setPatient] = useState([]);
@@ -21,15 +19,16 @@ function Edit() {
     const [professionals, setProfessionals] = useState([]);
 
     //Get data 
-
     useEffect(() => {
         getPatient()
         getProfessionals()
     }, [])
     
+    
+   
+    //Get Patient
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
-        console.log('Frontend get patients', response.data);
         setPatient(response.data)
     }
 
@@ -41,26 +40,8 @@ function Edit() {
     }
 
     //Send patient edited
-    const handleClick = async event => {
-        event.preventDefault()
-            
-      /*   const editPatient = {
-            name: input.name,
-            surname: input.surname,
-            email: input.email,
-            phone: input.phone,
-            address: input.address,
-            city: input.city, 
-            state: input.state,
-            postal: input.postal,
-            contactname: input.contactname,
-            contactsurname: input.contactsurname,
-            contactemail: input.contactemail,
-            contactphone: input.contactphone,
-            professional: input.professional,
-            history: input.history 
-        }
-         */
+    const editPatient = async event => {
+        event.preventDefault()          
         try {
             setRedirect(true) 
             await axiosApi.post(`/patients/edit/${id}`, input)
@@ -72,13 +53,13 @@ function Edit() {
 
     //Redirect
     if(redirect){
-        return <Redirect to='/patients'></Redirect>
+        return <Redirect to='/patients'/>
     }
 
   
 
-    function renderMyBody(){
-        const { name, surname, email, phone, adress, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history } = patient;
+    function renderPatient(){
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -88,19 +69,13 @@ function Edit() {
                 [name]: value,
             }));
 
-            /* setPatient((prevPatient)=> ({
-                ...prevPatient,
-               input
-            })) */
         };
-
-        console.log('Input and patients', input, patient)
      
                 
         return(
             <div> 
                 {Object.keys(patient).length > 0  && 
-                    <form onSubmit={handleClick}>
+                    <form onSubmit={editPatient}>
                         <Card title="Personal Information">
                             <Input
                                 label="Name"
@@ -136,8 +111,8 @@ function Edit() {
                             />
                             <Input
                                 label="Address "
-                                name= "adress"
-                                defaultValue={adress} 
+                                name= "address"
+                                defaultValue={address} 
                                 onChange={handleChange}
                                 type="text"
                             />
@@ -165,7 +140,7 @@ function Edit() {
                             />
                         </Card>
 
-                        <Card title="Contact Details">
+                        <Card title="Contact Person">
                             <Input
                                 label="Name "
                                 name="contactname"
@@ -201,15 +176,14 @@ function Edit() {
                         </Card>
 
                         <Card title="Professional Assistance">
-                    
+                      
                             <Select
                                 name="professional"
                                 label= "Professional"
                                 required
                                 onChange={handleChange}
                                 disabled={professionals.length <= 0}
-                            >
-                            
+                            >                       
                                 <option value="">--select professional--</option>
                                     {professionals.length > 0 &&
                                         professionals.map((prof) => (
@@ -218,37 +192,24 @@ function Edit() {
                                             </option>
                                     ))}
                             </Select> 
+                            
                 
                         </Card>
-                        <Button type="submit">Edit</Button>
+                        <Box margin="1rem" padding="1rem">
+                            <Button type="submit">Edit</Button>
+                        </Box>
+                        
                     </form>
                 }
             </div>
         )
-        
-    /*     
-    return patients && (({  _id, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional, history }) = patients {
-        return (
-            <div>
-                <h1>Hello</h1>
-                <p>Id: {_id}</p>
-                <p>Name: {name}</p>
-                <p>Surname: {surname}</p>
-                <p>{email}</p>
-                <p>{phone}</p>
-            </div>
-          
-        )
-    })
-   */
     }
 
     return(
-        <Container>
-            <p>{renderMyBody()}</p>    
-        </Container>
+        <PageWrapper>
+            <div>{renderPatient()}</div>    
+        </PageWrapper>
     )
-  
   }
 
-export default Edit;
+export default EditPatientPage;

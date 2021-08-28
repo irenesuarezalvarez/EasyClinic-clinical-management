@@ -1,34 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 
-
-function Button ({type, children}) {
+const Button = ({type, radius, bgColor, hoverColor, children, ...props}) => {
   return (
-    <StyledBtn type={type}>
-     {children}
+    <StyledBtn type={type} radius={radius} bgColor={bgColor} hoverColor={hoverColor} {...props}>
+      {children}
     </StyledBtn>
   );
 };
 
 export const StyledBtn = styled.button`
-  background-color: rgb(102, 205, 170);
+  background-color:${({bgColor})=> bgColor || "rgba(102, 205, 170)"} ;
   color: white;
   padding: 0.7rem 1rem;
-  border-radius: 4px;
   border: none;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: backgroud-color ease-out 0.35s;
-  border-radius: 5px;
+  transition: ease-out 0.35s;
+  border-radius: ${({radius})=> radius || "5px"};
   &:disabled {
     background-color: #bdbbbb;
     cursor: not-allowed;
     color: #989393;
   }
   &:hover{
-    background-color:rgb(28, 130, 112 );
-   
+    background-color: ${({hoverColor})=> hoverColor || "rgba(28, 130, 112 )"};
   }
+`;
+
+export const NewBtnRight = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1rem;
 `;
 
 export default Button;

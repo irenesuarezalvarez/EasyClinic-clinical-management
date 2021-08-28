@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-/* import axios from 'axios'; */
+
 
 import Input from "./../../components/forms/Input.js";
 import Select from "./../../components/forms/Select"
-import Container from "./../../components/layouts/Container";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
+import Box from "../../components/layouts/Box.js";
 import axiosApi from "../../utils/AxiosApi";
 
-function Create() {
-  const [input, setInput] = useState({});
-  const [redirect, setRedirect] = useState(false); 
-  const [professionals, setProfessionals] = useState([]);
+function CreateCloudi() {
+    const [input, setInput] = useState({});
+    const [redirect, setRedirect] = useState(false); 
+    const [professionals, setProfessionals] = useState([]);
 
     useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await axiosApi.get("/professionals"); 
-      const professionals = result.data;
-      setProfessionals([...professionals]); 
+        const fetchUsers = async () => {
+        const result = await axiosApi.get("/professionals"); 
+        const professionals = result.data;
+        setProfessionals([...professionals]); 
     };
 
     fetchUsers();
@@ -26,7 +27,7 @@ function Create() {
 
         
     const handleChange = (event) => {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
 
         setInput((prevState) => ({
         ...prevState,
@@ -34,7 +35,7 @@ function Create() {
         }));
     };
 
-  const handleClick = async event => {
+  const createPatient = async event => {
     event.preventDefault()
     
     const newPatient = {
@@ -54,8 +55,10 @@ function Create() {
         history: input.history 
     }
     try {
-      await axiosApi.post('/patients/create', newPatient)
-      setRedirect(true) 
+      const result = await axiosApi.post('/patients/createpatient', newPatient)
+      const data = await result;
+      setRedirect(data.status === 200)  //CHANGED
+     
       console.log('New patient was created', newPatient)
     } catch (err) {
       console.error(err)
@@ -63,16 +66,21 @@ function Create() {
   } 
 
   if(redirect){
-    return <Redirect to='/patients'></Redirect>
+    return <Redirect to='/patients'/>
   }
 
 
   return (
-    <Container horizontalPadding="1.5rem">
-        <form onSubmit={handleClick}>
+    <PageWrapper>
+        <form enctype="multipart/form-data" onSubmit={createPatient}>
 
-        <div>   
+      
             <Card title="Personal Information">
+                {/* <input type="file" name="image" id="" /> */}
+
+                <label for="image-input">Image:</label>
+                <input type="file" name="image" id="image-input"  />
+
                 <Input
                     label="Name "
                     name= "name"
@@ -111,9 +119,9 @@ function Create() {
                 />
                 <Input
                     label="Address "
-                    name= "adress"
-                    value={input.adress} 
-                    placeholder= "Adress"
+                    name= "address"
+                    value={input.address} 
+                    placeholder= "Address"
                     onChange= {handleChange}
                     type = "text"
                 />
@@ -192,21 +200,23 @@ function Create() {
                     disabled={professionals.length <= 0}
                     >
                         <option value="">--select professional--</option>
-                        {professionals.length > 0 &&
-                         professionals.map((professional) => (
+                        {professionals.length > 0 && professionals.map((professional) => (
                             <option value={professional._id} key={professional._id}>
                             {professional.username}
                             </option>
-                         ))}
+                        ))}
                 </Select> 
                 
             </Card>
-            <Button type="submit">Create</Button>
-        </div>
-
+            <Box margin="1rem" padding="1rem">
+                <Button type="submit">Create</Button>
+            </Box>
+            
         </form>
-    </Container>
+    </PageWrapper>
   );
 }
 
-export default Create;
+
+
+export default CreateCloudi;

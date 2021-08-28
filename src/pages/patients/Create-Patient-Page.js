@@ -1,50 +1,77 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
-import axios from 'axios';
-
-import Input from "./../../components/forms/Input.js";
-import Select from "./../../components/forms/Select"
-import Container from "./../../components/layouts/Container";
+import Input from "../../components/forms/Input.js";
+import Select from "../../components/forms/Select"
+import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
+import Button from "../../components/layouts/Button.js";
+import Box from "../../components/layouts/Box.js";
+import axiosApi from "../../utils/AxiosApi";
 
-//COPIED FROM CREATE, NEED TO BE CHANGED TO RECEIVE THE PATIENTS DATA
+function CreatePatientPage() {
+    const [input, setInput] = useState({});
+    const [redirect, setRedirect] = useState(false); 
+    const [professionals, setProfessionals] = useState([]);
 
-function Details() {
-  const [input, setInput] = useState({});
-  const [redirect, setRedirect] = useState(false); 
-  const [professionals, setProfessionals] = useState([]);
-
- /*  Possible use for the dropdown
     useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await fetch("http://localhost:5000/professionals"); //HELP NEEDED HERE
-      const professionals = await result.json();
-      setProfessionals([...professionals]);
+        const fetchUsers = async () => {
+            const result = await axiosApi.get("/professionals"); 
+            const professionals = result.data;
+            setProfessionals([...professionals]); 
+        };
+
+        fetchUsers();
+    }, []);
+
+        
+    const handleChange = (event) => {
+    const { name, value } = event.target;
+
+        setInput((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
     };
 
-    fetchUsers();
-  }, []);
-   */
-
-
-  const handleClick = async event => {
-    event.preventDefault()
-  
-    try {
-      await axios.post('http://localhost:5000/patients/create', newPatient)
-      setRedirect(true) 
-      console.log('New patient created', newPatient )
-    } catch (err) {
-      console.error(err)
-    } 
+    const createPatient = async event => {
+        event.preventDefault()
+        
+        const newPatient = {
+            name: input.name,
+            surname: input.surname,
+            email: input.email,
+            phone: input.phone,
+            address: input.address,
+            city: input.city, 
+            state: input.state,
+            postal: input.postal,
+            contactname: input.contactname,
+            contactsurname: input.contactsurname,
+            contactemail: input.contactemail,
+            contactphone: input.contactphone,
+            professional: input.professional,
+            history: input.history 
+        }
+        try {
+        await axiosApi.post('/patients/create', newPatient)
+        setRedirect(true) 
+        console.log('New patient was created', newPatient)
+        } catch (err) {
+        console.error(err)
+        } 
   } 
+
+  if(redirect){
+    return <Redirect to='/patients'></Redirect>
+  }
 
 
   return (
-    <Container horizontalPadding="1.5rem">
-        <form>
+    <PageWrapper>
+        <form onSubmit={createPatient}>
 
-        <div>   
+      
             <Card title="Personal Information">
                 <Input
                     label="Name "
@@ -52,6 +79,7 @@ function Details() {
                     required
                     value={input.name} 
                     placeholder= "Name"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -60,6 +88,7 @@ function Details() {
                     required
                     value={input.surname} 
                     placeholder= "Surname"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -68,6 +97,7 @@ function Details() {
                     required
                     value={input.email} 
                     placeholder= "Email"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -76,13 +106,15 @@ function Details() {
                     required
                     value={input.phone} 
                     placeholder= "Phone number"
+                    onChange= {handleChange}
                     type = "number"
                 />
                 <Input
                     label="Address "
-                    name= "adress"
-                    value={input.adress} 
-                    placeholder= "Adress"
+                    name= "address"
+                    value={input.address} 
+                    placeholder= "Address"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -90,6 +122,7 @@ function Details() {
                     name= "city"
                     value={input.city} 
                     placeholder= "City"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -97,6 +130,7 @@ function Details() {
                     name= "state"
                     value={input.state} 
                     placeholder= "State"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -105,6 +139,7 @@ function Details() {
                     required
                     value={input.postal} 
                     placeholder= "Postal code"
+                    onChange= {handleChange}
                     type = "number"
                 />
             </Card>
@@ -116,6 +151,7 @@ function Details() {
                     required
                     value={input.contactname} 
                     placeholder= "Name"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -124,6 +160,7 @@ function Details() {
                     required
                     value={input.contactsurname} 
                     placeholder= "Surname"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -132,6 +169,7 @@ function Details() {
                     required
                     value={input.contactemail} 
                     placeholder= "Email"
+                    onChange= {handleChange}
                     type = "text"
                 />
                 <Input
@@ -140,46 +178,38 @@ function Details() {
                     required
                     value={input.contactphone} 
                     placeholder= "Phone number"
+                    onChange= {handleChange}
                     type = "number"
                 />
             </Card>
             <Card title="Professional Assistance">
                 
-               {/*  OLD SELECT (Not working for the dropdown) */}
-                <Select 
-                    label="Professional"
-                    name= "professional"
-                    required
-                    value={input.professional} 
-                    placeholder= "Professional Assigned"
-                    type = "text"
-                >
-                    <option value="prof1">Professional1</option>
-                    <option value="prof">Professional</option>
-                </Select>
-
-                {/* Possible new select option. Help needed in the dropdown
                 <Select
                     name="professional"
+                    label="Professional"
                     required
+                    onChange={handleChange}
                     disabled={professionals.length <= 0}
                     >
-                        <option>--select professional--</option>
+                        <option value="">--select professional--</option>
                         {professionals.length > 0 &&
                          professionals.map((professional) => (
-                            <option value={professional.id} key={professional.id}>
-                            {professional.name}
+                            <option value={professional._id} key={professional._id}>
+                            {professional.username}
                             </option>
                          ))}
-                </Select>  */}
+                </Select> 
                 
             </Card>
-            {/* ADD CLINICAL HISTORY */}
-        </div>
-
+            <Box margin="1rem" padding="1rem">
+                <Button type="submit">Create</Button>
+            </Box>
+            
         </form>
-    </Container>
+    </PageWrapper>
   );
 }
 
-export default Details;
+
+
+export default CreatePatientPage;
