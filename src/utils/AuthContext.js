@@ -1,38 +1,81 @@
-/* import React, { useState, useContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
+import axiosApi from "./AxiosApi"
 
-const AuthContext = React.createContext(false);
+export const AuthContext = createContext({});
 
-// my custom hook
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
+  const [ role, setRole] = useState(undefined);
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    console.log(user, !!user);
-    setIsAuth(!!user);
-  }, [isAuth]);
+  console.log('contexMounting')
+  
+  //Log in function
+  async function logIn(credentials){
+    try {
+      const result = await axiosApi.post('/auth/login', credentials)
+      const data = await result;
+    
+      setRole(data.data.role);
+     
+      if(data.status === 200){ //TO BE CHANGED
+        setIsAuth(true);
+      }
+      console.log('rooole', role, data.data.role) //aqui noooo
+     /*  setIsAuth(data.status === 200);  *///setIsAuth to true if status is 200
+     /*  setIsAuth(data.data.role === "prof") */
+     return data
+    } catch (err) {
+      console.error(err)
+    } 
 
-  const login = (dataCredentials) => {
-    const { username, password } = dataCredentials;
-    localStorage.setItem("user", JSON.stringify({ username, password }));
-    // Your Axios call
-    setIsAuth(true);
-  };
+    return(
+      'User is authenticated', credentials
+    ) 
+  }
+  
+  //Sign up function
+  async function signUp(credentials){
+    try {
+      const result = await axiosApi.post('/auth/signup', credentials)
+      const data = await result;
+      setRole(data.data.role);
+     
+      if(data.status === 200){
+        setIsAuth(true);
+      } //setIsAuth to true if status is 200
+    } catch (err) {
+      console.error(err)
+    } 
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    setIsAuth(false);
-  };
+    return(
+      'User is authenticated', credentials //WHY???
+    ) 
+  }
+  console.log('AuthRole??', role)
 
-  return (
-    <AuthContext.Provider value={{ isAuth, login, logout }}>
+  //Log out function
+
+  const logOut = async () => {
+    const { data } = await axiosApi.post('/auth/logout')
+    return data
+  }
+/*    async function logOut(){
+    try {
+      console.log('Logged out');
+      setRole(undefined);
+      await axiosApi.post('/auth/logout')
+    } catch (err) {
+      console.error(err)
+    } 
+    return;
+  }  */
+
+  return(
+    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut}}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+} 
 
-export default AuthProvider; */
+
+export default AuthProvider;

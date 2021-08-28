@@ -1,30 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import axiosApi from '../../utils/AxiosApi';
-import Container from '../../components/layouts/Container';
 import Card from '../../components/layouts/Card';
-import StyledLink from '../../components/layouts/StyledLink';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
+import StyledLink from '../../components/layouts/StyledLink';
+import Searcher from '../../components/layouts/Search';
+import axiosApi from '../../utils/AxiosApi';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import Container from '../../components/layouts/Container';
 
 
 
-const ListMyPatients = () => {
+const URL = '/patients/all'
+
+const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
+   
 
     useEffect(() => {
-        getPatients()
+        getPatients();
     }, [])
 
+    //Refresh the page after deleting a patient
+    useEffect(()=> {
+        getPatients();
+    }, [patients]);
+ 
     const getPatients = async () => {
-        const response = await axiosApi.get(`/patients/mypatients`)
-        setPatients(response.data.patients)
+        const response = await axiosApi.get(URL)
+        setPatients(response.data)
     }
-
+    
+    const deletePatient = async (id) => {
+        try {
+            console.log('Patient deleted')
+            await axiosApi.delete(`${URL}/${id}`)
+            const del = patients.filter(patient => id !== patient.id)
+            setPatients(del)
+        } catch (err) {
+            console.error(err)
+        }  
+    }  
+   
     const renderHeader = () => {
         let headerElement = ['History number', 'Surname', 'Name', 'Operation']
 
@@ -40,34 +59,36 @@ const ListMyPatients = () => {
                     <Styledtd>{_id}</Styledtd>
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
-                    <Styledtd>
-                   
-                        <Button bgColor=" rgba(225, 183, 65)" hoverColor="rgba(187, 135, 20)" to={`details/${_id}`}>
-                            <FontAwesomeIcon icon={faInfoCircle}/>
+                    <ButtonBox>
+                        <Button radius="5px 0 0 5px" to="/calendar">
+                            <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`sessions/${_id}`}>
-                            <FontAwesomeIcon icon={faFolder}/>
+                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                            <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
-                        <Button radius=" 0 5px 5px 0" bgColor="rgba(107, 142, 35)" hoverColor=" rgba(85, 107, 47)" to={`sessions/${_id}`}>
-                            <FontAwesomeIcon icon={faFileAlt}/>
+                        <Button radius=" 0 5px 5px 0" bgColor="rgba(255, 127, 80)" hoverColor="rgba(250, 45, 25)" onClick={() => deletePatient(_id)}>
+                            <FontAwesomeIcon icon={faTrashAlt}/>
                         </Button>
-                    </Styledtd>
+                    </ButtonBox>
                 </tr>
             )
         })
     }
 
+  
     return (
         <Container>
             <Card>
-                <StyledTitle>My Patients</StyledTitle>
-
+                <StyledTitle>List of Patients</StyledTitle>
+               
                 <NewBtnRight>
-                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                    <StyledLink to="patient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
                 </NewBtnRight>
-                
+       
+                <Searcher deletePatient = {deletePatient}/>
+
                 <StyledTable>
                     <thead>
                         <tr>{renderHeader()}</tr>
@@ -117,4 +138,15 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-export default ListMyPatients;
+//SENDING BACK AN ERROR
+const ButtonBox = styled.td`
+    background-color: secondary_light;
+    padding: 0.9rem;
+    text-align: center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+`
+export default ListAllPatientsPage;

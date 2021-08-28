@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios'
 
+import axiosApi from '../../utils/AxiosApi';
 import Card from '../../components/layouts/Card';
-import Button from '../../components/layouts/Button';
-import PageWrapper from '../../components/layouts/PageWrapper';
-
+import Button, { NewBtnRight } from '../../components/layouts/Button';
+import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
@@ -26,12 +24,12 @@ const ListAllPatients = () => {
     }, [])
 
     const getData = async () => {
-        const response = await axios.get(URL)
+        const response = await axiosApi.get(URL)
         setPatients(response.data)
     }
 
     const removeData = (id) => {
-        axios.delete(`${URL}/${id}`).then(res => {
+            axiosApi.delete(`${URL}/${id}`).then(res => {
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
         })
@@ -53,9 +51,9 @@ const ListAllPatients = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
-                        <LinkIcon to="/calendar"><FontAwesomeIcon icon={faCalendar} /></LinkIcon>
-                        <LinkIcon to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></LinkIcon>
-                        <LinkIcon to={`sessions/${_id}`}>session</LinkIcon>
+                        <StyledLink to="/calendar"><FontAwesomeIcon icon={faCalendar} /></StyledLink>
+                        <StyledLink to={`edit/${_id}`}><FontAwesomeIcon icon={faEdit} /></StyledLink>
+                        <StyledLink to={`sessions/${_id}`}>session</StyledLink>
                         <Button onClick={() => removeData(_id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
                     </Styledtd>
                 </tr>
@@ -68,10 +66,10 @@ const ListAllPatients = () => {
             <Card>
                 <StyledTitle>List of Patients</StyledTitle>
 
-                <StyledBtn>
-                    <StyledLink to="/create">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
-                </StyledBtn>
-                
+                <NewBtnRight>
+                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                </NewBtnRight>
+                              
                 <StyledTable>
                     <thead>
                         <tr>{renderHeader()}</tr>
@@ -94,38 +92,14 @@ const StyledTitle = styled.h1`
   padding: 0.5rem;
 `;
 
-const StyledLink = styled(Link)`
+/* const StyledLink = styled(Link)`
   display: flex;
   justify-content: space-between;
   text-decoration: none;
   color: white;
 `;
-
-const LinkIcon = styled(Link)`
-  background-color: rgb(102, 205, 170);
-  color: white;
-  padding: 0.7rem 1rem;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: backgroud-color ease-out 0.35s;
-  border-radius: 5px;
-  &:disabled {
-    background-color: #bdbbbb;
-    cursor: not-allowed;
-    color: #989393;
-  }
-  &:hover{
-    background-color:#DAF7A6;
-    color: black;
-  }
-`;
- const StyledSpan = styled.span`
-  padding-left: 15px;
- `;
-
-//NOT WORKING: (TO BE CHECKED)
+ */
+/* //NOT WORKING: (TO BE CHECKED)
 const StyledBtn = styled(Button)`
     display: flex;
     justify-content: space-between;
@@ -133,7 +107,7 @@ const StyledBtn = styled(Button)`
     color: black;
     backgroundColor:red;
  `;
-
+ */
 
 //TABLE STYLES
 const StyledTable = styled.table`
@@ -157,6 +131,10 @@ const Styledtd = styled.td`
     background-color: secondary_light;
     padding: 0.9rem;
     text-align: center;
+`;
+
+const StyledSpan = styled.span`
+  padding-left: 15px;
 `;
 
 export default ListAllPatients;
