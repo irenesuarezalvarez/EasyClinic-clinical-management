@@ -17,7 +17,7 @@ const AuthProvider = ({children}) =>{
     
       setRole(data.data.role);
      
-      if(data.status === 200){
+      if(data.status === 200){ //TO BE CHANGED
         setIsAuth(true);
       }
       console.log('rooole', role, data.data.role) //aqui noooo

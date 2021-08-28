@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi.js";
 import Box from "../../components/layouts/Box.js";
-import { Title } from "../../components/layouts/Card.js";
+import Title from "../../components/layouts/Title.js";
 import StyledLink from "../../components/layouts/StyledLink.js";
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 
@@ -24,7 +24,21 @@ const DetailsPage = () => {
     }
 
     function renderMyBody(){
-        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
+        const {
+            name, 
+            surname, 
+            email, 
+            phone, 
+            address, 
+            city, 
+            state, 
+            postal, 
+            contactname, 
+            contactsurname, 
+            contactemail, 
+            contactphone, 
+            professional 
+        } = patient;
                   
         return(
             <article> 
