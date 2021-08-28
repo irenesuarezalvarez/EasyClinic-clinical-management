@@ -7,19 +7,19 @@ import Select from "./../../components/forms/Select"
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
-import BtnDiv from "../../components/layouts/BtnDiv";
+import Box from "../../components/layouts/Box.js";
 import axiosApi from "../../utils/AxiosApi";
 
 function CreateCloudi() {
-  const [input, setInput] = useState({});
-  const [redirect, setRedirect] = useState(false); 
-  const [professionals, setProfessionals] = useState([]);
+    const [input, setInput] = useState({});
+    const [redirect, setRedirect] = useState(false); 
+    const [professionals, setProfessionals] = useState([]);
 
     useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await axiosApi.get("/professionals"); 
-      const professionals = result.data;
-      setProfessionals([...professionals]); 
+        const fetchUsers = async () => {
+        const result = await axiosApi.get("/professionals"); 
+        const professionals = result.data;
+        setProfessionals([...professionals]); 
     };
 
     fetchUsers();
@@ -55,8 +55,10 @@ function CreateCloudi() {
         history: input.history 
     }
     try {
-      await axiosApi.post('/patients/create', newPatient)
+      const result = await axiosApi.post('/patients/createpatient', newPatient)
+      const data = await result;
       setRedirect(data.status === 200)  //CHANGED
+     
       console.log('New patient was created', newPatient)
     } catch (err) {
       console.error(err)
@@ -198,18 +200,17 @@ function CreateCloudi() {
                     disabled={professionals.length <= 0}
                     >
                         <option value="">--select professional--</option>
-                        {professionals.length > 0 &&
-                         professionals.map((professional) => (
+                        {professionals.length > 0 && professionals.map((professional) => (
                             <option value={professional._id} key={professional._id}>
                             {professional.username}
                             </option>
-                         ))}
+                        ))}
                 </Select> 
                 
             </Card>
-            <BtnDiv>
+            <Box margin="1rem" padding="1rem">
                 <Button type="submit">Create</Button>
-            </BtnDiv>
+            </Box>
             
         </form>
     </PageWrapper>

@@ -1,23 +1,20 @@
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { ResetStyles, ProjectTheme } from "./utils/globalStyles";
-import { Switch, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 
-
-import Signup from "./pages/authentication/Signup";
-import Navbar from "./components/layouts/Navbar";
-import CreatePatient from "./pages/patients/Create-new-patient";
-import ListAllPatients from "./pages/patients/List-all-patients"
-import ListMyPatients from "./pages/patients/List-my-patients";
-import Edit from "./pages/patients/Edit-new-patient"
-import History from "./pages/patients/Clinical-history";
-import Home from "./pages/general/Home";
-import DetailsPage from "./pages/patients/Details-patient";
 import AuthProvider from "./utils/AuthContext";
 import PrivateRoute from "./utils/PrivateRoute"; 
-import Calendar from "./pages/general/Calendar";
+import Navbar from "./components/layouts/Navbar";
+import HomePage from "./pages/general/HomePage";
+import SignupPage from "./pages/authentication/SignupPage";
+import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
+import ListMyPatients from "./pages/patients/List-my-patients";
 import CreateCloudi from "./pages/patients/Create-Cloudinary";
-
+import CreatePatientPage from "./pages/patients/Create-Patient-Page";
+import DetailsPage from "./pages/patients/Details-Patient-Page";
+import EditPatientPage from "./pages/patients/Edit-Patient-Page"
+import HistoryPage from "./pages/patients/Clinical-History-Page";
+import Calendar from "./pages/general/Calendar";
 
 function App() {
   return (
@@ -29,19 +26,19 @@ function App() {
         <Switch>
        
           <Route exact path="/">
-            <Home/>
+            <HomePage/>
           </Route>
 
           <Route path="/signup">
-            <Signup/>
+            <SignupPage/>
           </Route>
           
           <Route path="/patients">
-            <ListAllPatients/>
+            <ListAllPatientsPage/>
           </Route>
 
-          <Route path="/create">
-            <CreatePatient/>
+          <Route path="/createpatient">
+            <CreatePatientPage/>
           </Route>
 
           <Route path="/createclou">
@@ -58,11 +55,11 @@ function App() {
           </PrivateRoute>
 
           <Route path="/edit/:id">
-            <Edit/>
+            <EditPatientPage/>
           </Route>
 
           <PrivateRoute path="/sessions/:id">
-            <History/>
+            <HistoryPage/>
           </PrivateRoute>
 
           <Route path="/calendar">
@@ -76,7 +73,6 @@ function App() {
     </Router>
 
     </AuthProvider>
-   
   );
 }
 

@@ -7,8 +7,8 @@ import Button from "./Button";
 
 function Navbar() {
   const contextAuth = useContext(AuthContext)
-  const [redirect, setRedirect] = useState(false); 
   const { isAuth, logOut, role, setRole } = contextAuth;
+  const [redirect, setRedirect] = useState(false); 
 
   /* const history = useHistory() */
  
@@ -17,19 +17,18 @@ function Navbar() {
     try{
       setRole(undefined)
       //why redirect here render the component but not the navbar
-      await logOut()
+      const data = await logOut()
+      const result = data.status
     
-      setRedirect(true)
+      setRedirect(result === 200)
       //WHy redirect here does not work?
      
     }
-   catch(err){
-     console.log(err)
-   }
-   
-    
-  }  
-  console.log('redirectttttt', redirect)
+    catch(err){
+      console.log(err)
+    }
+  } 
+
   if(redirect){
     return <Redirect to="/"/>
   }
@@ -44,17 +43,17 @@ function Navbar() {
   return (
     
     <StyledNavbar>
-        <Link to="/"><StyledLogo  src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo></Link>
+        <Link to="/"><StyledLogo src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"></StyledLogo></Link>
         <StyledUl>
           <li><StyledLink to="/">Home</StyledLink></li> 
           <li><StyledLink to="/signup">Sign up</StyledLink></li>
-          <li><StyledLink to="/create">Create</StyledLink></li>    
+          <li><StyledLink to="/createpatient">Create New Patient</StyledLink></li>    
           <li><StyledLink to="/createclou">Clou</StyledLink></li> 
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
       
           { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
           { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
-        {/*   { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>} */}
+          { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>} 
 
           <li><Button onClick={handleLogOut}>Log out</Button></li>
         
@@ -65,8 +64,8 @@ function Navbar() {
 }
 const StyledLogo = styled.img`
   height: 50px;
-  padding:5px;
-  margin:5px 25px ;
+  padding: 5px;
+  margin: 5px 25px ;
 `
 const StyledUl = styled.ul`
   list-style-type: none;
@@ -78,17 +77,17 @@ const StyledUl = styled.ul`
 `
 
 const StyledNavbar = styled.nav`
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
-    background: rgb(218, 247, 166);
+    background: rgba(218, 247, 166);
 `
  const StyledLink = styled(Link)`
     color: black;
     text-decoration: none;
-    padding:5px;
-    margin:5px 10px ;
+    padding: 5px;
+    margin: 5px 10px ;
  `
 
 

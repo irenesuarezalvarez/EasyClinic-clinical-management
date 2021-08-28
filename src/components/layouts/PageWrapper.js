@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import Calendar from "../../pages/general/Calendar";
-
-
-
 function PageWrapper({children}) {
     return (
     <Wrapper>
-      <Aside><Calendar/></Aside>
+      <Aside></Aside>
       <FormContainer>
        {children}
       </FormContainer>

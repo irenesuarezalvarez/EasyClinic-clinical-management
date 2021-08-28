@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
-
-import Input from "./../../components/forms/Input.js";
-import Select from "./../../components/forms/Select"
+import Input from "../../components/forms/Input.js";
+import Select from "../../components/forms/Select"
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
-import BtnDiv from "../../components/layouts/BtnDiv";
+import Box from "../../components/layouts/Box.js";
 import axiosApi from "../../utils/AxiosApi";
 
-function CreatePatient() {
-  const [input, setInput] = useState({});
-  const [redirect, setRedirect] = useState(false); 
-  const [professionals, setProfessionals] = useState([]);
+function CreatePatientPage() {
+    const [input, setInput] = useState({});
+    const [redirect, setRedirect] = useState(false); 
+    const [professionals, setProfessionals] = useState([]);
 
     useEffect(() => {
-    const fetchUsers = async () => {
-      const result = await axiosApi.get("/professionals"); 
-      const professionals = result.data;
-      setProfessionals([...professionals]); 
-    };
+        const fetchUsers = async () => {
+            const result = await axiosApi.get("/professionals"); 
+            const professionals = result.data;
+            setProfessionals([...professionals]); 
+        };
 
-    fetchUsers();
+        fetchUsers();
     }, []);
 
         
@@ -30,37 +29,37 @@ function CreatePatient() {
     const { name, value } = event.target;
 
         setInput((prevState) => ({
-        ...prevState,
-        [name]: value,
+            ...prevState,
+            [name]: value,
         }));
     };
 
-  const createPatient = async event => {
-    event.preventDefault()
-    
-    const newPatient = {
-        name: input.name,
-        surname: input.surname,
-        email: input.email,
-        phone: input.phone,
-        address: input.address,
-        city: input.city, 
-        state: input.state,
-        postal: input.postal,
-        contactname: input.contactname,
-        contactsurname: input.contactsurname,
-        contactemail: input.contactemail,
-        contactphone: input.contactphone,
-        professional: input.professional,
-        history: input.history 
-    }
-    try {
-      await axiosApi.post('/patients/create', newPatient)
-      setRedirect(true) 
-      console.log('New patient was created', newPatient)
-    } catch (err) {
-      console.error(err)
-    } 
+    const createPatient = async event => {
+        event.preventDefault()
+        
+        const newPatient = {
+            name: input.name,
+            surname: input.surname,
+            email: input.email,
+            phone: input.phone,
+            address: input.address,
+            city: input.city, 
+            state: input.state,
+            postal: input.postal,
+            contactname: input.contactname,
+            contactsurname: input.contactsurname,
+            contactemail: input.contactemail,
+            contactphone: input.contactphone,
+            professional: input.professional,
+            history: input.history 
+        }
+        try {
+        await axiosApi.post('/patients/create', newPatient)
+        setRedirect(true) 
+        console.log('New patient was created', newPatient)
+        } catch (err) {
+        console.error(err)
+        } 
   } 
 
   if(redirect){
@@ -202,9 +201,9 @@ function CreatePatient() {
                 </Select> 
                 
             </Card>
-            <BtnDiv>
+            <Box margin="1rem" padding="1rem">
                 <Button type="submit">Create</Button>
-            </BtnDiv>
+            </Box>
             
         </form>
     </PageWrapper>
@@ -213,4 +212,4 @@ function CreatePatient() {
 
 
 
-export default CreatePatient;
+export default CreatePatientPage;

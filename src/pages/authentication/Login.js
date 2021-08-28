@@ -30,78 +30,64 @@ function Login() {
       email: input.email,
       password: input.password
     }
+
     try{
-      const data =  await  logIn(checkUser);
-           if(data.status === 200){
+      const data = await logIn(checkUser);
+      if(data.status === 200){
         setRedirect(true)       
       }else{
         alert('Please provide the right credentials')
       }
-
     }
     catch(error){
       console.log(error);
     }
- 
-    
-    
-      
-   
+
   } 
-  /*  if(redirect){
-    return <Redirect to='/mypatients'/>
-  } */
 
   console.log('este es el role', role)
   
   if(redirect && role === "prof"){
-    console.log('entra again')
     return <Redirect to='/mypatients'/>
 
-  }else if(redirect && role === "admin"){
+  }  else if(redirect && role === "admin"){
     return <Redirect to='/patients'/>
   }  
-
-  
-  
- 
 
   return (
     <form onSubmit={handleLogIn}>
       <Card title="Log In">
         <Input
           label="Username "
-          name= "username"
+          name="username"
           required
           value={input.username} 
-          placeholder= "Enter your username"
-          onChange= {handleChange}
-          type = "text"
+          placeholder="Enter your username"
+          onChange={handleChange}
+          type="text"
         />
         <Input
           label="Email "
-          name= "email"
+          name="email"
           required
           value={input.email} 
-          placeholder= "Enter your email"
-          onChange= {handleChange}
-          type = "text"
+          placeholder="Enter your email"
+          onChange={handleChange}
+          type="text"
         />
         <Input
           label="Password "
-          name= "password"
+          name="password"
           required
           value={input.password} 
-          placeholder= "Enter your password"
-          onChange= {handleChange}
-          type = "password"
+          placeholder="Enter your password"
+          onChange={handleChange}
+          type="password"
         />
-        <Button type="submit" >Log in</Button>
+        <Button type="submit">Log in</Button>
       </Card>
     </form>
-
   );
 }
-
 
 export default Login;

@@ -2,15 +2,15 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router";
 import {AuthContext} from "../../utils/AuthContext"
 
-import Input from "./../../components/forms/Input";
-import Select from "./../../components/forms/Select";
-import Card from "./../../components/layouts/Card";
+import Input from "../../components/forms/Input";
+import Select from "../../components/forms/Select";
+import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button";
-import BtnDiv from "../../components/layouts/BtnDiv";
+import Box from "../../components/layouts/Box";
 import PageWrapper from "../../components/layouts/PageWrapper";
 
 
-function Signup() {
+function SignupPage() {
   const { signUp, role } = useContext(AuthContext)
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
@@ -24,7 +24,7 @@ function Signup() {
     }));
   };
 
-  const createUser =  event => {
+  const createUser = event => {
     event.preventDefault()
     const newUser = {
       username: input.username,
@@ -90,9 +90,9 @@ function Signup() {
               onChange= {handleChange}
               type = "password"
             />
-            <BtnDiv>
+            <Box margin="1rem" padding="1rem">
               <Button type="submit">Create account</Button>
-            </BtnDiv>
+            </Box>
            
           </Card>
         </form>
@@ -101,4 +101,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupPage;

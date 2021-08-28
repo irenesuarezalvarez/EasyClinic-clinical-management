@@ -7,11 +7,11 @@ import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
 import Button from "../../components/layouts/Button.js";
-import BtnDiv from "../../components/layouts/BtnDiv.js";
+import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
 
 
-function Edit() {
+const EditPatientPage = () => {
     const { id } = useParams();
     const [input, setInput] = useState({});
     const [patient, setPatient] = useState([]);
@@ -195,16 +195,14 @@ function Edit() {
                             
                 
                         </Card>
-                        <BtnDiv>
+                        <Box margin="1rem" padding="1rem">
                             <Button type="submit">Edit</Button>
-                        </BtnDiv>
+                        </Box>
                         
                     </form>
                 }
             </div>
         )
-        
-
     }
 
     return(
@@ -214,4 +212,4 @@ function Edit() {
     )
   }
 
-export default Edit;
+export default EditPatientPage;

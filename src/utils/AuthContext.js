@@ -38,7 +38,6 @@ const AuthProvider = ({children}) =>{
     try {
       const result = await axiosApi.post('/auth/signup', credentials)
       const data = await result;
-      console.log('aqui deberia tener el user de req session', data.data._id, data.status )
       setRole(data.data.role);
      
       if(data.status === 200){

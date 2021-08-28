@@ -12,7 +12,7 @@ const StyledLink = ({ children, ...props }) => {
 };
 
 export const LinkIcon = styled(Link)`
-  background-color: rgb(102, 205, 170);
+  background-color: rgba(102, 205, 170);
   color: white;
   padding: 0.7rem 1rem;
   border-radius: 4px;
@@ -28,7 +28,7 @@ export const LinkIcon = styled(Link)`
     color: #989393;
   }
   &:hover{
-    background-color:rgb(28, 130, 112 );
+    background-color:rgba(28, 130, 112 );
   }
 `;
 
