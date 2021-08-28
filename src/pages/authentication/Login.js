@@ -32,7 +32,6 @@ function Login() {
       const result = await axiosApi.post('/auth/login', newUser)
       const data = await result;
       setRedirect(true)
-      
     } catch (err) {
       console.error(err)
     } 
