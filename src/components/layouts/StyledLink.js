@@ -11,11 +11,10 @@ const StyledLink = ({ children, ...props }) => {
   );
 };
 
-export const LinkIcon = styled(Link)`
+const LinkIcon = styled(Link)`
   background-color: rgba(102, 205, 170);
   color: white;
   padding: 0.7rem 1rem;
-  border-radius: 4px;
   border: none;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   text-decoration: none;
@@ -31,7 +30,5 @@ export const LinkIcon = styled(Link)`
     background-color:rgba(28, 130, 112 );
   }
 `;
-
-
 
 export default StyledLink;

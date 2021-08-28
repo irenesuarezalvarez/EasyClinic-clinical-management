@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+import Title from "./Title";
 
-const Card = ({ bgColor,title, children }) => {
+
+const Card = ({ bgColor, title, children }) => {
   return (
     <CardContainer bgColor={bgColor}>
       <Title>{title}</Title>
@@ -11,7 +13,7 @@ const Card = ({ bgColor,title, children }) => {
   );
 };
 
-export const CardContainer = styled.fieldset`
+const CardContainer = styled.fieldset`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,12 +27,6 @@ export const CardContainer = styled.fieldset`
   &:not(:last-of-type) {
     margin-bottom: 2rem;
   }
-`;
-
-export const Title = styled.h2`
-  font-weight: bold;
-  color: black;
-  margin-bottom: 1rem;
 `;
 
 export default Card;
