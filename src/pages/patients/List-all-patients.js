@@ -16,7 +16,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Container from '../../components/layouts/Container';
 
 
-const URL = 'http://localhost:5000/patients/all'
+const URL = process.env.REACT_APP_APIURL+'/patients/all'
 
 const ListAllPatients = () => {
     const [patients, setPatients] = useState([])
