@@ -31,6 +31,7 @@ function Login() {
       password: input.password
     }
 
+
     try{
       const data = await logIn(checkUser);
       if(data.status === 200){
@@ -87,6 +88,7 @@ function Login() {
         <Button type="submit">Log in</Button>
       </Card>
     </form>
+
   );
 }
 
