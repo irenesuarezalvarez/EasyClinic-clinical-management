@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios'
 
+import axiosApi from '../../utils/AxiosApi';
 import Card from '../../components/layouts/Card';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
 import StyledLink from '../../components/layouts/StyledLink';
-import PageWrapper from '../../components/layouts/PageWrapper';
-
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
@@ -27,12 +24,12 @@ const ListAllPatients = () => {
     }, [])
 
     const getData = async () => {
-        const response = await axios.get(URL)
+        const response = await axiosApi.get(URL)
         setPatients(response.data)
     }
 
     const removeData = (id) => {
-        axios.delete(`${URL}/${id}`).then(res => {
+            axiosApi.delete(`${URL}/${id}`).then(res => {
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
         })
@@ -95,14 +92,14 @@ const StyledTitle = styled.h1`
   padding: 0.5rem;
 `;
 
-const StyledLink = styled(Link)`
+/* const StyledLink = styled(Link)`
   display: flex;
   justify-content: space-between;
   text-decoration: none;
   color: white;
 `;
-
-//NOT WORKING: (TO BE CHECKED)
+ */
+/* //NOT WORKING: (TO BE CHECKED)
 const StyledBtn = styled(Button)`
     display: flex;
     justify-content: space-between;
@@ -110,7 +107,7 @@ const StyledBtn = styled(Button)`
     color: black;
     backgroundColor:red;
  `;
-
+ */
 
 //TABLE STYLES
 const StyledTable = styled.table`
@@ -134,6 +131,10 @@ const Styledtd = styled.td`
     background-color: secondary_light;
     padding: 0.9rem;
     text-align: center;
+`;
+
+const StyledSpan = styled.span`
+  padding-left: 15px;
 `;
 
 export default ListAllPatients;

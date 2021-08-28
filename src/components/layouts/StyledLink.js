@@ -31,6 +31,4 @@ const LinkIcon = styled(Link)`
   }
 `;
 
-
-
 export default StyledLink;
