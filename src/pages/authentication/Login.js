@@ -41,8 +41,7 @@ function Login() {
     return <Redirect to='/patients'/>
   }
 
-  return (
-    
+  return(
     <Container horizontalPadding="1.5rem">
       <form onSubmit={handleClick}>
         <Card title="Log In">
