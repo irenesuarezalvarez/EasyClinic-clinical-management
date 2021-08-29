@@ -72,12 +72,12 @@ const HistoryPage = () => {
 
     //Render previous sessions
     const renderSessions = () => {
-        return history.length && history.map(({ date, notes, content, _id }) => {
+        return history.length > 0  && history.map(({ date, notes, content, _id }) => {
             return (
-                <Card bgColor="rgba(218, 245, 242)">
+                <Card>
                     <h3>Date: {date}</h3>
                     <Box radius="0">
-                        <Card bgColor="#FFC300">{notes}</Card>
+                        <Card bgColor="rgba(255, 195, 0)">{notes}</Card>
                         <Card>{content}</Card>
                     </Box>
       
@@ -100,7 +100,7 @@ const HistoryPage = () => {
     return (
         <PageWrapper>
             <form onSubmit={createSession}>
-                <Card bgColor="rgba(218, 245, 242)">
+                <Card bgColor="rgba(232, 236, 237)">
                     <input
                         name="date"
                         required

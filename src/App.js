@@ -8,13 +8,14 @@ import Navbar from "./components/layouts/Navbar";
 import HomePage from "./pages/general/HomePage";
 import SignupPage from "./pages/authentication/SignupPage";
 import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
-import ListMyPatients from "./pages/patients/List-my-patients";
+import ListMyPatientsPage from "./pages/patients/List-my-patients";
 import CreateCloudi from "./pages/patients/Create-Cloudinary";
 import CreatePatientPage from "./pages/patients/Create-Patient-Page";
 import DetailsPage from "./pages/patients/Details-Patient-Page";
 import EditPatientPage from "./pages/patients/Edit-Patient-Page"
 import HistoryPage from "./pages/patients/Clinical-History-Page";
 import Calendar from "./pages/general/Calendar";
+
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
 
 
           <PrivateRoute path="/mypatients">
-            <ListMyPatients/>
+            <ListMyPatientsPage/>
           </PrivateRoute>
 
           <PrivateRoute path="/details/:id">

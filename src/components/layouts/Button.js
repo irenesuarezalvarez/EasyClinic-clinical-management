@@ -14,7 +14,7 @@ export const StyledBtn = styled.button`
   color: white;
   padding: 0.7rem 1rem;
   border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
   cursor: pointer;
   transition: ease-out 0.35s;
   border-radius: ${({radius})=> radius || "5px"};

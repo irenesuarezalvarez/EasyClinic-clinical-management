@@ -102,7 +102,7 @@ const SearchDiv = styled(StyledBox)`
     margin-top: 25px;
     width: 100%;
     justify-content: space-around;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
     background-color: white; ${'' /*  rgba(222, 232, 249 ) */}
 `
 const Styledtd = styled.td`

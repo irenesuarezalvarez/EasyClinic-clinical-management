@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 import Card from '../../components/layouts/Card';
@@ -60,11 +61,11 @@ const ListAllPatientsPage = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <ButtonBox>
-                        <Button radius="5px 0 0 5px" to="/calendar">
+                        <Button  as={Link} radius="5px 0 0 5px" to="/calendar">
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button  as={Link} radius="0" bgColor="rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
@@ -123,7 +124,7 @@ const StyledTable = styled.table`
     margin: 25px 0;
     width: 100%;
     font-size: 0.9em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
 `;
 
 const Styledth = styled.th`

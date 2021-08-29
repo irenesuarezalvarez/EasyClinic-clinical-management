@@ -155,7 +155,7 @@ const StyledArticle = styled.article`
   padding: 1rem;
   border-radius: 4px;
   border: 1px solid black;
-  box-shadow: 0 0 20px rgba(0 0 0 / 15%);
+  box-shadow: 0 0 20px ${props => props.theme.color.boxshadow};;
   width: 80%;
   margin: 2rem auto;
 `
