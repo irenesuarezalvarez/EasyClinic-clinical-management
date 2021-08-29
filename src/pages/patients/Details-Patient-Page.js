@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi.js";
 import Box, {StyledBox} from "../../components/layouts/Box.js";
-import Card from "../../components/layouts/Card.js";
-import Title from "../../components/layouts/Title.js";
-import StyledLink from "../../components/layouts/StyledLink.js";
 import PageWrapper from "../../components/layouts/PageWrapper.js";
+import StyledLink from "../../components/layouts/StyledLink.js";
+import StyledImg from "../../components/layouts/StyledImg.js";
+import Title from "../../components/layouts/Title.js";
+
 
 
 const DetailsPage = () => {
@@ -17,7 +18,7 @@ const DetailsPage = () => {
     //Get data 
     useEffect(() => {
         getPatient()
-    }, [])
+    }, [] )
     
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
@@ -26,6 +27,7 @@ const DetailsPage = () => {
 
     function renderMyBody(){
         const {
+            media,
             name, 
             surname, 
             email, 
@@ -50,7 +52,7 @@ const DetailsPage = () => {
                             <Box>
                                 <Title>Personal Information</Title>
                                 <Box direction="row">
-                                    <img src="../images/person-profile.jpg" alt="Person profile"></img>
+                                    <StyledImg src={media} alt="Patient Profile"/>
                                     <Box align="start" padding="0.5rem 2rem" margin="1rem" shadow="0 0 20px rgba(0 0 0 / 15%)">
                                         <Box align="start" margin="1px" padding=" 0.4rem">
                                             <h3>Name: </h3>
@@ -131,6 +133,7 @@ const DetailsPage = () => {
                                     <StyledLink to="/mypatients">Back</StyledLink>
                                 </Padding>
                                 <Padding>
+                                    <h2>{id}</h2>
                                     <StyledLink to={`edit/${id}`}>Edit</StyledLink>
                                 </Padding>
                         </Box>
@@ -148,13 +151,13 @@ const DetailsPage = () => {
   }
 
 const StyledSection = styled(StyledBox)`
+    background-color:white;
     flex-direction: row;
     padding: 1.5rem;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(0 0 0 / 15%);
 `
-
 const Padding = styled.div`
     padding: 0.7rem;
 `

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
-import Input from "../../components/forms/Input.js";
-import Select from "../../components/forms/Select"
+
+import Input from "./../../components/forms/Input.js";
+import Select from "./../../components/forms/Select"
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
@@ -13,31 +15,60 @@ function CreatePatientPage() {
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [professionals, setProfessionals] = useState([]);
+    const [image, setImage] = useState("");
+    const [mediaPreview, setMediaPreview] = useState("");
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const result = await axiosApi.get("/professionals"); 
-            const professionals = result.data;
-            setProfessionals([...professionals]); 
-        };
+        const result = await axiosApi.get("/professionals"); 
+        const professionals = result.data;
+        setProfessionals([...professionals]); 
+    };
 
-        fetchUsers();
+    fetchUsers();
     }, []);
 
         
     const handleChange = (event) => {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
 
         setInput((prevState) => ({
-            ...prevState,
-            [name]: value,
+        ...prevState,
+        [name]: value,
         }));
     };
 
+    //Cloudinary
+  /*   const uploadImage = async (files) =>{
+        console.log(files[0])
+    } */
+    const handleImageUpload = async (event) => {
+        /* setLoading(true) */
+        const { files } = event.target;
+        const image = files[0];
+    
+        const data = new FormData();
+        data.append("file", image);
+        data.append("upload_preset", "ii8ohoks");
+    
+        setMediaPreview(window.URL.createObjectURL(image));
+    
+        const response = await axios.post(
+            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"/* process.env.REACT_APP_CLOUDINARY_URL */, 
+            data
+        );
+        const mediaUrl = await response.data.url;
+        setImage(mediaUrl);
+        /* setLoading(false) */
+    };
+    
+      
     const createPatient = async event => {
         event.preventDefault()
-        
+        console.log('clicked', image)
+       
         const newPatient = {
+            media: image,
             name: input.name,
             surname: input.surname,
             email: input.email,
@@ -53,26 +84,39 @@ function CreatePatientPage() {
             professional: input.professional,
             history: input.history 
         }
+     
         try {
-        await axiosApi.post('/patients/create', newPatient)
-        setRedirect(true) 
-        console.log('New patient was created', newPatient)
+            const result = await axiosApi.post('/patients/create', newPatient)
+            const data = await result;
+            setRedirect(data.status === 200)  //CHANGED
+            
+            console.log('New patient was created', newPatient)
         } catch (err) {
-        console.error(err)
+            console.error(err)
         } 
   } 
 
   if(redirect){
-    return <Redirect to='/patients'></Redirect>
+    return <Redirect to='/patients'/>
   }
 
 
   return (
     <PageWrapper>
+        
         <form onSubmit={createPatient}>
 
-      
             <Card title="Personal Information">
+             
+                <Input
+                    placeholder="Profile Picture"
+                    name="media"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                />
+                
+                {mediaPreview && <img src={mediaPreview} alt="Media preview" />}
                 <Input
                     label="Name "
                     name= "name"
@@ -192,12 +236,11 @@ function CreatePatientPage() {
                     disabled={professionals.length <= 0}
                     >
                         <option value="">--select professional--</option>
-                        {professionals.length > 0 &&
-                         professionals.map((professional) => (
+                        {professionals.length > 0 && professionals.map((professional) => (
                             <option value={professional._id} key={professional._id}>
                             {professional.username}
                             </option>
-                         ))}
+                        ))}
                 </Select> 
                 
             </Card>

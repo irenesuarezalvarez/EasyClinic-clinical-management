@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import {  Redirect, useParams } from "react-router-dom";
+import axios from "axios";
 
 import axiosApi from "../../utils/AxiosApi.js";
 import PageWrapper from "../../components/layouts/PageWrapper.js";
@@ -9,6 +9,7 @@ import Select from "../../components/forms/Select.js";
 import Button from "../../components/layouts/Button.js";
 import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
+import StyledImg from "../../components/layouts/StyledImg.js";
 
 
 const EditPatientPage = () => {
@@ -17,11 +18,13 @@ const EditPatientPage = () => {
     const [patient, setPatient] = useState([]);
     const [redirect, setRedirect] = useState(false); 
     const [professionals, setProfessionals] = useState([]);
+    const [image, setImage] = useState("");
+    const [mediaPreview, setMediaPreview] = useState("");
 
     //Get data 
     useEffect(() => {
         getPatient()
-        getProfessionals()
+        getProfessionals()  
     }, [])
     
     
@@ -30,8 +33,9 @@ const EditPatientPage = () => {
     const getPatient = async () => {
         const response = await axiosApi.get(`/patients/edit/${id}`);
         setPatient(response.data)
+        setImage(response.data.media)
     }
-
+    
     //Get professionals for dropdown
       const getProfessionals = async () =>{
         const result = await axiosApi.get("/professionals"); 
@@ -43,14 +47,45 @@ const EditPatientPage = () => {
     const editPatient = async event => {
         event.preventDefault()          
         try {
-            setRedirect(true) 
-            await axiosApi.post(`/patients/edit/${id}`, input)
+          /*   setRedirect(true) */
+            console.log('Que imagen sale?', image)
+          
+                      
+            const response =  await axiosApi.post(`/patients/edit/${id}`, input)
             console.log('The patient was edited', input)
+            const status = await response.status 
+            setRedirect(status === 200) 
         } catch (err) {
             console.error(err)
         } 
     } 
-
+    //Picture
+    const addImageToInput = (mediaUrl) =>{
+        console.log('im in', mediaUrl)
+        setInput((prevState) => ({
+            ...prevState,
+            media: mediaUrl,
+        }));
+    }
+    const uploadImage = async (event) => {
+        const { files } = event.target;
+        const image = files[0];
+    
+        const data = new FormData();
+        data.append("file", image);
+        data.append("upload_preset", "ii8ohoks");
+    
+        setMediaPreview(window.URL.createObjectURL(image));
+    
+        const response = await axios.post(
+            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload", /// process.env.REACT_APP_CLOUDINARY_URL ///
+            data
+        );
+        const mediaUrl = await response.data.url;
+        addImageToInput(mediaUrl)
+    };
+  
+    
     //Redirect
     if(redirect){
         return <Redirect to='/patients'/>
@@ -59,7 +94,7 @@ const EditPatientPage = () => {
   
 
     function renderPatient(){
-        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
+        const { media, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -77,6 +112,17 @@ const EditPatientPage = () => {
                 {Object.keys(patient).length > 0  && 
                     <form onSubmit={editPatient}>
                         <Card title="Personal Information">
+                            <Box>
+                                <StyledImg width="10rem" src={mediaPreview ? mediaPreview : image} alt="Patient Profile"/>
+                            </Box>
+                           
+                            <Input
+                                name="media"
+                                type="file"
+                                accept="image/*"
+                                onChange={(uploadImage)}
+                            /> 
+
                             <Input
                                 label="Name"
                                 name="name"

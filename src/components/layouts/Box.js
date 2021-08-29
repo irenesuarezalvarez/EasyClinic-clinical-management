@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 
-const Box = ({ direction, position, align, flex, wrap, margin, padding, width, height, radius, bgColor, shadow, children }) => {
+const Box = ({ direction, position, align, flex, wrap, margin, padding, width, height, radius, bgcolor, shadow, children, ...props }) => {
   return (
     <StyledBox 
       direction={direction} 
@@ -15,8 +15,9 @@ const Box = ({ direction, position, align, flex, wrap, margin, padding, width, h
       width={width}
       height={height}
       radius={radius} 
-      bgColor={bgColor} 
-      shadow={shadow}>
+      bgcolor={bgcolor} 
+      shadow={shadow}
+      {...props}>
 
         {children}
 
@@ -27,16 +28,16 @@ const Box = ({ direction, position, align, flex, wrap, margin, padding, width, h
 export const StyledBox = styled.section`
   display: flex;
   color: ${props => props.theme.color.test};;
-  background-color: ${({bgColor})=> bgColor};
+  background-color: ${({bgcolor})=> bgcolor};
   flex-direction:${({direction})=> direction === "row" ? "row" : "column"};
   justify-content:  ${({position})=> position || "center"};
-  align-items: ${({align})=> align === "start" ? "start" : "center"};
+  align-items: ${({align})=> align || "center"};
   flex: ${({flex})=> flex};
   flex-wrap: ${({wrap})=> wrap};
   margin: ${({margin})=> margin};
   padding: ${({padding})=> padding};
   width: ${({width})=> width};
-  height:  ${({height})=> height};
+  height: ${({height})=> height};
   border-radius: ${({radius})=> radius || "5px"};
   box-shadow: ${({shadow})=> shadow};
 `;

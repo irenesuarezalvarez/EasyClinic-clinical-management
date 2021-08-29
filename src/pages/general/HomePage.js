@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <Box>
         <HeaderStyled>
-            <Box bgColor="rgba( 255, 255, 255)" radius="50%">
+            <Box bgcolor="rgba( 255, 255, 255)" radius="50%">
                 <StyledLogo src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"/>
             </Box>
             
@@ -51,7 +51,7 @@ const HomePage = () => {
 
         </Box>
         <Box>
-            <Box direction="row" bgColor="rgb(255, 160, 122)" padding="1rem" wrap="no-wrap">
+            <Box direction="row" bgcolor="rgb(255, 160, 122)" padding="1rem" wrap="no-wrap">
                
                     <Box padding="0.5rem" width="100%" height="100%" flex="4">
                         <IconImg src="../images/agenda.jpg" alt="Agenda"/>

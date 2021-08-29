@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
-import Card from '../../components/layouts/Card';
-import Button, { NewBtnRight } from '../../components/layouts/Button';
-import StyledLink from '../../components/layouts/StyledLink';
-import Searcher from '../../components/layouts/Search';
 import axiosApi from '../../utils/AxiosApi';
+import Box from '../../components/layouts/Box';
+import Button, { NewBtnRight } from '../../components/layouts/Button';
+import Card from '../../components/layouts/Card';
+import Container from '../../components/layouts/Container';
+import Searcher from '../../components/layouts/Search';
+import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import Container from '../../components/layouts/Container';
 
 
 
@@ -34,10 +35,10 @@ const ListAllPatientsPage = () => {
         setPatients(response.data)
     }
     
-    const deletePatient = async (id) => {
+    const deletePatient = async (id, professional) => {
         try {
-            console.log('Patient deleted')
-            await axiosApi.delete(`${URL}/${id}`)
+            console.log('Patient deleted', id, professional)
+            await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
         } catch (err) {
@@ -54,25 +55,26 @@ const ListAllPatientsPage = () => {
     }
 
     const renderBody = () => {
-        return patients && patients.map(({ _id, surname, name }) => {
+        return patients && patients.map(({ _id, surname, name, professional }) => {
             return (
                 <tr key={_id}>
                     <Styledtd>{_id}</Styledtd>
-                    <Styledtd>{surname}</Styledtd>
+                    <Styledtd>{surname}{professional}</Styledtd>
                     <Styledtd>{name}</Styledtd>
-                    <ButtonBox>
-                        <Button  as={Link} radius="5px 0 0 5px" to="/calendar">
+                    <Box direction="row">
+                        <Button as={Link} radius="5px 0 0 5px" to="/calendar">
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button  as={Link} radius="0" bgColor="rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button  as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
-                        <Button radius=" 0 5px 5px 0" bgColor="rgba(255, 127, 80)" hoverColor="rgba(250, 45, 25)" onClick={() => deletePatient(_id)}>
+                        <Button radius="0 5px 5px 0" bgcolor="rgba(255, 127, 80)" hovercolor="rgba(250, 45, 25)" onClick={() => deletePatient(_id, professional)}>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </Button>
-                    </ButtonBox>
+                    </Box>
+                    
                 </tr>
             )
         })
@@ -139,7 +141,7 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-//SENDING BACK AN ERROR
+/* //SENDING BACK AN ERROR
 const ButtonBox = styled.td`
     background-color: secondary_light;
     padding: 0.9rem;
@@ -149,5 +151,5 @@ const ButtonBox = styled.td`
     justify-content:center;
     flex-direction: row;
     flex-wrap: nowrap;
-`
+` */
 export default ListAllPatientsPage;

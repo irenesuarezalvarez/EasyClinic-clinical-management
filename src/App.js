@@ -9,7 +9,6 @@ import HomePage from "./pages/general/HomePage";
 import SignupPage from "./pages/authentication/SignupPage";
 import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
 import ListMyPatientsPage from "./pages/patients/List-my-patients";
-import CreateCloudi from "./pages/patients/Create-Cloudinary";
 import CreatePatientPage from "./pages/patients/Create-Patient-Page";
 import DetailsPage from "./pages/patients/Details-Patient-Page";
 import EditPatientPage from "./pages/patients/Edit-Patient-Page"
@@ -42,11 +41,6 @@ function App() {
             <CreatePatientPage/>
           </Route>
 
-          <Route path="/createclou">
-            <CreateCloudi/>
-          </Route>
-
-
           <PrivateRoute path="/mypatients">
             <ListMyPatientsPage/>
           </PrivateRoute>
@@ -54,14 +48,14 @@ function App() {
           <PrivateRoute path="/details/:id">
             <DetailsPage/>
           </PrivateRoute>
-
+{/* REMOVED PRIVATE */}
           <Route path="/edit/:id">
             <EditPatientPage/>
           </Route>
-
-          <PrivateRoute path="/sessions/:id">
+{/* REMOVED PRIVATE */}
+          <Route path="/sessions/:id">
             <HistoryPage/>
-          </PrivateRoute>
+          </Route>
 
           <Route path="/calendar">
             <Calendar/>

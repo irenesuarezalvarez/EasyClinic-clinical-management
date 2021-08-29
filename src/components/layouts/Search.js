@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import { faCalendar, faEdit, faTrashAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -43,15 +45,15 @@ const Searcher = ({deletePatient}) => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Box direction="row">
-                        <Button radius="5px 0 0 5px" to="/calendar">
+                        <Button  as={Link} radius="5px 0 0 5px" to="/calendar">
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button  as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
-                        <Button radius="0 5px 5px 0" bgColor="rgba(255, 127, 80)" hoverColor="rgba(250, 45, 25)" onClick={() => deletePatient(_id)}>
+                        <Button radius="0 5px 5px 0" bgcolor="rgba(255, 127, 80)" hovercolor="rgba(250, 45, 25)" onClick={() => deletePatient(_id)}>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </Button>
                     </Box>
@@ -101,6 +103,7 @@ const SearchDiv = styled(StyledBox)`
     padding: 0.5rem;
     margin-top: 25px;
     width: 100%;
+    flex-direction: row;
     justify-content: space-around;
     box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
     background-color: white; ${'' /*  rgba(222, 232, 249 ) */}

@@ -57,6 +57,7 @@ function Navbar() {
           <li><StyledLink to="/createpatient">Create Patient</StyledLink></li>    
           <li><StyledLink to="/createclou">Clou</StyledLink></li> 
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
+          <li><StyledLink to="/sessions/61201ea5931efe29b08118b2">History</StyledLink></li>
       
           { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
           { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
@@ -87,6 +88,7 @@ const StyledNavbar = styled.nav`
     justify-content: space-between;
     flex-wrap: nowrap;
     background:${props => props.theme.color.navbar};
+    box-shadow: 0 0 20px black;
 `
  const StyledLink = styled(Link)`
     color: black;

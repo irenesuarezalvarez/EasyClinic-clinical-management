@@ -1,86 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
-
-import Input from "./../../components/forms/Input.js";
-import Select from "./../../components/forms/Select"
+import Input from "../../components/forms/Input.js";
+import Select from "../../components/forms/Select"
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Card from "../../components/layouts/Card";
 import Button from "../../components/layouts/Button.js";
 import Box from "../../components/layouts/Box.js";
 import axiosApi from "../../utils/AxiosApi";
 
-function CreateCloudi() {
+function DELETECreatePatientPage() {
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [professionals, setProfessionals] = useState([]);
 
     useEffect(() => {
         const fetchUsers = async () => {
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
-    };
+            const result = await axiosApi.get("/professionals"); 
+            const professionals = result.data;
+            setProfessionals([...professionals]); 
+        };
 
-    fetchUsers();
+        fetchUsers();
     }, []);
 
         
     const handleChange = (event) => {
-        const { name, value } = event.target;
+    const { name, value } = event.target;
 
         setInput((prevState) => ({
-        ...prevState,
-        [name]: value,
+            ...prevState,
+            [name]: value,
         }));
     };
 
-  const createPatient = async event => {
-    event.preventDefault()
-    
-    const newPatient = {
-        name: input.name,
-        surname: input.surname,
-        email: input.email,
-        phone: input.phone,
-        address: input.address,
-        city: input.city, 
-        state: input.state,
-        postal: input.postal,
-        contactname: input.contactname,
-        contactsurname: input.contactsurname,
-        contactemail: input.contactemail,
-        contactphone: input.contactphone,
-        professional: input.professional,
-        history: input.history 
-    }
-    try {
-      const result = await axiosApi.post('/patients/createpatient', newPatient)
-      const data = await result;
-      setRedirect(data.status === 200)  //CHANGED
-     
-      console.log('New patient was created', newPatient)
-    } catch (err) {
-      console.error(err)
-    } 
+    const createPatient = async event => {
+        event.preventDefault()
+        
+        const newPatient = {
+            name: input.name,
+            surname: input.surname,
+            email: input.email,
+            phone: input.phone,
+            address: input.address,
+            city: input.city, 
+            state: input.state,
+            postal: input.postal,
+            contactname: input.contactname,
+            contactsurname: input.contactsurname,
+            contactemail: input.contactemail,
+            contactphone: input.contactphone,
+            professional: input.professional,
+            history: input.history 
+        }
+        try {
+        await axiosApi.post('/patients/create', newPatient)
+        setRedirect(true) 
+        console.log('New patient was created', newPatient)
+        } catch (err) {
+        console.error(err)
+        } 
   } 
 
   if(redirect){
-    return <Redirect to='/patients'/>
+    return <Redirect to='/patients'></Redirect>
   }
 
 
   return (
     <PageWrapper>
-        <form enctype="multipart/form-data" onSubmit={createPatient}>
+        <form onSubmit={createPatient}>
 
       
             <Card title="Personal Information">
-                {/* <input type="file" name="image" id="" /> */}
-
-                <label for="image-input">Image:</label>
-                <input type="file" name="image" id="image-input"  />
-
                 <Input
                     label="Name "
                     name= "name"
@@ -200,11 +192,12 @@ function CreateCloudi() {
                     disabled={professionals.length <= 0}
                     >
                         <option value="">--select professional--</option>
-                        {professionals.length > 0 && professionals.map((professional) => (
+                        {professionals.length > 0 &&
+                         professionals.map((professional) => (
                             <option value={professional._id} key={professional._id}>
                             {professional.username}
                             </option>
-                        ))}
+                         ))}
                 </Select> 
                 
             </Card>
@@ -219,4 +212,4 @@ function CreateCloudi() {
 
 
 
-export default CreateCloudi;
+export default DELETECreatePatientPage;

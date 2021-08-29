@@ -20,7 +20,7 @@ const AuthProvider = ({children}) =>{
       if(data.status === 200){ //TO BE CHANGED
         setIsAuth(true);
       }
-      console.log('rooole', role, data.data.role) //aqui noooo
+    
      /*  setIsAuth(data.status === 200);  *///setIsAuth to true if status is 200
      /*  setIsAuth(data.data.role === "prof") */
      return data
@@ -32,7 +32,7 @@ const AuthProvider = ({children}) =>{
       'User is authenticated', credentials
     ) 
   }
-  
+  console.log('rooole', role)
   //Sign up function
   async function signUp(credentials){
     try {

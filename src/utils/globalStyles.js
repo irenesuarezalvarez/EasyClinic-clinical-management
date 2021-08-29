@@ -5,7 +5,15 @@ const reset = css`
   body {
     font-family: "Helvetica", sans-serif;
     height: 100%;
-    color: green;
+    background: lightgray;
+    background-image: url("../images/bg.png");
+    width: 100%; 
+    height: 100%;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    object-fit: cover;
+ 
   }
   html,
   body,
@@ -83,12 +91,13 @@ const ProjectTheme = {
     button: "rgba(102, 205, 170)",
     navbar:"rgba(68, 183, 219) ", /* "rgba(218, 247, 166)" */
     transparentWhite: "rgba(255, 255, 255, 0.5)",
-    editBtn: " rgba(82, 189, 201)"
+    editBtn: "rgba(82, 189, 201)"
+    
     
   },
 };
 /* 
-color: ${props => props.theme.color.editBtn}; 
+bgcolor={`color: ${props => props.theme.color.editBtn}`}; 
 className={`some-global-class ${this.props.className}`}*/
 
 export { ResetStyles, ProjectTheme };

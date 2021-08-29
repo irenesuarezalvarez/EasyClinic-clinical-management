@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import {  Redirect, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import axiosApi from "../../utils/AxiosApi";
-import Card from "../../components/layouts/Card";
-import Button from "../../components/layouts/Button";
-import Input, {StyledInput} from "../../components/forms/Input";
-import PageWrapper from "../../components/layouts/PageWrapper";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
+import axiosApi from "../../utils/AxiosApi";
 import Box from "../../components/layouts/Box";
+import Button from "../../components/layouts/Button";
+import Card from "../../components/layouts/Card";
+import {StyledInput} from "../../components/forms/Input";
+import PageWrapper from "../../components/layouts/PageWrapper";
+import TextArea from "../../components/forms/Textarea";
+
 
 const URL = "/api/history"
  
 const HistoryPage = () => {
-    let { id } = useParams();
+    const { id } = useParams();
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [history, setHistory] = useState([]);
@@ -42,26 +44,25 @@ const HistoryPage = () => {
     
     const createSession = async event => {
         event.preventDefault()
-    
         const newSession = {
             date: input.date,
             notes: input.notes,
             content: input.content,
+            patient: id
         }
 
         try {
             setRedirect(true) 
             console.log('New session was saved', newSession)
-            await axiosApi.post(`${URL}/${id}`, newSession)
+            await axiosApi.post(`${URL}/create`, newSession)
         } catch (err) {
             console.error(err)
         } 
     } 
 
-    const deleteSession = async (id) => {
+    const deleteSession = async (id, patient) => {
         try {
-            console.log('Session deleted')
-            await axiosApi.delete(`${URL}/${id}`)
+            await axiosApi.delete(`${URL}/${id}/${patient}`)
             const del = history.filter(session => id !== session.id)
             setHistory(del)
         } catch (err) {
@@ -72,21 +73,30 @@ const HistoryPage = () => {
 
     //Render previous sessions
     const renderSessions = () => {
-        return history.length > 0  && history.map(({ date, notes, content, _id }) => {
+        return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
+        /*   console.log('Aquiiii', date, patient) */
             return (
-                <Card>
-                    <h3>Date: {date}</h3>
+                <Card bgcolor="rgba(232, 236, 237)" width="100%">
+               {/*      <div>
+                    {Object.keys(patient).length > 0 &&
+                        <div>PatName: {patient.name}</div>
+                    }
+                    </div> */}
+                    <Box direction="row">
+                        <h3>Date: {date}</h3>
+                        <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">{notes}</Box>
+                    </Box>
+                   
                     <Box radius="0">
-                        <Card bgColor="rgba(255, 195, 0)">{notes}</Card>
-                        <Card>{content}</Card>
+                        <Box bgcolor="white" radius="0" shadow="0 0 20px rgba(0 0 0 / 15%)" height="15rem" width="25rem" margin="1rem">{content}</Box>
                     </Box>
       
-                    <div>
-                        <Button bgColor="rgba(255, 127, 80)" hoverColor="rgba(250, 45, 25)" onClick={() => deleteSession(_id)}>
+                    <Box direction="row" width="100%" position="flex-end">
+                        <Button bgcolor="rgba(255, 127, 80)" hovercolor="rgba(250, 45, 25)" onClick={() => deleteSession(_id, patient)}>
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </Button>
                         <Button>Edit</Button>
-                    </div>
+                    </Box>
                 </Card>
             )
         })
@@ -99,47 +109,50 @@ const HistoryPage = () => {
 
     return (
         <PageWrapper>
-            <form onSubmit={createSession}>
-                <Card bgColor="rgba(232, 236, 237)">
-                    <input
-                        name="date"
-                        required
-                        value={input.date} 
-                        placeholder="Date"
-                        onChange={handleChange}
-                        type="date"
-                    />
+            <Card title="Clinical History">
                 
-                   <Box radius="0">
-                    <ImportantStyled
-                            name="notes"
-                            required
-                            value={input.notes} 
-                            placeholder="Notes"
-                            onChange= {handleChange}
-                            type = "text"
-                        />
+                <Card as={"form"} onSubmit={createSession} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
+                        <Box direction="row" padding="1rem">
+                            <h4>Date: </h4>
+                            <input
+                                name="date"
+                                required
+                                value={input.date} 
+                                placeholder="Date"
+                                onChange={handleChange}
+                                type="date"
+                            />
+                        </Box>
                     
-                        <Input
-                            name="content"
-                            required
-                            value={input.content} 
-                            placeholder="Content"
-                            onChange={handleChange}
-                            type="text"
-                        />
+                    
+                    <Box radius="0">
+                        <ImportantStyled
+                                name="notes"
+                                required
+                                value={input.notes} 
+                                placeholder="Notes"
+                                onChange= {handleChange}
+                                type = "text"
+                            />
+                        
+                            <TextArea
+                                name="content"
+                                required
+                                value={input.content} 
+                                onChange={handleChange}
+                                type="text"
+                            />
 
-                   </Box>
-
-                                     
-                    <div>
-                       <Button type="submit">Save</Button>
-                    </div>
+                    </Box>    
+                        <Box align="flex-end" width="100%">
+                        <Button type="submit">Save</Button>
+                        </Box>
                 </Card>
-            </form>
-            <article>
-                {renderSessions()}
-            </article>
+            
+                <article>
+                    {renderSessions()}
+                </article>
+            </Card>
         </PageWrapper>
     );
 };
