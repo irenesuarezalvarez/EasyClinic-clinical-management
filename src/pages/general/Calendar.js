@@ -1,6 +1,9 @@
-import  React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import '../../Calendar.css';
+
+import axiosApi from "../../utils/AxiosApi.js";
+
 
 import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
 import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
@@ -10,41 +13,21 @@ import Box from "../../components/layouts/Box";
 
 function Calendar (){
   var scheduleObj = new Schedule();
- /*  const data = [{
-      Id: 2,
-      Subject: 'Guido',
-      StartTime: new Date(2021, 8, 15, 10, 0),
-      EndTime: new Date(2021, 8, 15, 12, 30),
-      ResourceId: 1
-  },
-  {
-    Id: 2,
-    Subject: 'Baba',
-    StartTime: new Date(2021, 8, 17, 10, 0),
-    EndTime: new Date(2021, 8, 17, 12, 30),
-    ResourceId: 1
-},
-  {
-    Id: 2,
-    Subject: 'Irene',
-    StartTime: new Date(2021, 8, 14, 13, 0),
-    EndTime: new Date(2021, 8, 14, 14, 30),
-    ResourceId: 2
-  },
-  {
-    Id: 2,
-    Subject: 'Pepe',
-    StartTime: new Date(2021, 8, 15, 13, 0),
-    EndTime: new Date(2021, 8, 15, 14, 30),
-    ResourceId: 2
-  },
-  {
-    Id: 2,
-    Subject: 'Irene',
-    StartTime: new Date(2021, 8, 16, 13, 0), //month one less
-    EndTime: new Date(2021, 8, 16, 14, 30),
-    ResourceId: 3
-  }]; */
+  const [professionals, setProfessionals] = useState([]);
+
+  useEffect(() => {
+    getProfessionals()  
+  }, [])
+
+
+//Get professionals for dropdown
+const getProfessionals = async () =>{
+    const result = await axiosApi.get("/professionals"); 
+    const professionals = result.data;
+    setProfessionals([...professionals]); 
+}
+
+
  //resourceID connected to field
   const resourceDataSource = [
     {Name: 'My Calendar', Id:0, Color: '#ea7a57'},
@@ -52,6 +35,8 @@ function Calendar (){
     {Name: 'Stella', Id:2, Color: '#357CD2'},
     {Name: 'Juana', Id:3, Color: '#7fa900'}
   ]
+
+
   const today = new Date()
   const year = today.getFullYear()
   const month = today.getMonth()+1
@@ -107,7 +92,7 @@ const prof3 =[  {
 } 
   function onChange(args){
     const value = parseInt(args.event.target.getAttribute('value'), 10);
-    const resourceData = resourceDataSource.filter((resource) => resource.Id === value);
+    const resourceData = professionals.filter((prof) => prof._id === value);
     if (args.checked) {
         scheduleObj.addResource(resourceData[0], 'Resources', value - 1);
     }
@@ -140,7 +125,7 @@ const prof3 =[  {
             idField="Id" 
             colorField="Color"
             allowMultiple={true}
-            dataSource={resourceDataSource[0]}
+            dataSource={professionals[0]}
             />
         </ResourcesDirective>
         <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>

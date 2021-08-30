@@ -8,7 +8,7 @@ import Navbar from "./components/layouts/Navbar";
 import HomePage from "./pages/general/HomePage";
 import SignupPage from "./pages/authentication/SignupPage";
 import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
-import ListMyPatientsPage from "./pages/patients/List-my-patients";
+import ListMyPatientsPage from "./pages/patients/List-My-Patients-Page";
 import CreatePatientPage from "./pages/patients/Create-Patient-Page";
 import DetailsPage from "./pages/patients/Details-Patient-Page";
 import EditPatientPage from "./pages/patients/Edit-Patient-Page"
@@ -48,20 +48,19 @@ function App() {
           <PrivateRoute path="/details/:id">
             <DetailsPage/>
           </PrivateRoute>
-{/* REMOVED PRIVATE */}
-          <Route path="/edit/:id">
+
+          <PrivateRoute path="/edit/:id">
             <EditPatientPage/>
-          </Route>
-{/* REMOVED PRIVATE */}
-          <Route path="/sessions/:id">
+          </PrivateRoute>
+
+          <PrivateRoute path="/sessions/:id">
             <HistoryPage/>
-          </Route>
+          </PrivateRoute>
 
           <Route path="/calendar">
             <Calendar/>
           </Route>
      
-
         </Switch>
 
       </ThemeProvider>

@@ -37,7 +37,7 @@ const EditPatientPage = () => {
     }
     
     //Get professionals for dropdown
-      const getProfessionals = async () =>{
+    const getProfessionals = async () =>{
         const result = await axiosApi.get("/professionals"); 
         const professionals = result.data;
         setProfessionals([...professionals]); 

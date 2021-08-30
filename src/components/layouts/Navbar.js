@@ -11,18 +11,17 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 function Navbar() {
   const contextAuth = useContext(AuthContext)
-  const { isAuth, logOut, role, setRole } = contextAuth;
+  const { isAuth, logOut, role } = contextAuth;
   const [redirect, setRedirect] = useState(false); 
 
-  /* const history = useHistory() */
- 
   const handleLogOut = async event => {
-
+   
+   
     try{
-      setRole(undefined)
-      //why redirect here render the component but not the navbar
       const data = await logOut()
-      const result = data.status
+      const result = data
+
+      console.log('navbar log out status', result)
     
       setRedirect(result === 200)
       //WHy redirect here does not work?
@@ -36,13 +35,8 @@ function Navbar() {
   if(redirect){
     return <Redirect to="/"/>
   }
-/*   const handleLogOut = async event => {
-    event.preventDefault()
-    await logOut()
-    history.push('/') 
-    setRedirect(true) 
-  }   */
-  console.log('Cambio??', role)
+
+  console.log('Role en navbar??', role)
 
   return (
     

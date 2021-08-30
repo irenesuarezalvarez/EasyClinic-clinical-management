@@ -45,8 +45,6 @@ function Login() {
     }
 
   } 
-
-  console.log('este es el role', role)
   
   if(redirect && role === "prof"){
     return <Redirect to='/mypatients'/>

@@ -24,17 +24,23 @@ function SignupPage() {
     }));
   };
 
-  const createUser = event => {
+  const createUser = async (event) => {
     event.preventDefault()
     const newUser = {
       username: input.username,
       email: input.email,
       role: input.role,
+      color: input.color,
       password: input.password
     } 
-     
-    signUp(newUser)
-    setRedirect(true) 
+    
+    try{
+      const data = await signUp(newUser);
+      setRedirect(data.status === 200)
+    }
+    catch(error){
+      console.log(error);
+    }
   } 
 
   if(redirect && role === "prof"){
@@ -75,11 +81,20 @@ function SignupPage() {
               onChange= {handleChange}
               type = "text"
             >
-                 <option value="">--select professional--</option>
+                <option value="">--select professional--</option>
                 <option value="admin">Administrative</option>
                 <option value="prof">Professional</option>
             </Select>
             
+            <Input
+              label="Color "
+              name= "color"
+              required
+              value={input.color} 
+              placeholder= "Enter your color"
+              onChange= {handleChange}
+              type = "text"
+            />
 
             <Input
               label="Password "

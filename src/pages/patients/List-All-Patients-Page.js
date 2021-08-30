@@ -19,8 +19,7 @@ const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
-   
-
+    
     useEffect(() => {
         getPatients();
     }, [])
