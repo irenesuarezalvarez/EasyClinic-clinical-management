@@ -6,12 +6,9 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
   const [ role, setRole] = useState(undefined);
-
-  console.log('contexMounting')
   
   //Log in function
   async function logIn(credentials){
- 
     try {
       const result = await axiosApi.post('/auth/login', credentials)
       const data = await result;
@@ -21,10 +18,8 @@ const AuthProvider = ({children}) =>{
       if(data.status === 200){ //TO BE CHANGED
         setIsAuth(true);
       }
-    
-     /*  setIsAuth(data.status === 200);  *///setIsAuth to true if status is 200
-     /*  setIsAuth(data.data.role === "prof") */
-     return data
+
+      return data
     } catch (err) {
       console.error(err)
     } 
@@ -57,10 +52,9 @@ const AuthProvider = ({children}) =>{
 
   //Log out function
   const logOut = async () => {
-    console.log('you clicked log out');
     let data = "";
     try{
-      const data = await axiosApi.post('/auth/logout')
+      data = await axiosApi.post('/auth/logout')
       setIsAuth(false);
       setRole(undefined);
     }

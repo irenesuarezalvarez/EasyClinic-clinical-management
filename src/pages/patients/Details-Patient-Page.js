@@ -133,8 +133,7 @@ const DetailsPage = () => {
                                     <StyledLink to="/mypatients">Back</StyledLink>
                                 </Padding>
                                 <Padding>
-                                    <h2>{id}</h2>
-                                    <StyledLink to={`edit/${id}`}>Edit</StyledLink>
+                                    <StyledLink to={`/edit/${id}`} >Edit</StyledLink>
                                 </Padding>
                         </Box>
                     </section>

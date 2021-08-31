@@ -5,7 +5,7 @@ import Input from "./forms/Input.js"
 import Card from "./layouts/Card";
 import Box from "./layouts/Box";
 import Button from "./layouts/Button.js";
-import {AuthContext} from "../utils/AuthContext"
+import { AuthContext } from "../utils/AuthContext"
 
 
 function Login() {

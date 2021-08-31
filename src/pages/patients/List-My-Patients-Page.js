@@ -42,15 +42,15 @@ const ListMyPatientsPage = () => {
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
                    
-                        <Button as={Link} radius="5px 0 0 5px" bgcolor=" rgba(225, 183, 65)" hovercolor="rgba(187, 135, 20)" to={`details/${_id}`}>
+                        <Button as={Link} radius="5px 0 0 5px" bgcolor=" rgba(225, 183, 65)" hovercolor="rgba(187, 135, 20)" to={`/details/${_id}`}>
                             <FontAwesomeIcon icon={faInfoCircle}/>
                         </Button>
 
-                        <Button as={Link} radius="0" bgcolor=" rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`sessions/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor=" rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/sessions/${_id}`}>
                             <FontAwesomeIcon icon={faFolder}/>
                         </Button>
 
-                        <Button  as={Link} radius=" 0 5px 5px 0" bgcolor="rgba(107, 142, 35)" hovercolor=" rgba(85, 107, 47)" to={`sessions/${_id}`}>
+                        <Button  as={Link} radius=" 0 5px 5px 0" bgcolor="rgba(107, 142, 35)" hovercolor=" rgba(85, 107, 47)" to={`/sessions/${_id}`}>
                             <FontAwesomeIcon icon={faFileAlt}/>
                         </Button>
                     </Styledtd>

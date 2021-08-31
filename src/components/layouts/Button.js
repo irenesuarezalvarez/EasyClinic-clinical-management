@@ -13,10 +13,11 @@ export const StyledBtn = styled.button`
   background-color:${({bgcolor})=> bgcolor || "rgba(102, 205, 170)"} ;
   color: white;
   padding: 0.7rem 1rem;
+  height: 2.55rem;
   border: none;
   box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
   cursor: pointer;
-  transition: ease-out 0.35s;
+  transition: backgroud-color ease-out 0.35s;
   border-radius: ${({radius})=> radius || "5px"};
   &:disabled {
     background-color: #bdbbbb;

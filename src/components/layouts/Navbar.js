@@ -19,12 +19,7 @@ function Navbar() {
     try{
       const data = await logOut()
       const result = data
-
-      console.log('navbar log out status', result)
-    
       setRedirect(result === 200)
-      
-     
     }
     catch(err){
       console.log(err)
@@ -35,7 +30,6 @@ function Navbar() {
     return <Redirect to="/"/>
   }
 
-  console.log('Role en navbar??', role)
 
   return (
     

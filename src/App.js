@@ -38,9 +38,9 @@ function App() {
               <LoginPage/>
             </Route>
             
-            <Route path="/patients">
+            <PrivateRoute path="/patients">
               <ListAllPatientsPage/>
-            </Route>
+            </PrivateRoute>
 
             <Route path="/createpatient">
               <CreatePatientPage/>
@@ -53,10 +53,10 @@ function App() {
             <PrivateRoute path="/details/:id">
               <DetailsPage/>
             </PrivateRoute>
-{/* PRIVATE ROUTES REMOVED */}
-            <Route path="/edit/:id">
+
+            <PrivateRoute path="/edit/:id">
               <EditPatientPage/>
-            </Route>
+            </PrivateRoute>
 
             <PrivateRoute path="/sessions/:id">
               <HistoryPage/>

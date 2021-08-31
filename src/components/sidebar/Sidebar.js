@@ -91,7 +91,6 @@ const Sidebar = () => {
 
     const handleLogOut = async (event) => {
         try{
-            console.log('entered in lo out nav')
             const data = await logOut()
             const result = data
             console.log('navbar log out status', result)

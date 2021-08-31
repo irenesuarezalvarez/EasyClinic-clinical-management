@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {  Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 
 import axiosApi from "../../utils/AxiosApi.js";
+import { AuthContext } from "../../utils/AuthContext.js";
 import PageWrapper from "../../components/layouts/PageWrapper.js";
 import Input from "../../components/forms/Input.js";
 import Select from "../../components/forms/Select.js";
@@ -10,10 +11,12 @@ import Button from "../../components/layouts/Button.js";
 import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
+import StyledLink from "../../components/layouts/StyledLink.js";
 
 
 const EditPatientPage = () => {
     const { id } = useParams();
+    const { role } = useContext(AuthContext);
     const [input, setInput] = useState({});
     const [patient, setPatient] = useState([]);
     const [redirect, setRedirect] = useState(false); 
@@ -47,12 +50,7 @@ const EditPatientPage = () => {
     const editPatient = async event => {
         event.preventDefault()          
         try {
-          /*   setRedirect(true) */
-            console.log('Que imagen sale?', image)
-          
-                      
             const response =  await axiosApi.post(`/patients/edit/${id}`, input)
-            console.log('The patient was edited', input)
             const status = await response.status 
             setRedirect(status === 200) 
         } catch (err) {
@@ -241,7 +239,15 @@ const EditPatientPage = () => {
                             
                 
                         </Card>
-                        <Box margin="1rem" padding="1rem">
+                        <Box direction="row" position="space-around" margin="1rem" padding="1rem">
+                            { role === "prof" && 
+                                <StyledLink to="/mypatients">Back</StyledLink>
+                            }
+
+                            { role === "admin" &&
+                                <StyledLink to="/patients">Back</StyledLink>
+                            }
+
                             <Button type="submit">Edit</Button>
                         </Box>
                         

@@ -20,10 +20,10 @@ const URL = '/patients/all'
 const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
     
-    useEffect(() => {
+/*     useEffect(() => {
         getPatients();
     }, [])
-
+ */
     //Refresh the page after deleting a patient
     useEffect(()=> {
         getPatients();
@@ -31,12 +31,12 @@ const ListAllPatientsPage = () => {
  
     const getPatients = async () => {
         const response = await axiosApi.get(URL)
+        console.log('GEEET', response.data)
         setPatients(response.data)
     }
     
     const deletePatient = async (id, professional) => {
         try {
-            console.log('Patient deleted', id, professional)
             await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
@@ -65,7 +65,7 @@ const ListAllPatientsPage = () => {
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
@@ -85,7 +85,7 @@ const ListAllPatientsPage = () => {
                 <StyledTitle>List of Patients</StyledTitle>
                
                 <NewBtnRight>
-                    <StyledLink to="patient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
                 </NewBtnRight>
        
                 <Searcher deletePatient = {deletePatient}/>

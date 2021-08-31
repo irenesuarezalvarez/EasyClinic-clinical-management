@@ -59,8 +59,7 @@ const CreatePatientPage = () => {
       
     const createPatient = async event => {
         event.preventDefault()
-        console.log('clicked', image)
-       
+         
         const newPatient = {
             media: image,
             name: input.name,

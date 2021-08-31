@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,6 +11,7 @@ import Button from "../../components/layouts/Button";
 import Card from "../../components/layouts/Card";
 import {StyledInput} from "../../components/forms/Input";
 import PageWrapper from "../../components/layouts/PageWrapper";
+import StyledLink from "../../components/layouts/StyledLink";
 import TextArea from "../../components/forms/Textarea";
 
 
@@ -21,16 +22,35 @@ const HistoryPage = () => {
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [history, setHistory] = useState([]);
-
+    const [formsubmited, setFormsubmited] = useState(false);
+   
+   /*  useEffect(() => {
+        getHistory();
+    }, [])
+ */
+/* 
     useEffect(() => {
         getHistory()
-    }, [history])
-    
-    
+    }, [saveSession])
+     */
+
+    useEffect(()=>{
+        console.log('mouuuunting')
+        getHistory()
+        
+    }, [formsubmited])
+
     const getHistory = async () =>{
-        const response = await axiosApi.get(`${URL}/${id}`);
-        const patientHistory = await response
-        setHistory(patientHistory.data.history)
+        try{
+            const response = await axiosApi.get(`${URL}/${id}`);
+            /* const patientHistory = await response */
+            console.log("REspuesta", response.data.history)
+            setHistory(response.data.history)
+        }
+        catch(err){
+            console.log(err)
+        }
+        
     } 
    
        
@@ -52,9 +72,9 @@ const HistoryPage = () => {
         }
 
         try {
-            setRedirect(true) 
             console.log('New session was saved', newSession)
             await axiosApi.post(`${URL}/create`, newSession)
+            setFormsubmited(true)
         } catch (err) {
             console.error(err)
         } 
@@ -73,15 +93,12 @@ const HistoryPage = () => {
 
     //Render previous sessions
     const renderSessions = () => {
+        console.log('hola') 
         return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
-        /*   console.log('Aquiiii', date, patient) */
+       
             return (
-                <Card bgcolor="rgba(232, 236, 237)" width="100%">
-               {/*      <div>
-                    {Object.keys(patient).length > 0 &&
-                        <div>PatName: {patient.name}</div>
-                    }
-                    </div> */}
+                <Card bgcolor="rgba(232, 236, 237)" width="100%" key={_id}>
+               
                     <Box direction="row">
                         <h3>Date: {date}</h3>
                         <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">{notes}</Box>
@@ -111,7 +128,7 @@ const HistoryPage = () => {
         <PageWrapper>
             <Card title="Clinical History">
                 
-                <Card as={"form"} onSubmit={createSession} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
+                <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
                         <Box direction="row" padding="1rem">
                             <h4>Date: </h4>
                             <input
@@ -142,15 +159,17 @@ const HistoryPage = () => {
                                 onChange={handleChange}
                                 type="text"
                             />
+                    </Box>
 
-                    </Box>    
-                        <Box align="flex-end" width="100%">
-                        <Button type="submit">Save</Button>
-                        </Box>
+                    <Box direction= "row" margin= "1rem 0 1.5rem" position="space-between">
+                        <StyledLink to="/mypatients">Back</StyledLink>
+                        <Button type="submit" onClick={(e) => createSession(e)}>Save</Button>
+                    </Box>
                 </Card>
-            
+
+              
                 <article>
-                    {renderSessions()}
+                  {renderSessions()} 
                 </article>
             </Card>
         </PageWrapper>

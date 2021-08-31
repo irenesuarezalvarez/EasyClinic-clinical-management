@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import '../../Calendar.css';
 
 import axiosApi from "../../utils/AxiosApi.js";
+import StyledLink from "../../components/layouts/StyledLink";
 
-
+import { AuthContext } from "../../utils/AuthContext";
+import Box from "../../components/layouts/Box";
 import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
 import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 
@@ -12,6 +14,7 @@ import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 function Calendar (){
   var scheduleObj = new Schedule();
   const [professionals, setProfessionals] = useState([]);
+  const { role } = useContext(AuthContext)
 
   useEffect(() => {
     getProfessionals()  
@@ -132,42 +135,54 @@ const renderProfessionalChekbox = () =>{
 }
 /* deleted from scheduler component, event settings:  template: eventTemplate.bind()  */
 /* eventSettings={ { dataSource: data } } */
-  return(<div>
- 
-    <div>
+  return(
+  <div>
+      <div>
         <tr style={{ height: '50px' }}>
             <td style={{ width: '100%' }}>
               {renderProfessionalChekbox()}
-               {/*  <CheckBoxComponent value='0' id='personal' checked={true} label='My Calendar' disabled={true} change={onChange.bind()}></CheckBoxComponent>
+                {/*  <CheckBoxComponent value='0' id='personal' checked={true} label='My Calendar' disabled={true} change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='2' checked={false} label='Stella' change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='3' id='birthdays' checked={false} label='Juana' change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='1' id='holidays' checked={false} label='John' change={onChange.bind()}></CheckBoxComponent> */}
             </td>
-            </tr>
+        </tr>
+      </div>
+      <StyledArticle>
+        <ScheduleComponent  
+          ref={schedule => scheduleObj = schedule} 
+          currentView='Month' 
+          selectedDate= {new Date(year, month, day)} 
+          eventSettings={{ dataSource: generateCalendarData()}} 
+          group={{ resources: ['Resources'] }}> 
+          <ResourcesDirective>
+            <ResourceDirective 
+              field="professional" 
+              title="Resource Name"
+              name="Resources" 
+              textField="username" //changed
+              idField="_id" 
+              colorField="'#ea7a57'"
+              allowMultiple={true}
+              dataSource={professionals[0]}
+              />
+          </ResourcesDirective>
+          <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
+        </ScheduleComponent> 
+      </StyledArticle> 
+      <Box>
+        { role === "prof" && 
+          <StyledLink to="/mypatients">Back</StyledLink>
+        }
+        { role === "admin" &&
+          <StyledLink to="/patients">Back</StyledLink>
+        }
+        { !role &&
+          <StyledLink to="/">Back</StyledLink>
+        }
+      </Box>
     </div>
-    <StyledArticle>
-      <ScheduleComponent  
-        ref={schedule => scheduleObj = schedule} 
-        currentView='Month' 
-        selectedDate= {new Date(year, month, day)} 
-        eventSettings={{ dataSource: generateCalendarData()}} 
-        group={{ resources: ['Resources'] }}> 
-        <ResourcesDirective>
-          <ResourceDirective 
-            field="professional" 
-            title="Resource Name"
-            name="Resources" 
-            textField="username" //changed
-            idField="_id" 
-            colorField="'#ea7a57'"
-            allowMultiple={true}
-            dataSource={professionals[0]}
-            />
-        </ResourcesDirective>
-        <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
-      </ScheduleComponent> 
-    </StyledArticle> 
-    </div>
+    
   )
    
 }
