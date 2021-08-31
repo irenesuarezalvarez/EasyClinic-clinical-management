@@ -10,7 +10,6 @@ import Box, { StyledBox } from "./layouts/Box";
 import Button from "./layouts/Button";
 import { StyledInput } from "./forms/Input";
 
-
 const Searcher = ({deletePatient}) => {
     const [input, setInput] = useState({});
     const [searchPatients, setsearchPatients] = useState([]);
