@@ -19,26 +19,36 @@ const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
+    const [boolean, setBoolean] = useState(false);
+
+    const toogleBoolean = () => setBoolean(!boolean);
     
-/*     useEffect(() => {
+    useEffect(() => {
         getPatients();
     }, [])
- */
+
     //Refresh the page after deleting a patient
-    useEffect(()=> {
+    useEffect(() => {
+        getPatients();
+    }, [boolean])
+
+    
+   /*  useEffect(()=> {
         getPatients();
     }, [patients]);
- 
+   */
     const getPatients = async () => {
         const response = await axiosApi.get(URL)
         console.log('GEEET', response.data)
-        setPatients(response.data)
+        const data = await response.data
+        setPatients(data)
     }
     
     const deletePatient = async (id, professional) => {
         try {
             await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
+            toogleBoolean()
             setPatients(del)
         } catch (err) {
             console.error(err)

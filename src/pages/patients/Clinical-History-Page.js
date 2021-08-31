@@ -14,6 +14,8 @@ import PageWrapper from "../../components/layouts/PageWrapper";
 import StyledLink from "../../components/layouts/StyledLink";
 import TextArea from "../../components/forms/Textarea";
 
+import Editor from "../../components/layouts/Editor"
+
 
 const URL = "/api/history"
  
@@ -22,37 +24,30 @@ const HistoryPage = () => {
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [history, setHistory] = useState([]);
-    const [formsubmited, setFormsubmited] = useState(false);
+    const [boolean, setBoolean] = useState(false);
+    const [value, setValue] = useState("")
+
    
-   /*  useEffect(() => {
-        getHistory();
+    const toogleBoolean = () => setBoolean(!boolean);
+    
+    useEffect(()=>{
+        getHistory() 
     }, [])
- */
-/* 
-    useEffect(() => {
-        getHistory()
-    }, [saveSession])
-     */
 
     useEffect(()=>{
-        console.log('mouuuunting')
-        getHistory()
-        
-    }, [formsubmited])
+        getHistory() 
+    }, [boolean])
 
     const getHistory = async () =>{
         try{
             const response = await axiosApi.get(`${URL}/${id}`);
-            /* const patientHistory = await response */
-            console.log("REspuesta", response.data.history)
-            setHistory(response.data.history)
+            const data = await response.data
+            setHistory(data.history)
         }
         catch(err){
             console.log(err)
         }
-        
     } 
-   
        
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -61,6 +56,19 @@ const HistoryPage = () => {
             [name]: value,
         }));
     };
+    /////////////
+    const handleEditorChange = (e, editor) =>{
+        const data = editor.getData()
+        setValue(data)
+    }
+    const addContentToInput = (content) =>{
+        console.log('im in', content)
+        setInput((prevState) => ({
+            ...prevState,
+            content: content,
+        }));
+    }
+    /////////////
     
     const createSession = async event => {
         event.preventDefault()
@@ -72,9 +80,8 @@ const HistoryPage = () => {
         }
 
         try {
-            console.log('New session was saved', newSession)
             await axiosApi.post(`${URL}/create`, newSession)
-            setFormsubmited(true)
+            toogleBoolean()
         } catch (err) {
             console.error(err)
         } 
@@ -85,6 +92,7 @@ const HistoryPage = () => {
             await axiosApi.delete(`${URL}/${id}/${patient}`)
             const del = history.filter(session => id !== session.id)
             setHistory(del)
+            toogleBoolean()
         } catch (err) {
             console.error(err)
         } 
@@ -93,12 +101,11 @@ const HistoryPage = () => {
 
     //Render previous sessions
     const renderSessions = () => {
-        console.log('hola') 
-        return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
+          return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
        
             return (
                 <Card bgcolor="rgba(232, 236, 237)" width="100%" key={_id}>
-               
+
                     <Box direction="row">
                         <h3>Date: {date}</h3>
                         <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">{notes}</Box>
@@ -127,7 +134,7 @@ const HistoryPage = () => {
     return (
         <PageWrapper>
             <Card title="Clinical History">
-                
+               {/*  <Editor/> */}
                 <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
                         <Box direction="row" padding="1rem">
                             <h4>Date: </h4>
@@ -151,7 +158,7 @@ const HistoryPage = () => {
                                 onChange= {handleChange}
                                 type = "text"
                             />
-                        
+                          {/*    <Texteditor />  */}
                             <TextArea
                                 name="content"
                                 required

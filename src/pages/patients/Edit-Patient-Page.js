@@ -85,11 +85,12 @@ const EditPatientPage = () => {
   
     
     //Redirect
-    if(redirect){
+    if(redirect && role === "admin"){
         return <Redirect to='/patients'/>
     }
-
-  
+    if(redirect && role === "prof"){
+        return <Redirect to='/mypatients'/>
+    }
 
     function renderPatient(){
         const { media, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
