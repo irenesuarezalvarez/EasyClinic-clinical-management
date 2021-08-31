@@ -16,7 +16,6 @@ function Navbar() {
 
   const handleLogOut = async event => {
    
-   
     try{
       const data = await logOut()
       const result = data
@@ -24,7 +23,7 @@ function Navbar() {
       console.log('navbar log out status', result)
     
       setRedirect(result === 200)
-      //WHy redirect here does not work?
+      
      
     }
     catch(err){
@@ -49,10 +48,10 @@ function Navbar() {
           <li><StyledLink to="/">Home</StyledLink></li> 
           <li><StyledLink to="/signup">Sign up</StyledLink></li>
           <li><StyledLink to="/createpatient">Create Patient</StyledLink></li>    
-          <li><StyledLink to="/createclou">Clou</StyledLink></li> 
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
-          <li><StyledLink to="/sessions/61201ea5931efe29b08118b2">History</StyledLink></li>
-      
+          <li><StyledLink to="/appointment">Appointment</StyledLink></li>
+          
+  
           { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
           { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
           { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>} 

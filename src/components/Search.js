@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { faCalendar, faEdit, faTrashAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import axiosApi from "../../utils/AxiosApi";
-import Box, { StyledBox } from "./Box";
-import Button from "./Button";
-import { StyledInput } from "../forms/Input";
+import axiosApi from "../utils/AxiosApi";
+import Box, { StyledBox } from "./layouts/Box";
+import Button from "./layouts/Button";
+import { StyledInput } from "./forms/Input";
 
 
 const Searcher = ({deletePatient}) => {

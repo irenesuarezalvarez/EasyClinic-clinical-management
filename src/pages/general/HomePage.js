@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import Login from "../authentication/Login";
+import Login from "../../components/Login";
 import Box, { StyledBox } from "../../components/layouts/Box";
-import Container from "../../components/layouts/Container";
 import IconImg from "../../components/layouts/IconImg";
 import Title from "../../components/layouts/Title";
 
@@ -12,11 +11,10 @@ const HomePage = () => {
   return (
     <Box>
         <HeaderStyled>
-            <Box bgcolor="rgba( 255, 255, 255)" radius="50%">
-                <StyledLogo src="../images/EasyClinicLogo.png" alt="Easy Clinic Logo"/>
-            </Box>
-            
-            
+           {/*  <Box bgcolor="rgba( 255, 255, 255, 0.50)" radius="25px">
+                <StyledLogo src="../images/EasyClinic.png" alt="Easy Clinic Logo"/>
+            </Box> */}
+            <Box></Box>
             
             <LoginBox>
                 <Login/>

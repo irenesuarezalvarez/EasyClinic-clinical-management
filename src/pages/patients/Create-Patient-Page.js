@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-
-import Input from "./../../components/forms/Input.js";
-import Select from "./../../components/forms/Select"
-import PageWrapper from "../../components/layouts/PageWrapper.js";
-import Card from "../../components/layouts/Card";
-import Button from "../../components/layouts/Button.js";
-import Box from "../../components/layouts/Box.js";
 import axiosApi from "../../utils/AxiosApi";
+import Box from "../../components/layouts/Box.js";
+import Button from "../../components/layouts/Button.js";
+import Card from "../../components/layouts/Card";
+import Input from "./../../components/forms/Input.js";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
+import Select from "./../../components/forms/Select"
+import StyledImg from "./../../components/layouts/StyledImg.js";
 
-function CreatePatientPage() {
+const CreatePatientPage = () => {
     const [input, setInput] = useState({});
     const [redirect, setRedirect] = useState(false); 
     const [professionals, setProfessionals] = useState([]);
@@ -38,12 +38,7 @@ function CreatePatientPage() {
         }));
     };
 
-    //Cloudinary
-  /*   const uploadImage = async (files) =>{
-        console.log(files[0])
-    } */
     const handleImageUpload = async (event) => {
-        /* setLoading(true) */
         const { files } = event.target;
         const image = files[0];
     
@@ -59,7 +54,6 @@ function CreatePatientPage() {
         );
         const mediaUrl = await response.data.url;
         setImage(mediaUrl);
-        /* setLoading(false) */
     };
     
       
@@ -100,14 +94,12 @@ function CreatePatientPage() {
     return <Redirect to='/patients'/>
   }
 
-
   return (
     <PageWrapper>
         
         <form onSubmit={createPatient}>
 
             <Card title="Personal Information">
-             
                 <Input
                     placeholder="Profile Picture"
                     name="media"
@@ -116,7 +108,7 @@ function CreatePatientPage() {
                     onChange={handleImageUpload}
                 />
                 
-                {mediaPreview && <img src={mediaPreview} alt="Media preview" />}
+                {mediaPreview && <StyledImg width="10rem" src={mediaPreview} alt="Media preview" />}
                 <Input
                     label="Name "
                     name= "name"

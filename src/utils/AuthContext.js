@@ -16,6 +16,7 @@ const AuthProvider = ({children}) =>{
       const result = await axiosApi.post('/auth/login', credentials)
       const data = await result;
       setRole(data.data.role);
+      setIsAuth(true);
      
       if(data.status === 200){ //TO BE CHANGED
         setIsAuth(true);
@@ -33,6 +34,7 @@ const AuthProvider = ({children}) =>{
     ) 
   }
   console.log('rooole', role)
+
   //Sign up function
   async function signUp(credentials){
     let data= "";
@@ -55,9 +57,11 @@ const AuthProvider = ({children}) =>{
 
   //Log out function
   const logOut = async () => {
+    console.log('you clicked log out');
     let data = "";
     try{
       const data = await axiosApi.post('/auth/logout')
+      setIsAuth(false);
       setRole(undefined);
     }
     catch (err) {

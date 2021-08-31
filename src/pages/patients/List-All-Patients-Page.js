@@ -7,7 +7,7 @@ import Box from '../../components/layouts/Box';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
 import Card from '../../components/layouts/Card';
 import Container from '../../components/layouts/Container';
-import Searcher from '../../components/layouts/Search';
+import Searcher from '../../components/Search';
 import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -54,18 +54,18 @@ const ListAllPatientsPage = () => {
     }
 
     const renderBody = () => {
-        return patients && patients.map(({ _id, surname, name, professional }) => {
+        return patients.length > 0 && patients.map(({ _id, surname, name, professional }) => {
             return (
                 <tr key={_id}>
                     <Styledtd>{_id}</Styledtd>
-                    <Styledtd>{surname}{professional}</Styledtd>
+                    <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Box direction="row">
                         <Button as={Link} radius="5px 0 0 5px" to="/calendar">
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button  as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
@@ -73,7 +73,6 @@ const ListAllPatientsPage = () => {
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </Button>
                     </Box>
-                    
                 </tr>
             )
         })
@@ -140,15 +139,4 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-/* //SENDING BACK AN ERROR
-const ButtonBox = styled.td`
-    background-color: secondary_light;
-    padding: 0.9rem;
-    text-align: center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction: row;
-    flex-wrap: nowrap;
-` */
 export default ListAllPatientsPage;
