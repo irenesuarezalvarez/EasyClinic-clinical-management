@@ -24,7 +24,7 @@ const TextAreaContainer = styled.textarea`
     color: #495057;
     border-color: #80bdff;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0 123 255 / 25%);
+    box-shadow: 0 0 0.2rem ${props => props.theme.color.shadow};
   }
 `;
 

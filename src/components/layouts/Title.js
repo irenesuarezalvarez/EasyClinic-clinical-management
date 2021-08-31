@@ -9,9 +9,12 @@ const Title = ({children}) => {
     )
 }
 const StyledTitle = styled.h2`
-  font-weight: bold;
-  color: black;
-  margin-bottom: 1rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 1rem;
 `;
 
 export default Title;

@@ -13,7 +13,7 @@ import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free
 
 
 
-const ListMyPatients = () => {
+const ListMyPatientsPage = () => {
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
@@ -42,15 +42,15 @@ const ListMyPatients = () => {
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
                    
-                        <Button bgColor=" rgba(225, 183, 65)" hoverColor="rgba(187, 135, 20)" to={`details/${_id}`}>
+                        <Button as={Link} radius="5px 0 0 5px" bgcolor=" rgba(225, 183, 65)" hovercolor="rgba(187, 135, 20)" to={`/details/${_id}`}>
                             <FontAwesomeIcon icon={faInfoCircle}/>
                         </Button>
 
-                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`sessions/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor=" rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/sessions/${_id}`}>
                             <FontAwesomeIcon icon={faFolder}/>
                         </Button>
 
-                        <Button radius=" 0 5px 5px 0" bgColor="rgba(107, 142, 35)" hoverColor=" rgba(85, 107, 47)" to={`sessions/${_id}`}>
+                        <Button  as={Link} radius=" 0 5px 5px 0" bgcolor="rgba(107, 142, 35)" hovercolor=" rgba(85, 107, 47)" to={`/sessions/${_id}`}>
                             <FontAwesomeIcon icon={faFileAlt}/>
                         </Button>
                     </Styledtd>
@@ -102,7 +102,7 @@ const StyledTable = styled.table`
     margin: 25px 0;
     width: 100%;
     font-size: 0.9em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
 `;
 
 const Styledth = styled.th`
@@ -117,4 +117,4 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-export default ListMyPatients;
+export default ListMyPatientsPage;

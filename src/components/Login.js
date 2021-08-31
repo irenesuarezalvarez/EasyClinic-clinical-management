@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import Input from "./../../components/forms/Input.js"
-import Card from "../../components/layouts/Card";
-import Button from "../../components/layouts/Button.js";
-import {AuthContext} from "../../utils/AuthContext"
+import Input from "./forms/Input.js"
+import Card from "./layouts/Card";
+import Box from "./layouts/Box";
+import Button from "./layouts/Button.js";
+import { AuthContext } from "../utils/AuthContext"
 
 
 function Login() {
@@ -45,8 +46,6 @@ function Login() {
     }
 
   } 
-
-  console.log('este es el role', role)
   
   if(redirect && role === "prof"){
     return <Redirect to='/mypatients'/>
@@ -85,7 +84,10 @@ function Login() {
           onChange={handleChange}
           type="password"
         />
-        <Button type="submit">Log in</Button>
+        <Box padding="1rem">
+          <Button type="submit">Log in</Button>
+        </Box>
+        
       </Card>
     </form>
 

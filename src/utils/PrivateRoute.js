@@ -9,7 +9,7 @@ const PrivateRoute = ({ children, ...props }) => {
   const location = useLocation();
   const { isAuth, role } = useContext(AuthContext) 
 
-  if(role === "prof"){
+  if(role){
     return <Route {...props}>{children}</Route>
   }
 

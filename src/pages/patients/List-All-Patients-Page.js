@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
-import Card from '../../components/layouts/Card';
-import Button, { NewBtnRight } from '../../components/layouts/Button';
-import StyledLink from '../../components/layouts/StyledLink';
-import Searcher from '../../components/layouts/Search';
 import axiosApi from '../../utils/AxiosApi';
+import Box from '../../components/layouts/Box';
+import Button, { NewBtnRight } from '../../components/layouts/Button';
+import Card from '../../components/layouts/Card';
+import Container from '../../components/layouts/Container';
+import Searcher from '../../components/Search';
+import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import Container from '../../components/layouts/Container';
 
 
 
@@ -17,12 +19,11 @@ const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
-   
-
-    useEffect(() => {
+    
+/*     useEffect(() => {
         getPatients();
     }, [])
-
+ */
     //Refresh the page after deleting a patient
     useEffect(()=> {
         getPatients();
@@ -30,13 +31,13 @@ const ListAllPatientsPage = () => {
  
     const getPatients = async () => {
         const response = await axiosApi.get(URL)
+        console.log('GEEET', response.data)
         setPatients(response.data)
     }
     
-    const deletePatient = async (id) => {
+    const deletePatient = async (id, professional) => {
         try {
-            console.log('Patient deleted')
-            await axiosApi.delete(`${URL}/${id}`)
+            await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
             setPatients(del)
         } catch (err) {
@@ -53,25 +54,25 @@ const ListAllPatientsPage = () => {
     }
 
     const renderBody = () => {
-        return patients && patients.map(({ _id, surname, name }) => {
+        return patients.length > 0 && patients.map(({ _id, surname, name, professional }) => {
             return (
                 <tr key={_id}>
                     <Styledtd>{_id}</Styledtd>
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
-                    <ButtonBox>
-                        <Button radius="5px 0 0 5px" to="/calendar">
+                    <Box direction="row">
+                        <Button as={Link} radius="5px 0 0 5px" to="/calendar">
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button radius="0" bgColor=" rgba(82, 189, 201)" hoverColor="rgba(45, 167, 175)" to={`edit/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 
-                        <Button radius=" 0 5px 5px 0" bgColor="rgba(255, 127, 80)" hoverColor="rgba(250, 45, 25)" onClick={() => deletePatient(_id)}>
+                        <Button radius="0 5px 5px 0" bgcolor="rgba(255, 127, 80)" hovercolor="rgba(250, 45, 25)" onClick={() => deletePatient(_id, professional)}>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </Button>
-                    </ButtonBox>
+                    </Box>
                 </tr>
             )
         })
@@ -84,7 +85,7 @@ const ListAllPatientsPage = () => {
                 <StyledTitle>List of Patients</StyledTitle>
                
                 <NewBtnRight>
-                    <StyledLink to="patient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
                 </NewBtnRight>
        
                 <Searcher deletePatient = {deletePatient}/>
@@ -123,7 +124,7 @@ const StyledTable = styled.table`
     margin: 25px 0;
     width: 100%;
     font-size: 0.9em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
 `;
 
 const Styledth = styled.th`
@@ -138,15 +139,4 @@ const Styledtd = styled.td`
     text-align: center;
 `;
 
-//SENDING BACK AN ERROR
-const ButtonBox = styled.td`
-    background-color: secondary_light;
-    padding: 0.9rem;
-    text-align: center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction: row;
-    flex-wrap: nowrap;
-`
 export default ListAllPatientsPage;

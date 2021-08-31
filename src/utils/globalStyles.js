@@ -5,6 +5,15 @@ const reset = css`
   body {
     font-family: "Helvetica", sans-serif;
     height: 100%;
+    background: lightgray;
+    background-image: url("../images/bg.png");
+    width: 100%; 
+    height: 100%;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    object-fit: cover;
+ 
   }
   html,
   body,
@@ -70,14 +79,25 @@ const ResetStyles = createGlobalStyle`${reset}`;
 
 const ProjectTheme = {
   color: {
-    primary: "#FFF8DC	",
+    primary: "red",
     secondary: "##66CDAA",
     secondary_light: "#AFEEEE",
     secondary_dark: "#20B2AA",
     secondary_dark_dark: "#008B8B",
-    danger: ""
+    danger: "#fff",
+    shadow: "rgba(0 123 255 / 25%)",
+    buttonshadow:  "rgba(0, 0, 0, 0.15)",
+    boxshadow: "rgba(0 0 0 / 15%)",
+    button: "rgba(102, 205, 170)",
+    navbar:"rgba(68, 183, 219) ", /* "rgba(218, 247, 166)" */
+    transparentWhite: "rgba(255, 255, 255, 0.5)",
+    editBtn: "rgba(82, 189, 201)"
+    
+    
   },
 };
-
+/* 
+bgcolor={`color: ${props => props.theme.color.editBtn}`}; 
+className={`some-global-class ${this.props.className}`}*/
 
 export { ResetStyles, ProjectTheme };
