@@ -6,7 +6,10 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
   const [ role, setRole] = useState(undefined);
-  
+  const [sidebar, setSidebar] = useState(false);
+ 
+  //Set Sidebar
+  const showSidebar = () => setSidebar(!sidebar);
   //Log in function
   async function logIn(credentials){
     try {
@@ -65,7 +68,7 @@ const AuthProvider = ({children}) =>{
   }
 
   return(
-    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut}}>
+    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut, sidebar, showSidebar}}>
       {children}
     </AuthContext.Provider>
   )

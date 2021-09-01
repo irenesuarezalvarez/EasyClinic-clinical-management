@@ -7,7 +7,7 @@ import { faBars, faTimes, faSignOutAlt, faSignInAlt} from '@fortawesome/free-sol
 
 import SubMenu from './SidebarSubmenu';
 import StyledImg from '../layouts/StyledImg';
-import {AuthContext} from "../../utils/AuthContext";
+import { AuthContext } from "../../utils/AuthContext";
 import { SidebarData } from './SidebarData';
 import { SidebarProtectedData } from './SidebarProtectedData';
 import { SidebarAdminData } from './SidebarAdminData';
@@ -83,11 +83,12 @@ const StyledBtn = styled.button`
 `
 
 const Sidebar = () => {
-    const [sidebar, setSidebar] = useState(false);
+    /* const [sidebar, setSidebar] = useState(false); */
     const [redirect, setRedirect] = useState(false);
     const contextAuth = useContext(AuthContext)
-    const { isAuth, role, logOut } = contextAuth;
-    const showSidebar = () => setSidebar(!sidebar);
+    const { role, logOut, sidebar, showSidebar } = contextAuth;
+
+   /*  const showSidebar = () => setSidebar(!sidebar); */
 
     const handleLogOut = async (event) => {
         try{
@@ -95,7 +96,6 @@ const Sidebar = () => {
             const result = data
             console.log('navbar log out status', result)
             setRedirect(true)
-            /* setRedirect(result === 200)    */ 
         }
         catch(err){
             console.log(err)

@@ -16,6 +16,7 @@ import EditPatientPage from "./pages/patients/Edit-Patient-Page"
 import HistoryPage from "./pages/patients/Clinical-History-Page";
 import Calendar from "./pages/general/Calendar";
 import AppointmentsPage from "./pages/professionals/AppointmentsPage";
+import OutsideListener from "./components/ClickoutsideListener";
 
 function App() {
   return (
@@ -23,7 +24,11 @@ function App() {
       <Router>
         <ThemeProvider theme={ProjectTheme}>
           <ResetStyles/>
-          <Sidebar/>
+          
+          <OutsideListener>
+            <Sidebar/>
+          </OutsideListener>
+      
           <Switch>
         
             <Route exact path="/">
