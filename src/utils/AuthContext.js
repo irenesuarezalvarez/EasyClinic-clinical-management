@@ -6,7 +6,11 @@ export const AuthContext = createContext({});
 const AuthProvider = ({children}) =>{
   const [isAuth, setIsAuth] = useState(false);
   const [ role, setRole] = useState(undefined);
-  
+  const [sidebar, setSidebar] = useState(false);
+ 
+  //Set Sidebar
+  const showSidebar = () => setSidebar(!sidebar);
+
   //Log in function
   async function logIn(credentials){
     try {
@@ -14,12 +18,9 @@ const AuthProvider = ({children}) =>{
       const data = await result;
       setRole(data.data.role);
       setIsAuth(true);
-     
-      if(data.status === 200){ //TO BE CHANGED
-        setIsAuth(true);
-      }
-
+      setIsAuth(data.status === 200);
       return data
+
     } catch (err) {
       console.error(err)
     } 
@@ -28,7 +29,6 @@ const AuthProvider = ({children}) =>{
       'User is authenticated', credentials
     ) 
   }
-  console.log('rooole', role)
 
   //Sign up function
   async function signUp(credentials){
@@ -41,7 +41,7 @@ const AuthProvider = ({children}) =>{
         setIsAuth(true); 
         setRole(data.data.role);
       }else{
-        alert('Please provide the right credentials')
+        alert('Please provide the right credentials');
       }
      
     } catch (err) {
@@ -65,11 +65,10 @@ const AuthProvider = ({children}) =>{
   }
 
   return(
-    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut}}>
+    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut, sidebar, setSidebar, showSidebar}}>
       {children}
     </AuthContext.Provider>
   )
 } 
-
 
 export default AuthProvider;

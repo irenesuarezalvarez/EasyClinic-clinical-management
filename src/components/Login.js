@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import Input from "./forms/Input.js"
-import Card from "./layouts/Card";
+import { AuthContext } from "../utils/AuthContext";
 import Box from "./layouts/Box";
 import Button from "./layouts/Button.js";
-import { AuthContext } from "../utils/AuthContext"
+import Card from "./layouts/Card";
+import Input from "./forms/Input.js";
 
 
-function Login() {
+const Login = () => {
   const { logIn, role } = useContext(AuthContext)
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
@@ -44,7 +44,6 @@ function Login() {
     catch(error){
       console.log(error);
     }
-
   } 
   
   if(redirect && role === "prof"){
@@ -90,7 +89,6 @@ function Login() {
         
       </Card>
     </form>
-
   );
 }
 

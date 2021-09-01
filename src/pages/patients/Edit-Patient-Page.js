@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import {  Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 
-import axiosApi from "../../utils/AxiosApi.js";
 import { AuthContext } from "../../utils/AuthContext.js";
-import PageWrapper from "../../components/layouts/PageWrapper.js";
-import Input from "../../components/forms/Input.js";
-import Select from "../../components/forms/Select.js";
+import axiosApi from "../../utils/AxiosApi.js";
 import Button from "../../components/layouts/Button.js";
 import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
+import Input from "../../components/forms/Input.js";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
+import Select from "../../components/forms/Select.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
 import StyledLink from "../../components/layouts/StyledLink.js";
-
 
 const EditPatientPage = () => {
     const { id } = useParams();
@@ -30,20 +29,29 @@ const EditPatientPage = () => {
         getProfessionals()  
     }, [])
     
-    
-   
     //Get Patient
     const getPatient = async () => {
-        const response = await axiosApi.get(`/patients/edit/${id}`);
-        setPatient(response.data)
-        setImage(response.data.media)
+        try{
+            const response = await axiosApi.get(`/patients/edit/${id}`);
+            setPatient(response.data)
+            setImage(response.data.media)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     
     //Get professionals for dropdown
     const getProfessionals = async () =>{
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
+        try{
+            const result = await axiosApi.get("/professionals"); 
+            const professionals = result.data;
+            setProfessionals([...professionals]); 
+        }
+        catch(err){
+            console.log(err)
+        }
+       
     }
 
     //Send patient edited
@@ -57,6 +65,7 @@ const EditPatientPage = () => {
             console.error(err)
         } 
     } 
+
     //Picture
     const addImageToInput = (mediaUrl) =>{
         console.log('im in', mediaUrl)
@@ -65,6 +74,7 @@ const EditPatientPage = () => {
             media: mediaUrl,
         }));
     }
+
     const uploadImage = async (event) => {
         const { files } = event.target;
         const image = files[0];
@@ -85,14 +95,15 @@ const EditPatientPage = () => {
   
     
     //Redirect
-    if(redirect){
+    if(redirect && role === "admin"){
         return <Redirect to='/patients'/>
     }
-
-  
+    if(redirect && role === "prof"){
+        return <Redirect to='/mypatients'/>
+    }
 
     function renderPatient(){
-        const { media, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -101,10 +112,8 @@ const EditPatientPage = () => {
                 ...prevState,
                 [name]: value,
             }));
-
         };
-     
-                
+                 
         return(
             <div> 
                 {Object.keys(patient).length > 0  && 
@@ -220,7 +229,6 @@ const EditPatientPage = () => {
                         </Card>
 
                         <Card title="Professional Assistance">
-                      
                             <Select
                                 name="professional"
                                 label= "Professional"
@@ -236,9 +244,8 @@ const EditPatientPage = () => {
                                             </option>
                                     ))}
                             </Select> 
-                            
-                
                         </Card>
+
                         <Box direction="row" position="space-around" margin="1rem" padding="1rem">
                             { role === "prof" && 
                                 <StyledLink to="/mypatients">Back</StyledLink>

@@ -19,22 +19,26 @@ const CreatePatientPage = () => {
     const [mediaPreview, setMediaPreview] = useState("");
 
     useEffect(() => {
-        const fetchUsers = async () => {
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
+        const getProfessionals = async () => {
+            try{
+                const result = await axiosApi.get("/professionals"); 
+                const professionals = result.data;
+                setProfessionals([...professionals]); 
+            }
+            catch(err){
+                console.log(err)
+            }
     };
 
-    fetchUsers();
+    getProfessionals();
     }, []);
-
-        
+ 
     const handleChange = (event) => {
         const { name, value } = event.target;
 
         setInput((prevState) => ({
-        ...prevState,
-        [name]: value,
+            ...prevState,
+            [name]: value,
         }));
     };
 
@@ -49,14 +53,14 @@ const CreatePatientPage = () => {
         setMediaPreview(window.URL.createObjectURL(image));
     
         const response = await axios.post(
-            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"/* process.env.REACT_APP_CLOUDINARY_URL */, 
+            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"/*  "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"*/, 
             data
         );
         const mediaUrl = await response.data.url;
         setImage(mediaUrl);
     };
     
-      
+      //NO TRY CATCH BLOCK AQUI (ARRIBA)
     const createPatient = async event => {
         event.preventDefault()
          
@@ -81,7 +85,7 @@ const CreatePatientPage = () => {
         try {
             const result = await axiosApi.post('/patients/create', newPatient)
             const data = await result;
-            setRedirect(data.status === 200)  //CHANGED
+            setRedirect(data.status === 200) 
             
             console.log('New patient was created', newPatient)
         } catch (err) {
@@ -95,9 +99,7 @@ const CreatePatientPage = () => {
 
   return (
     <PageWrapper>
-        
         <form onSubmit={createPatient}>
-
             <Card title="Personal Information">
                 <Input
                     placeholder="Profile Picture"
@@ -110,115 +112,115 @@ const CreatePatientPage = () => {
                 {mediaPreview && <StyledImg width="10rem" src={mediaPreview} alt="Media preview" />}
                 <Input
                     label="Name "
-                    name= "name"
+                    name="name"
                     required
                     value={input.name} 
-                    placeholder= "Name"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Name"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Surname "
-                    name= "surname"
+                    name="surname"
                     required
                     value={input.surname} 
-                    placeholder= "Surname"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Surname"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Email "
-                    name= "email"
+                    name="email"
                     required
                     value={input.email} 
-                    placeholder= "Email"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Phone"
-                    name= "phone"
+                    name="phone"
                     required
                     value={input.phone} 
-                    placeholder= "Phone number"
-                    onChange= {handleChange}
-                    type = "number"
+                    placeholder="Phone number"
+                    onChange={handleChange}
+                    type="number"
                 />
                 <Input
                     label="Address "
-                    name= "address"
+                    name="address"
                     value={input.address} 
-                    placeholder= "Address"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Address"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="City "
-                    name= "city"
+                    name="city"
                     value={input.city} 
-                    placeholder= "City"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="City"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="State "
-                    name= "state"
+                    name="state"
                     value={input.state} 
-                    placeholder= "State"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="State"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Postal code "
-                    name= "postal"
+                    name="postal"
                     required
                     value={input.postal} 
-                    placeholder= "Postal code"
-                    onChange= {handleChange}
-                    type = "number"
+                    placeholder="Postal code"
+                    onChange={handleChange}
+                    type="number"
                 />
             </Card>
 
             <Card title="Contact Details">
                 <Input
                     label="Name "
-                    name= "contactname"
+                    name="contactname"
                     required
                     value={input.contactname} 
-                    placeholder= "Name"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Name"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Surname "
-                    name= "contactsurname"
+                    name="contactsurname"
                     required
                     value={input.contactsurname} 
-                    placeholder= "Surname"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Surname"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Email "
-                    name= "contactemail"
+                    name="contactemail"
                     required
                     value={input.contactemail} 
-                    placeholder= "Email"
-                    onChange= {handleChange}
-                    type = "text"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    type="text"
                 />
                 <Input
                     label="Phone"
-                    name= "contactphone"
+                    name="contactphone"
                     required
                     value={input.contactphone} 
-                    placeholder= "Phone number"
-                    onChange= {handleChange}
-                    type = "number"
+                    placeholder="Phone number"
+                    onChange={handleChange}
+                    type="number"
                 />
             </Card>
+
             <Card title="Professional Assistance">
-                
                 <Select
                     name="professional"
                     label="Professional"
@@ -243,7 +245,5 @@ const CreatePatientPage = () => {
     </PageWrapper>
   );
 }
-
-
 
 export default CreatePatientPage;

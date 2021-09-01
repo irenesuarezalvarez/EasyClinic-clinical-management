@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { faCalendar, faEdit, faTrashAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import axiosApi from "../utils/AxiosApi";
 import Box, { StyledBox } from "./layouts/Box";
 import Button from "./layouts/Button";
 import { StyledInput } from "./forms/Input";
 
+import { faCalendar, faEdit, faTrashAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Searcher = ({deletePatient}) => {
     const [input, setInput] = useState({});
@@ -36,7 +35,6 @@ const Searcher = ({deletePatient}) => {
         } 
     } 
     
-    //
     const renderSearch = () => {
         return searchPatients.length > 0 && searchPatients.map(({ _id, surname, name }) => {
             return (
@@ -61,8 +59,7 @@ const Searcher = ({deletePatient}) => {
             )
         })
     }
-  
-    //
+
     return(
         <StyledArt>
             <SearchBar onSubmit={searchPatient}>              
@@ -90,11 +87,9 @@ const Searcher = ({deletePatient}) => {
                 {renderSearch()}
             </StyledRow>
         </StyledArt>
-        
-       
     )
-  
 }
+
 const StyledArt= styled.article`
     width: 100%
 `
@@ -117,7 +112,6 @@ const Styledtd = styled.td`
 const StyledRow = styled(StyledBox)`
     width: 100%;   
 `
-//Search Bar
 const SearchBar = styled.form`
     width: 100%;
     display: flex;

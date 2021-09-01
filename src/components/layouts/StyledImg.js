@@ -12,5 +12,4 @@ const RoundImg = styled.img`
     height: ${({height})=> height};
     border-radius: 50%;
 `
-
 export default StyledImg;

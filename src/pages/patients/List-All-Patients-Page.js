@@ -13,32 +13,38 @@ import StyledLink from '../../components/layouts/StyledLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 
-
-
 const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
     const [patients, setPatients] = useState([])
+    const [boolean, setBoolean] = useState(false);
+
+    const toogleBoolean = () => setBoolean(!boolean);
     
-/*     useEffect(() => {
+    useEffect(() => {
         getPatients();
     }, [])
- */
-    //Refresh the page after deleting a patient
-    useEffect(()=> {
+
+    useEffect(() => {
         getPatients();
-    }, [patients]);
- 
+    }, [boolean])
+
     const getPatients = async () => {
-        const response = await axiosApi.get(URL)
-        console.log('GEEET', response.data)
-        setPatients(response.data)
+        try{
+            const response = await axiosApi.get(URL);
+            const data = await response.data
+            setPatients(data)
+        }
+        catch(err){
+            console.log(err)
+        }  
     }
     
     const deletePatient = async (id, professional) => {
         try {
             await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
+            toogleBoolean()
             setPatients(del)
         } catch (err) {
             console.error(err)
@@ -116,7 +122,6 @@ const StyledSpan = styled.span`
   padding-left: 15px;
 `;
 
-//Table Styles
 const StyledTable = styled.table`
     border-collapse: collapse;
     border-radius: 0.5em;

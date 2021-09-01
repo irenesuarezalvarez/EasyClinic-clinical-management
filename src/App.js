@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { ResetStyles, ProjectTheme } from "./utils/globalStyles";
 
 import AuthProvider from "./utils/AuthContext";
-import PrivateRoute from "./utils/PrivateRoute"; 
+import PrivateRoute from "./utils/PrivateRoute";
+import OutsideListener from "./components/ClickoutsideListener";
 import Sidebar from "./components/sidebar/Sidebar";
 import HomePage from "./pages/general/HomePage";
 import SignupPage from "./pages/authentication/SignupPage";
@@ -16,6 +17,7 @@ import EditPatientPage from "./pages/patients/Edit-Patient-Page"
 import HistoryPage from "./pages/patients/Clinical-History-Page";
 import Calendar from "./pages/general/Calendar";
 import AppointmentsPage from "./pages/professionals/AppointmentsPage";
+import PageNotFound from "./pages/general/PageNotFound";
 
 function App() {
   return (
@@ -23,7 +25,11 @@ function App() {
       <Router>
         <ThemeProvider theme={ProjectTheme}>
           <ResetStyles/>
-          <Sidebar/>
+
+          <OutsideListener>
+            <Sidebar/>
+          </OutsideListener>
+      
           <Switch>
         
             <Route exact path="/">
@@ -69,7 +75,11 @@ function App() {
             <Route path="/appointment">
               <AppointmentsPage/>
             </Route>
-            
+
+            <Route>
+              <PageNotFound/>
+            </Route>
+
           </Switch>
         </ThemeProvider>
       </Router>

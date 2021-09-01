@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-function PageWrapper({children}) {
+const PageWrapper = ({children}) => {
     return (
     <Wrapper>
-      <Aside></Aside>
+      <Aside/>
       <FormContainer>
        {children}
       </FormContainer>
-      <Aside></Aside>
+      <Aside/>
     </Wrapper>
 
   );

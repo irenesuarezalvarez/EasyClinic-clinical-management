@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faCalendar, faEdit, faCaretDown, faCaretUp, faNotesMedical} from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faCaretUp, faNotesMedical} from '@fortawesome/free-solid-svg-icons';
 
 export const SidebarLogout = [
     {

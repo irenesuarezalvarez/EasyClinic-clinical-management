@@ -2,16 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import '../../Calendar.css';
 
+import { AuthContext } from "../../utils/AuthContext";
 import axiosApi from "../../utils/AxiosApi.js";
+import Box from "../../components/layouts/Box";
 import StyledLink from "../../components/layouts/StyledLink";
 
-import { AuthContext } from "../../utils/AuthContext";
-import Box from "../../components/layouts/Box";
-import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
 import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
+import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
 
-
-function Calendar (){
+const Calendar =() => {
   var scheduleObj = new Schedule();
   const [professionals, setProfessionals] = useState([]);
   const { role } = useContext(AuthContext)
@@ -20,14 +19,17 @@ function Calendar (){
     getProfessionals()  
   }, [])
 
-
 //Get professionals for dropdown
   const getProfessionals = async () =>{
-    const result = await axiosApi.get("/professionals"); 
-    const professionals = result.data;
-    setProfessionals([...professionals]); 
+    try{
+      const result = await axiosApi.get("/professionals"); 
+      const professionals = result.data;
+      setProfessionals([...professionals]); 
+    }
+    catch(error){
+      console.log(error);
+    }
 }
-
 
  //resourceID connected to field
   const resourceDataSource = [

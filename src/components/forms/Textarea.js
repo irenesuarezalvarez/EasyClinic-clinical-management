@@ -14,6 +14,9 @@ const TextAreaContainer = styled.textarea`
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
+    display: inline-block;
+    padding: 10px;
+    word-break: break-all;
   color: #495057;
   background-color: #fff;
   border: 1px solid #ced4da;

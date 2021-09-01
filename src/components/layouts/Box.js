@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Box = ({ direction, position, align, flex, wrap, margin, padding, width, height, radius, bgcolor, shadow, children, ...props }) => {
   return (
     <StyledBox 
@@ -27,7 +26,7 @@ const Box = ({ direction, position, align, flex, wrap, margin, padding, width, h
 
 export const StyledBox = styled.section`
   display: flex;
-  color: ${props => props.theme.color.test};;
+  color: ${props => props.theme.color.test};
   background-color: ${({bgcolor})=> bgcolor};
   flex-direction:${({direction})=> direction === "row" ? "row" : "column"};
   justify-content:  ${({position})=> position || "center"};
@@ -41,6 +40,5 @@ export const StyledBox = styled.section`
   border-radius: ${({radius})=> radius || "5px"};
   box-shadow: ${({shadow})=> shadow};
 `;
-
 
 export default Box;

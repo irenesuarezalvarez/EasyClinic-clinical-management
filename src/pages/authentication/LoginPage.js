@@ -1,10 +1,9 @@
 import React from "react";
 
-import PageWrapper from "../../components/layouts/PageWrapper";
 import Login from "../../components/Login";
+import PageWrapper from "../../components/layouts/PageWrapper";
 
-
-function LoginPage() {
+const LoginPage = () => {
   return (
     <PageWrapper>
        <Login/>

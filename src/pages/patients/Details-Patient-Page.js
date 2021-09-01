@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi.js";
@@ -9,20 +9,23 @@ import StyledLink from "../../components/layouts/StyledLink.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
 import Title from "../../components/layouts/Title.js";
 
-
-
 const DetailsPage = () => {
     const { id } = useParams();
     const [patient, setPatient] = useState([]);
-
+ 
     //Get data 
     useEffect(() => {
         getPatient()
-    }, [] )
+    }, [])
     
     const getPatient = async () => {
-        const response = await axiosApi.get(`/patients/edit/${id}`);
-        setPatient(response.data)
+        try{
+            const response = await axiosApi.get(`/patients/edit/${id}`);
+            setPatient(response.data)
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     function renderMyBody(){
@@ -48,7 +51,6 @@ const DetailsPage = () => {
                 {Object.keys(patient).length > 0  && 
                     <section>
                         <StyledSection>
-                            
                             <Box>
                                 <Title>Personal Information</Title>
                                 <Box direction="row">
@@ -88,7 +90,6 @@ const DetailsPage = () => {
                                         </Box>
                                     </Box>
                                 </Box>
-
                             </Box>
 
                             <Box>

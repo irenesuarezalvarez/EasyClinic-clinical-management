@@ -1,17 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router";
-import {AuthContext} from "../../utils/AuthContext"
 
-import Input from "../../components/forms/Input";
-import Select from "../../components/forms/Select";
-import Card from "../../components/layouts/Card";
-import Button from "../../components/layouts/Button";
+import { AuthContext } from "../../utils/AuthContext";
 import Box from "../../components/layouts/Box";
+import Button from "../../components/layouts/Button";
+import Card from "../../components/layouts/Card";
+import Input from "../../components/forms/Input";
 import PageWrapper from "../../components/layouts/PageWrapper";
+import Select from "../../components/forms/Select";
 
-
-function SignupPage() {
-  const { signUp, role } = useContext(AuthContext)
+const SignupPage = () => {
+  const { signUp, role } = useContext(AuthContext);
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
 
@@ -36,7 +35,7 @@ function SignupPage() {
     
     try{
       const data = await signUp(newUser);
-      setRedirect(data.status === 200)
+      setRedirect(data.status === 200);
     }
     catch(error){
       console.log(error);
@@ -64,46 +63,46 @@ function SignupPage() {
             />
             <Input
               label="Email "
-              name= "email"
+              name="email"
               required
               value={input.email} 
-              placeholder= "Enter your email"
-              onChange= {handleChange}
-              type = "text"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              type="text"
             />
        
             <Select
               label="Role position "
-              name= "role"
+              name="role"
               required
               value={input.role} 
               placeholder= "Enter your role position"
-              onChange= {handleChange}
-              type = "text"
+              onChange={handleChange}
+              type="text"
             >
-                <option value="">--select professional--</option>
-                <option value="admin">Administrative</option>
-                <option value="prof">Professional</option>
+              <option value="">--select professional--</option>
+              <option value="admin">Administrative</option>
+              <option value="prof">Professional</option>
             </Select>
             
             <Input
               label="Color "
-              name= "color"
+              name="color"
               required
               value={input.color} 
-              placeholder= "Enter your color"
-              onChange= {handleChange}
-              type = "text"
+              placeholder="Enter your color"
+              onChange={handleChange}
+              type="text"
             />
 
             <Input
               label="Password "
-              name= "password"
+              name="password"
               required
               value={input.password} 
-              placeholder= "Enter your password"
-              onChange= {handleChange}
-              type = "password"
+              placeholder="Enter your password"
+              onChange={handleChange}
+              type="password"
             />
             <Box margin="1rem" padding="1rem">
               <Button type="submit">Create account</Button>
