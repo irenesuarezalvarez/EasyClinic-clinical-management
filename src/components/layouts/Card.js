@@ -3,19 +3,21 @@ import styled from "styled-components";
 
 import Title from "./Title";
 
-
 const Card = ({ width, height, bgcolor, margin, title, children }) => {
   return (
     <CardContainer width={width} height={height} bgcolor={bgcolor} margin={margin}>
-      <Title>{title}</Title>
+      <Title>
+        {title}
+      </Title>
+
       {children}
     </CardContainer>
   );
 };
 
 const CardContainer = styled.fieldset`
-  width: ${({width})=> width}
-  height: ${({height})=> height} 
+  width: ${({width})=> width};
+  height: ${({height})=> height} ;
   display: flex;
   justify-content: center;
   align-items: center;

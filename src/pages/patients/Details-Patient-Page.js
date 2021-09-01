@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi.js";
@@ -8,8 +8,6 @@ import PageWrapper from "../../components/layouts/PageWrapper.js";
 import StyledLink from "../../components/layouts/StyledLink.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
 import Title from "../../components/layouts/Title.js";
-
-
 
 const DetailsPage = () => {
     const { id } = useParams();
@@ -48,7 +46,6 @@ const DetailsPage = () => {
                 {Object.keys(patient).length > 0  && 
                     <section>
                         <StyledSection>
-                            
                             <Box>
                                 <Title>Personal Information</Title>
                                 <Box direction="row">
@@ -88,7 +85,6 @@ const DetailsPage = () => {
                                         </Box>
                                     </Box>
                                 </Box>
-
                             </Box>
 
                             <Box>

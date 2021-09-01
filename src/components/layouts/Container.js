@@ -7,16 +7,17 @@ export const Wrapper = styled.div`
 `;
 
 const Container = ({
-  verticalPadding = "1rem",
-  horizontalPadding = "2rem",
-  type = "section", //default
-  children,
-}) => {
+    verticalPadding = "1rem",
+    horizontalPadding = "2rem",
+    type = "section",
+    children,
+  }) => {
+ 
   return (
     <Wrapper
       verticalPadding={verticalPadding}
       horizontalPadding={horizontalPadding}
-      as={type} // what kind element? Default is 'section'
+      as={type}
     >
       {children}
     </Wrapper>

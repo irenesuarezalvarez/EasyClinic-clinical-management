@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import {  Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import axios from "axios";
 
-import axiosApi from "../../utils/AxiosApi.js";
 import { AuthContext } from "../../utils/AuthContext.js";
-import PageWrapper from "../../components/layouts/PageWrapper.js";
-import Input from "../../components/forms/Input.js";
-import Select from "../../components/forms/Select.js";
+import axiosApi from "../../utils/AxiosApi.js";
 import Button from "../../components/layouts/Button.js";
 import Box from "../../components/layouts/Box.js";
 import Card from "../../components/layouts/Card.js";
+import Input from "../../components/forms/Input.js";
+import PageWrapper from "../../components/layouts/PageWrapper.js";
+import Select from "../../components/forms/Select.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
 import StyledLink from "../../components/layouts/StyledLink.js";
-
 
 const EditPatientPage = () => {
     const { id } = useParams();
@@ -104,7 +103,7 @@ const EditPatientPage = () => {
     }
 
     function renderPatient(){
-        const { media, name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
+        const { name, surname, email, phone, address, city, state, postal, contactname, contactsurname, contactemail, contactphone, professional } = patient;
         
         const handleChange = (event) => {
             const { name, value } = event.target;
@@ -113,7 +112,6 @@ const EditPatientPage = () => {
                 ...prevState,
                 [name]: value,
             }));
-
         };
                  
         return(
@@ -231,7 +229,6 @@ const EditPatientPage = () => {
                         </Card>
 
                         <Card title="Professional Assistance">
-                      
                             <Select
                                 name="professional"
                                 label= "Professional"
@@ -247,9 +244,8 @@ const EditPatientPage = () => {
                                             </option>
                                     ))}
                             </Select> 
-                            
-                
                         </Card>
+
                         <Box direction="row" position="space-around" margin="1rem" padding="1rem">
                             { role === "prof" && 
                                 <StyledLink to="/mypatients">Back</StyledLink>

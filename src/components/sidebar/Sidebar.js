@@ -2,15 +2,83 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes, faSignOutAlt, faSignInAlt} from '@fortawesome/free-solid-svg-icons'
-
-import SubMenu from './SidebarSubmenu';
-import StyledImg from '../layouts/StyledImg';
 import { AuthContext } from "../../utils/AuthContext";
 import { SidebarData } from './SidebarData';
 import { SidebarProtectedData } from './SidebarProtectedData';
 import { SidebarAdminData } from './SidebarAdminData';
+import SubMenu from './SidebarSubmenu';
+import StyledImg from '../layouts/StyledImg';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faTimes, faSignOutAlt, faSignInAlt} from '@fortawesome/free-solid-svg-icons'
+
+const Sidebar = () => {
+    const contextAuth = useContext(AuthContext)
+    const { role, logOut, sidebar, showSidebar } = contextAuth;
+
+    const handleLogOut = async (event) => {
+        try{
+            await logOut()
+        }
+        catch(err){
+            console.log(err)
+        }
+    } 
+
+    return (
+        <>
+            <Nav>
+                <NavIcon to='#'>
+                    <FontAwesomeIcon onClick={showSidebar} icon={faBars}/>
+                </NavIcon>
+                <NavIcon to='/'>
+                    <StyledImg width="3.5rem" src="../images/ECLogoBg.jpg" alt="Logo"/>
+                </NavIcon>
+            </Nav>
+
+            <SidebarNav sidebar={sidebar}>
+                <SidebarWrap>
+                    <NavIcon to='#'>
+                        <FontAwesomeIcon onClick={showSidebar} icon={faTimes}/>
+                    </NavIcon>
+
+                    {SidebarData.map((item, index) => {
+                        return <SubMenu item={item} key={index} />;
+                    })}
+                    {role === "admin" && SidebarAdminData.map((item, index) => {
+                        return <SubMenu item={item} key={index} />;
+                    })}
+                    {role === "prof" && SidebarProtectedData.map((item, index) => {
+                        return <SubMenu item={item} key={index} />;
+                    })}
+
+                    { !role &&
+                        <>
+                            <SidebarLabel to='/signup'>
+                                <FontAwesomeIcon icon={faSignInAlt}/>
+                                <StyledSpan>Sign up</StyledSpan>
+                            </SidebarLabel>
+                            <SidebarLabel to='/login'>
+                                <FontAwesomeIcon  icon={faSignInAlt}/>
+                                <StyledSpan>Log in</StyledSpan>
+                            </SidebarLabel>
+                        </>
+                    }
+
+                    { role &&
+                        <SidebarLabel to='#'>
+                            <StyledBtn onClick={handleLogOut}>
+                                <FontAwesomeIcon icon={faSignOutAlt}/>
+                                <StyledSpan>Log out</StyledSpan>
+                            </StyledBtn>
+                        </SidebarLabel>
+                    }
+                    
+                </SidebarWrap>
+            </SidebarNav>
+        </>
+    );
+};
 
 const Nav = styled.div`
   background: ${props => props.theme.color.navbar};
@@ -81,79 +149,4 @@ const StyledBtn = styled.button`
     text-decoration: none;
     font-size: 19px;
 `
-
-const Sidebar = () => {
-    /* const [sidebar, setSidebar] = useState(false); */
-    const [redirect, setRedirect] = useState(false);
-    const contextAuth = useContext(AuthContext)
-    const { role, logOut, sidebar, showSidebar } = contextAuth;
-
-   /*  const showSidebar = () => setSidebar(!sidebar); */
-
-    const handleLogOut = async (event) => {
-        try{
-            const data = await logOut()
-            const result = data
-            console.log('navbar log out status', result)
-            setRedirect(true)
-        }
-        catch(err){
-            console.log(err)
-        }
-    } 
-
-    return (
-        <>
-            <Nav>
-                <NavIcon to='#'>
-                    <FontAwesomeIcon onClick={showSidebar} icon={faBars}/>
-                </NavIcon>
-                <NavIcon to='/'>
-                    <StyledImg width="3.5rem" src="../images/ECLogoBg.jpg" alt="Logo"/>
-                </NavIcon>
-            </Nav>
-            <SidebarNav sidebar={sidebar}>
-                <SidebarWrap>
-                    <NavIcon to='#'>
-                        <FontAwesomeIcon onClick={showSidebar} icon={faTimes}/>
-                    </NavIcon>
-                    {SidebarData.map((item, index) => {
-                        return <SubMenu item={item} key={index} />;
-                    })}
-                    {role === "admin" && SidebarAdminData.map((item, index) => {
-                        return <SubMenu item={item} key={index} />;
-                    })}
-                    {role === "prof" && SidebarProtectedData.map((item, index) => {
-                        return <SubMenu item={item} key={index} />;
-                    })}
-
-                    { !role &&
-                        <>
-                            <SidebarLabel to='/signup'>
-                                <FontAwesomeIcon icon={faSignInAlt}/>
-                                <StyledSpan>Sign up</StyledSpan>
-                            </SidebarLabel>
-                            <SidebarLabel to='/login'>
-                                <FontAwesomeIcon  icon={faSignInAlt}/>
-                                <StyledSpan>Log in</StyledSpan>
-                            </SidebarLabel>
-                        </>
-                    }
-
-
-                    { role &&
-                        <SidebarLabel to='#'>
-                            <StyledBtn onClick={handleLogOut}>
-                                <FontAwesomeIcon icon={faSignOutAlt}/>
-                                <StyledSpan>Log out</StyledSpan>
-                            </StyledBtn>
-                        </SidebarLabel>
-                    }
-                    
-                </SidebarWrap>
-            </SidebarNav>
-        </>
-    );
-};
-
 export default Sidebar;

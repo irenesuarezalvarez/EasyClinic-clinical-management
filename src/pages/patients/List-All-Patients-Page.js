@@ -13,8 +13,6 @@ import StyledLink from '../../components/layouts/StyledLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 
-
-
 const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
@@ -27,20 +25,13 @@ const ListAllPatientsPage = () => {
         getPatients();
     }, [])
 
-    //Refresh the page after deleting a patient
     useEffect(() => {
         getPatients();
     }, [boolean])
 
-    
-   /*  useEffect(()=> {
-        getPatients();
-    }, [patients]);
-   */
     const getPatients = async () => {
         try{
-            const response = await axiosApi.get(URL)
-            console.log('GEEET', response.data)
+            const response = await axiosApi.get(URL);
             const data = await response.data
             setPatients(data)
         }
@@ -131,7 +122,6 @@ const StyledSpan = styled.span`
   padding-left: 15px;
 `;
 
-//Table Styles
 const StyledTable = styled.table`
     border-collapse: collapse;
     border-radius: 0.5em;

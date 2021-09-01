@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faEdit, faFileMedicalAlt, faCalendar, faInfo, faCaretDown, faCaretUp, faNotesMedical} from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faEdit, faFileMedicalAlt, faCalendar, faInfo, faCaretDown, faCaretUp, faNotesMedical} from '@fortawesome/free-solid-svg-icons';
 
 export const SidebarProtectedData = [
   {

@@ -1,8 +1,8 @@
-import { Link, Redirect } from "react-router-dom"; //, Redirect, useHistory deleted
-import React, { useContext, useState } from "react"; //useState deleted
+import { Link, Redirect } from "react-router-dom"; 
+import React, { useContext, useState } from "react"; 
 import styled from "styled-components";
 
-import {AuthContext} from "../../utils/AuthContext";
+import { AuthContext } from "../../utils/AuthContext";
 import Box from "./Box";
 import Button from "./Button";
 
@@ -15,7 +15,6 @@ function Navbar() {
   const [redirect, setRedirect] = useState(false); 
 
   const handleLogOut = async event => {
-   
     try{
       const data = await logOut()
       const result = data
@@ -29,7 +28,6 @@ function Navbar() {
   if(redirect){
     return <Redirect to="/"/>
   }
-
 
   return (
     
@@ -45,7 +43,6 @@ function Navbar() {
           <li><StyledLink to="/calendar">Calendar</StyledLink></li>
           <li><StyledLink to="/appointment">Appointment</StyledLink></li>
           
-  
           { role === "prof" && <li><StyledLink to="/mypatients">My Patients</StyledLink></li>}
           { role === "admin" && <li><StyledLink to="/patients">Patients</StyledLink></li>}
           { isAuth && <li><Button onClick={handleLogOut}>Log out</Button></li>} 
@@ -55,6 +52,7 @@ function Navbar() {
     
   );
 }
+
 const StyledLogo = styled.img`
   height: 50px;
   padding: 5px;
@@ -68,7 +66,6 @@ const StyledUl = styled.ul`
   flex-direction: row;
   align-items: center;
 `
-
 const StyledNavbar = styled.nav`
     display: flex;
     flex-direction: row;

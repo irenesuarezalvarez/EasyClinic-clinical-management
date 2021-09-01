@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { AuthContext } from "../utils/AuthContext";
 
-function useOutsideListener(ref) {
+const useOutsideListener = (ref) => {
     const contextAuth = useContext(AuthContext)
     const { setSidebar } = contextAuth;
 
@@ -21,7 +21,7 @@ function useOutsideListener(ref) {
 }
 
 //Component
-function OutsideListener({children}) {
+const OutsideListener = ({children}) => {
   const wrapperRef = useRef(null);
   useOutsideListener(wrapperRef);
 

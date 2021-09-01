@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Box = ({ direction, position, align, flex, wrap, margin, padding, width, height, radius, bgcolor, shadow, children, ...props }) => {
   return (
     <StyledBox 
@@ -41,6 +40,5 @@ export const StyledBox = styled.section`
   border-radius: ${({radius})=> radius || "5px"};
   box-shadow: ${({shadow})=> shadow};
 `;
-
 
 export default Box;

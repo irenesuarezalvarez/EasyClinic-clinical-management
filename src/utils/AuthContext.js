@@ -10,6 +10,7 @@ const AuthProvider = ({children}) =>{
  
   //Set Sidebar
   const showSidebar = () => setSidebar(!sidebar);
+
   //Log in function
   async function logIn(credentials){
     try {
@@ -17,12 +18,9 @@ const AuthProvider = ({children}) =>{
       const data = await result;
       setRole(data.data.role);
       setIsAuth(true);
-     
-      if(data.status === 200){ //TO BE CHANGED
-        setIsAuth(true);
-      }
-
+      setIsAuth(data.status === 200);
       return data
+
     } catch (err) {
       console.error(err)
     } 
@@ -43,7 +41,7 @@ const AuthProvider = ({children}) =>{
         setIsAuth(true); 
         setRole(data.data.role);
       }else{
-        alert('Please provide the right credentials')
+        alert('Please provide the right credentials');
       }
      
     } catch (err) {
@@ -72,6 +70,5 @@ const AuthProvider = ({children}) =>{
     </AuthContext.Provider>
   )
 } 
-
 
 export default AuthProvider;

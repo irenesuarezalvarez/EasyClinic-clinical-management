@@ -3,15 +3,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from '../../utils/AxiosApi';
-import Container from '../../components/layouts/Container';
-import Card from '../../components/layouts/Card';
-import StyledLink from '../../components/layouts/StyledLink';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
+import Card from '../../components/layouts/Card';
+import Container from '../../components/layouts/Container';
+import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
-
-
 
 const ListMyPatientsPage = () => {
     const [patients, setPatients] = useState([])
@@ -99,7 +97,6 @@ const StyledSpan = styled.span`
   padding-left: 15px;
 `;
 
-//Table Styles
 const StyledTable = styled.table`
     border-collapse: collapse;
     border-radius: 0.5em;
