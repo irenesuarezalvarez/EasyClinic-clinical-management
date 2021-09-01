@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -15,6 +15,9 @@ import StyledLink from "../../components/layouts/StyledLink";
 import TextArea from "../../components/forms/Textarea";
 
 import Editor from "../../components/layouts/Editor"
+import {CKEditor} from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import "./SessionStyles.css"
 
 
 const URL = "/api/history"
@@ -26,8 +29,33 @@ const HistoryPage = () => {
     const [history, setHistory] = useState([]);
     const [boolean, setBoolean] = useState(false);
     const [value, setValue] = useState("")
+  
+    const callback = useCallback((value) => {
+        setValue(value);
+    }, []);
 
-   
+
+   /////
+/*    function Editor(){ 
+        
+        const handleOnChange = (e, editor) =>{
+            const data= editor.getData()
+            console.log(data);
+        }
+        return(
+            <div>
+                <h1>Session</h1>
+                <CKEditor
+                    editor={ClassicEditor}
+                    onChange={handleOnChange}
+                />
+                <div>
+                    Value: {value}
+                </div>
+            </div>
+        )
+    } */
+   /////
     const toogleBoolean = () => setBoolean(!boolean);
     
     useEffect(()=>{
@@ -57,7 +85,7 @@ const HistoryPage = () => {
         }));
     };
     /////////////
-    const handleEditorChange = (e, editor) =>{
+/*     const handleEditorChange = (e, editor) =>{
         const data = editor.getData()
         setValue(data)
     }
@@ -67,19 +95,25 @@ const HistoryPage = () => {
             ...prevState,
             content: content,
         }));
-    }
+    } */
     /////////////
-    
+   /*  if(value.length > 0 ){
+        console.log('VALUUE', value[0].props.children)
+        JSON.stringify(value)
+    } */
+   
     const createSession = async event => {
         event.preventDefault()
+     
         const newSession = {
             date: input.date,
             notes: input.notes,
-            content: input.content,
+            content: JSON.stringify(value),
             patient: id
         }
-
+    
         try {
+            console.log('aqui-->', JSON.stringify(value))
             await axiosApi.post(`${URL}/create`, newSession)
             toogleBoolean()
         } catch (err) {
@@ -102,17 +136,21 @@ const HistoryPage = () => {
     //Render previous sessions
     const renderSessions = () => {
           return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
-       
+           
             return (
                 <Card bgcolor="rgba(232, 236, 237)" width="100%" key={_id}>
 
                     <Box direction="row">
                         <h3>Date: {date}</h3>
-                        <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">{notes}</Box>
+                        <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">
+                            {notes}
+                        </Box>
                     </Box>
                    
                     <Box radius="0">
-                        <Box bgcolor="white" radius="0" shadow="0 0 20px rgba(0 0 0 / 15%)" height="15rem" width="25rem" margin="1rem">{content}</Box>
+                        <Box bgcolor="white" radius="0" shadow="0 0 20px rgba(0 0 0 / 15%)" height="15rem" width="25rem" margin="1rem">
+                            {content}
+                        </Box>
                     </Box>
       
                     <Box direction="row" width="100%" position="flex-end">
@@ -134,7 +172,7 @@ const HistoryPage = () => {
     return (
         <PageWrapper>
             <Card title="Clinical History">
-               {/*  <Editor/> */}
+                
                 <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
                         <Box direction="row" padding="1rem">
                             <h4>Date: </h4>
@@ -158,14 +196,18 @@ const HistoryPage = () => {
                                 onChange= {handleChange}
                                 type = "text"
                             />
-                          {/*    <Texteditor />  */}
-                            <TextArea
+                         
+                            <div >
+                                <Editor parentCallback={callback} />
+                                <h2>Value: {value}</h2>
+                            </div>
+                         {/*    <TextArea
                                 name="content"
                                 required
                                 value={input.content} 
                                 onChange={handleChange}
                                 type="text"
-                            />
+                            /> */}
                     </Box>
 
                     <Box direction= "row" margin= "1rem 0 1.5rem" position="space-between">

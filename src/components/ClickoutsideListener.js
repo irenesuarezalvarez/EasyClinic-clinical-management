@@ -4,13 +4,12 @@ import { AuthContext } from "../utils/AuthContext";
 
 function useOutsideListener(ref) {
     const contextAuth = useContext(AuthContext)
-    const { showSidebar } = contextAuth;
+    const { setSidebar } = contextAuth;
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        console.log("You clicked outside of me!");
-        showSidebar()
+        setSidebar(false)
       }
     }
    

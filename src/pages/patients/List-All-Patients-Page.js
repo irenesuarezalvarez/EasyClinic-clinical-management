@@ -38,10 +38,15 @@ const ListAllPatientsPage = () => {
     }, [patients]);
    */
     const getPatients = async () => {
-        const response = await axiosApi.get(URL)
-        console.log('GEEET', response.data)
-        const data = await response.data
-        setPatients(data)
+        try{
+            const response = await axiosApi.get(URL)
+            console.log('GEEET', response.data)
+            const data = await response.data
+            setPatients(data)
+        }
+        catch(err){
+            console.log(err)
+        }  
     }
     
     const deletePatient = async (id, professional) => {

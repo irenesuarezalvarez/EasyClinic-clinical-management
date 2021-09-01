@@ -23,9 +23,14 @@ function Calendar (){
 
 //Get professionals for dropdown
   const getProfessionals = async () =>{
-    const result = await axiosApi.get("/professionals"); 
-    const professionals = result.data;
-    setProfessionals([...professionals]); 
+    try{
+      const result = await axiosApi.get("/professionals"); 
+      const professionals = result.data;
+      setProfessionals([...professionals]); 
+    }
+    catch(error){
+      console.log(error);
+    }
 }
 
 

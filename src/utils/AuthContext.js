@@ -31,7 +31,6 @@ const AuthProvider = ({children}) =>{
       'User is authenticated', credentials
     ) 
   }
-  console.log('rooole', role)
 
   //Sign up function
   async function signUp(credentials){
@@ -68,7 +67,7 @@ const AuthProvider = ({children}) =>{
   }
 
   return(
-    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut, sidebar, showSidebar}}>
+    <AuthContext.Provider value={{isAuth, logIn, signUp, role, setRole, logOut, sidebar, setSidebar, showSidebar}}>
       {children}
     </AuthContext.Provider>
   )

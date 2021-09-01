@@ -17,6 +17,7 @@ import HistoryPage from "./pages/patients/Clinical-History-Page";
 import Calendar from "./pages/general/Calendar";
 import AppointmentsPage from "./pages/professionals/AppointmentsPage";
 import OutsideListener from "./components/ClickoutsideListener";
+import PageNotFound from "./pages/general/PageNotFound";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
       <Router>
         <ThemeProvider theme={ProjectTheme}>
           <ResetStyles/>
-          
+
           <OutsideListener>
             <Sidebar/>
           </OutsideListener>
@@ -63,9 +64,9 @@ function App() {
               <EditPatientPage/>
             </PrivateRoute>
 
-            <PrivateRoute path="/sessions/:id">
+            <Route path="/sessions/:id">
               <HistoryPage/>
-            </PrivateRoute>
+            </Route>
 
             <Route path="/calendar">
               <Calendar/>
@@ -74,7 +75,11 @@ function App() {
             <Route path="/appointment">
               <AppointmentsPage/>
             </Route>
-            
+
+            <Route>
+              <PageNotFound/>
+            </Route>
+
           </Switch>
         </ThemeProvider>
       </Router>

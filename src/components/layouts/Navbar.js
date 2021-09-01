@@ -83,8 +83,6 @@ const StyledNavbar = styled.nav`
     padding: 5px;
     margin: 5px 10px ;
  `
-
-
 export default Navbar;
 
  

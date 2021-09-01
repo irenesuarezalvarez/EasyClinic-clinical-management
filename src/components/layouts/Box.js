@@ -27,7 +27,7 @@ const Box = ({ direction, position, align, flex, wrap, margin, padding, width, h
 
 export const StyledBox = styled.section`
   display: flex;
-  color: ${props => props.theme.color.test};;
+  color: ${props => props.theme.color.test};
   background-color: ${({bgcolor})=> bgcolor};
   flex-direction:${({direction})=> direction === "row" ? "row" : "column"};
   justify-content:  ${({position})=> position || "center"};

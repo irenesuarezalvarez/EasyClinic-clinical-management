@@ -21,8 +21,13 @@ const ListMyPatientsPage = () => {
     }, [])
 
     const getPatients = async () => {
-        const response = await axiosApi.get(`/patients/mypatients`)
-        setPatients(response.data.patients)
+        try{
+            const response = await axiosApi.get(`/patients/mypatients`)
+            setPatients(response.data.patients)
+        }
+        catch(err){
+            console.log(err)
+        }       
     }
 
     const renderHeader = () => {

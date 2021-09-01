@@ -7,7 +7,7 @@ import {AuthContext} from "./AuthContext"
 const PrivateRoute = ({ children, ...props }) => {
   
   const location = useLocation();
-  const { isAuth, role } = useContext(AuthContext) 
+  const { role } = useContext(AuthContext) 
 
   if(role){
     return <Route {...props}>{children}</Route>

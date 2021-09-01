@@ -1,13 +1,20 @@
-import React from 'react';
-import CKEditor from '@ckeditor/ckeditor5-react';
+import React, { useCallback, useState } from 'react';
+import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ReactHtmlParser from "react-html-parser";
 
-function Editor(){
+function Editor({parentCallback}){
+    const [value, setValue] = useState("")
+    const handleOnChange = (e, editor) =>{
+        const data= editor.getData()
+        setValue(data);
+        parentCallback(ReactHtmlParser(value))
+    }
     return(
         <div>
-            <h1>Article</h1>
             <CKEditor
                 editor={ClassicEditor}
+                onChange={handleOnChange}  
             />
         </div>
     )

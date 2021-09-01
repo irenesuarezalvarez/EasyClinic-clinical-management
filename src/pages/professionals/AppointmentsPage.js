@@ -18,9 +18,14 @@ function AppointmentsPage() {
 
     useEffect(() => {
         const fetchUsers = async () => {
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
+            try{
+                const result = await axiosApi.get("/professionals"); 
+                const professionals = result.data;
+                setProfessionals([...professionals]);
+            }
+            catch(err){
+                console.log(err)
+            }     
     };
 
     fetchUsers();
@@ -51,7 +56,7 @@ function AppointmentsPage() {
         try {
             const result = await axiosApi.post('/appointments', newAppointment)
             const data = await result;
-            setRedirect(data.status === 200)  //CHANGED
+            setRedirect(data.status === 200)
             
             console.log('New appointment was created', newAppointment)
         } catch (err) {

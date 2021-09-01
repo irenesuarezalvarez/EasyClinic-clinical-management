@@ -30,20 +30,29 @@ const EditPatientPage = () => {
         getProfessionals()  
     }, [])
     
-    
-   
     //Get Patient
     const getPatient = async () => {
-        const response = await axiosApi.get(`/patients/edit/${id}`);
-        setPatient(response.data)
-        setImage(response.data.media)
+        try{
+            const response = await axiosApi.get(`/patients/edit/${id}`);
+            setPatient(response.data)
+            setImage(response.data.media)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     
     //Get professionals for dropdown
     const getProfessionals = async () =>{
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
+        try{
+            const result = await axiosApi.get("/professionals"); 
+            const professionals = result.data;
+            setProfessionals([...professionals]); 
+        }
+        catch(err){
+            console.log(err)
+        }
+       
     }
 
     //Send patient edited
@@ -57,6 +66,7 @@ const EditPatientPage = () => {
             console.error(err)
         } 
     } 
+
     //Picture
     const addImageToInput = (mediaUrl) =>{
         console.log('im in', mediaUrl)
@@ -65,6 +75,7 @@ const EditPatientPage = () => {
             media: mediaUrl,
         }));
     }
+
     const uploadImage = async (event) => {
         const { files } = event.target;
         const image = files[0];
@@ -104,8 +115,7 @@ const EditPatientPage = () => {
             }));
 
         };
-     
-                
+                 
         return(
             <div> 
                 {Object.keys(patient).length > 0  && 

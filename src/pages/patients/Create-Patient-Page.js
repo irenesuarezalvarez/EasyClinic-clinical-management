@@ -20,9 +20,14 @@ const CreatePatientPage = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-        const result = await axiosApi.get("/professionals"); 
-        const professionals = result.data;
-        setProfessionals([...professionals]); 
+            try{
+                const result = await axiosApi.get("/professionals"); 
+                const professionals = result.data;
+                setProfessionals([...professionals]); 
+            }
+            catch(err){
+                console.log(err)
+            }
     };
 
     fetchUsers();
@@ -56,7 +61,7 @@ const CreatePatientPage = () => {
         setImage(mediaUrl);
     };
     
-      
+      //NO TRY CATCH BLOCK AQUI (ARRIBA)
     const createPatient = async event => {
         event.preventDefault()
          
