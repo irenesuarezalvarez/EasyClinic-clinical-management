@@ -115,7 +115,6 @@ const HistoryPage = () => {
     return (
         <PageWrapper>
             <Card title="Clinical History">
-                
                 <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
                         <Box direction="row" padding="1rem">
                             <h4>Date: </h4>
@@ -148,7 +147,7 @@ const HistoryPage = () => {
                             /> 
                     </Box>
 
-                    <Box direction= "row" margin= "1rem 0 1.5rem" position="space-between">
+                    <Box width="100%" direction= "row" margin= "1rem 0 1.5rem" position="space-around">
                         <StyledLink to="/mypatients">Back</StyledLink>
                         <Button type="submit" onClick={(e) => createSession(e)}>Save</Button>
                     </Box>

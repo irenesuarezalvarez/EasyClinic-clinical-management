@@ -12,15 +12,20 @@ import Title from "../../components/layouts/Title.js";
 const DetailsPage = () => {
     const { id } = useParams();
     const [patient, setPatient] = useState([]);
-
+ 
     //Get data 
     useEffect(() => {
         getPatient()
-    }, [] )
+    }, [])
     
     const getPatient = async () => {
-        const response = await axiosApi.get(`/patients/edit/${id}`);
-        setPatient(response.data)
+        try{
+            const response = await axiosApi.get(`/patients/edit/${id}`);
+            setPatient(response.data)
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     function renderMyBody(){
