@@ -3,9 +3,10 @@ import axios from "axios";
 const axiosApi = axios.create({
   baseURL: process.env.REACT_APP_APIURL,
   withCredentials: true,
-  "Access-Control-Allow-Origin": "*",
   headers: {
-    'Content-Type': 'application/json'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Credentials': 'true'
   },
 });
 
