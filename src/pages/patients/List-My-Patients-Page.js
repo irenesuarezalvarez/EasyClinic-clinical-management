@@ -49,7 +49,7 @@ const ListMyPatientsPage = () => {
                             <FontAwesomeIcon icon={faInfoCircle}/>
                         </Button>
 
-                        <Button as={Link} radius="0" bgcolor=" rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/sessions/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/sessions/${_id}`}>
                             <FontAwesomeIcon icon={faFolder}/>
                         </Button>
 
