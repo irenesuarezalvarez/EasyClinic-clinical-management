@@ -5,8 +5,7 @@ const axiosApi = axios.create({
   withCredentials: true,
 
   headers: {
-    "Access-Control-Allow-Origin": "https://talkdata.herokuapp.com/",
-    "Access-Control-Allow-Methods": "GET, DELETE, HEAD, OPTIONS",
+    'Content-Type': 'application/json'
   },
 });
 
