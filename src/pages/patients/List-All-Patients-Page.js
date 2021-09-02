@@ -71,7 +71,7 @@ const ListAllPatientsPage = () => {
                             <FontAwesomeIcon icon={faCalendar}/>
                         </Button>
 
-                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/edit/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="editBtn" hovercolor="rgba(45, 167, 175)" to={`/edit/${_id}`}>
                             <FontAwesomeIcon icon={faEdit}/>
                         </Button>
 

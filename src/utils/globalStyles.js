@@ -91,8 +91,8 @@ const ProjectTheme = {
     button: "rgba(102, 205, 170)",
     navbar:"rgba(68, 183, 219) ", /* "rgba(218, 247, 166)" */
     transparentWhite: "rgba(255, 255, 255, 0.5)",
-    editBtn: "rgba(82, 189, 201)"
-    
+    editBtn: "rgba(82, 189, 201)",
+    inputshadow: "0 0 0 0.2rem rgba(0 123 255 / 25%)"
     
   },
 };
