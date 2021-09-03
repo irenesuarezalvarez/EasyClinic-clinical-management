@@ -3,7 +3,7 @@
 /* IN CONSTRUCTION */
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import './Calendar.css';
+import '../../Calendar.css';
 
 import { AuthContext } from "../../utils/AuthContext";
 import axiosApi from "../../utils/AxiosApi.js";
@@ -12,7 +12,6 @@ import StyledLink from "../../components/layouts/StyledLink";
 
 import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
-import { faSortAlphaUp } from "@fortawesome/free-solid-svg-icons";
 
 const Calendar =() => {
   var scheduleObj = new Schedule();
