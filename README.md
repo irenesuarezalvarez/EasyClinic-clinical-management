@@ -14,6 +14,13 @@
 <br/>
 <p>Continuous complaints and issues with the current patient management system of the public health system in the Canaries have led to a desire for change. And so, the aim of this project was to create a more user friendly and efficient application that better facilitates the daily work of professionals and clinic workers.</p>
 
+<h2>Getting Started</h2>
+To get this app running locally:
+- Clone this repo
+- Run `$ npm install` to install all the dependencies
+- Start your API and change the information in the .env file
+- Run `$ npm start` to start the application
+
 <h2>Dependencies</h2>
 - ReactJS - For handling and routing HTTP requests
 - Axios - For modeling and mapping mongoDB data to javascript
