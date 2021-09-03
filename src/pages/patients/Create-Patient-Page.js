@@ -86,7 +86,6 @@ const CreatePatientPage = () => {
             const result = await axiosApi.post('/patients/create', newPatient)
             const data = await result;
             setRedirect(data.status === 200) 
-            
             console.log('New patient was created', newPatient)
         } catch (err) {
             console.error(err)
