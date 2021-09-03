@@ -68,7 +68,6 @@ const EditPatientPage = () => {
 
     //Picture
     const addImageToInput = (mediaUrl) =>{
-        console.log('im in', mediaUrl)
         setInput((prevState) => ({
             ...prevState,
             media: mediaUrl,

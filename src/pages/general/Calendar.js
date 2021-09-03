@@ -9,14 +9,17 @@ import StyledLink from "../../components/layouts/StyledLink";
 
 import { CheckBoxComponent } from '@syncfusion/ej2-react-buttons';
 import { Schedule, Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, ResourceDirective, ResourcesDirective } from '@syncfusion/ej2-react-schedule';
+import { faSortAlphaUp } from "@fortawesome/free-solid-svg-icons";
 
 const Calendar =() => {
   var scheduleObj = new Schedule();
   const [professionals, setProfessionals] = useState([]);
+  const [app, setApp] = useState([]);
   const { role } = useContext(AuthContext)
 
   useEffect(() => {
     getProfessionals()  
+    getApppointments()
   }, [])
 
 //Get professionals for dropdown
@@ -29,6 +32,18 @@ const Calendar =() => {
     catch(error){
       console.log(error);
     }
+}
+
+//Get appointments
+const getApppointments = async () =>{
+  try{
+    const result = await axiosApi.get("/professionals/app"); 
+    const appoint = result.data;
+    setApp([...appoint]); 
+  }
+  catch(error){
+    console.log(error);
+  }
 }
 
  //resourceID connected to field
@@ -82,6 +97,8 @@ const Calendar =() => {
     EndTime: new Date(2021, 8, 16, 14, 30),
     ResourceId: 3
   }]
+
+  console.log('Prof start', prof3.StartTime)
   /* const eventTemplate = ({Subject}) =>{
     return(<div className="template-wrap">{Subject}</div>);
   }
@@ -95,12 +112,17 @@ const Calendar =() => {
     }
     return collections;
   }  */
-  let collections = [];
+  
+  
   function generateCalendarData() {
-   
-    let dataCollections = professionals.map((prof)=> collections.push(prof.appointment))
+    let collections = [];
+    let dataCollections = professionals.map((prof)=> {
+     /*  console.log('prof-->', prof) */
+      collections.push(prof.appointment)
+    })
 
     for (let data of dataCollections) {
+        /* console.log('we are in data collections', dataCollections)  */
         collections = collections.concat(data);
     }
     return collections;
@@ -113,7 +135,7 @@ const Calendar =() => {
     const resourceData = professionals.filter((coll) => (professionals.indexOf(coll)+1) === value );
    
    if (args.checked) {
-      console.log('yeah you entered! Resourcedata', resourceData[0])
+      console.log('Resourcedata', resourceData[0])
        scheduleObj.addResource(resourceData[0], 'Resources', value - 1); 
     }
     else {
@@ -121,6 +143,14 @@ const Calendar =() => {
     } 
    
     
+}
+console.log('-->', app)
+const renderApp = () => {
+  return app.length > 0 && app.map(({subject, StartTime}) => {
+      return(
+        <div>subject: {subject} y startTime: {StartTime}</div>
+      )
+  })
 }
 
 const renderProfessionalChekbox = () =>{
@@ -139,10 +169,16 @@ const renderProfessionalChekbox = () =>{
 /* eventSettings={ { dataSource: data } } */
   return(
   <div>
+                    <div>
+                      Render app:
+                      {renderApp()}
+                    </div>
       <div>
         <tr style={{ height: '50px' }}>
             <td style={{ width: '100%' }}>
               {renderProfessionalChekbox()}
+
+              
                 {/*  <CheckBoxComponent value='0' id='personal' checked={true} label='My Calendar' disabled={true} change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='2' checked={false} label='Stella' change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='3' id='birthdays' checked={false} label='Juana' change={onChange.bind()}></CheckBoxComponent>
