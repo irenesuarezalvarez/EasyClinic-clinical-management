@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+<h1>Easy Clinic - Clinical Management</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Introduction</h2>
+<p>What is Easy Clinic?The idea of this project was born from the hope of building an easier way to manage online clinical history in order to make professional’s work easier and more efficient. </p>
 
-## Available Scripts
+<p> Accessible from anywhere at anytime, without previous installation or hard configuration, Easy Clinic allows users to manage clinic appointments and patient information in a secure way.</p>
 
-In the project directory, you can run:
+<h2>Description</h2>
+<p>How does it work?Utilizing Node JS, Express technology, combined with MongoDb , you just need to create your account, specify your role as administrative or as a professional, then log in. </p>
+<br/>
+<p>The administration position will bring you access to all the center’s patients, giving you the option to add new patients to the database, manage their information, assign a professional to them and create new appointments. Also, you will easily have an overview of each professional’s agenda. </p>
+<br/>
+<p>If you’re accessing our application as a professional, Easy Clinic will allow you an overview of all your patients. You’ll have access to their personal information, contact details and the authority to modify them if necessary. Additionally, Easy Clinic provides the option to write your session notes during the patient appointment, as well as access their clinical history and your agenda. </p>
+<br/>
+<p>Continuous complaints and issues with the current patient management system of the public health system in the Canaries have led to a desire for change. And so, the aim of this project was to create a more user friendly and efficient application that better facilitates the daily work of professionals and clinic workers.</p>
 
-### `npm start`
+<h2>Getting Started</h2>
+To get this app running locally:
+- Clone this repo
+- Run `$ npm install` to install all the dependencies
+- Start your API and change the information in the .env file
+- Run `$ npm start` to start the application
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h2>Dependencies</h2>
+- ReactJS - For handling and routing HTTP requests
+- Axios - For modeling and mapping mongoDB data to javascript
+- Cloudinary - for handling images /video uploads
+- Styled components - For handling css styles
+- Fontawesome - For adding icons to the application
+- Syncfusion - To implement a scheduler calendar
+  
+<h2>Application Structure</h2>
+- `index.js` Is the entry point for all node apps. This file get element from the HTML file and renders our application. 
+- `components/` This folder contains all the components available both for layout or single components. 
+- `pages/` - This folder contains the pages component and its divided into authentication / general /patients and professionals pages.
+- `utils/` - This folder contains general utilities envolving the hole application.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h2>Suggestions for the future</h2>
+- Fix Scheduler calendar to make it render each professional's agenda show the appointments.
+- Fix appointment creator to make it possible to create appointments.  
+- Implement a rich editor to the Clinical History Page so the professional can improve session information adding highlights, cuotes, etc. 
+- Add a derivation option inside the patient's information, sending a notification to the derived professional. 
+- Implement a Third party profile, to be able to share a private clinical history with third parties involved in patients treatment. (schools, social services, speech therapists, etc. )
+- Create a Patient profile to allow patients to upload documentation, have access to their appointments and have private chats with professionals.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h2>Contact information</h2>
+```
+{
+    author: 'Irene Suárez',
+    github: 'https://github.com/irenesuarezalvarez'
+}
+````

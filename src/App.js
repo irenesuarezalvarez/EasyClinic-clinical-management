@@ -6,7 +6,7 @@ import AuthProvider from "./utils/AuthContext";
 import PrivateRoute from "./utils/PrivateRoute";
 import OutsideListener from "./components/ClickoutsideListener";
 import Sidebar from "./components/sidebar/Sidebar";
-import HomePage from "./pages/general/HomePage";
+import HomePage from "./pages/generalPages/HomePage";
 import SignupPage from "./pages/authentication/SignupPage";
 import LoginPage from "./pages/authentication/LoginPage";
 import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
@@ -15,9 +15,9 @@ import CreatePatientPage from "./pages/patients/Create-Patient-Page";
 import DetailsPage from "./pages/patients/Details-Patient-Page";
 import EditPatientPage from "./pages/patients/Edit-Patient-Page"
 import HistoryPage from "./pages/patients/Clinical-History-Page";
-import Calendar from "./pages/general/Calendar";
+import Calendar from "./pages/generalPages/Calendar";
 import AppointmentsPage from "./pages/professionals/AppointmentsPage";
-import PageNotFound from "./pages/general/PageNotFound";
+import PageNotFound from "./pages/generalPages/PageNotFound";
 
 function App() {
   return (

@@ -68,7 +68,6 @@ const EditPatientPage = () => {
 
     //Picture
     const addImageToInput = (mediaUrl) =>{
-        console.log('im in', mediaUrl)
         setInput((prevState) => ({
             ...prevState,
             media: mediaUrl,
@@ -255,7 +254,7 @@ const EditPatientPage = () => {
                                 <StyledLink to="/patients">Back</StyledLink>
                             }
 
-                            <Button type="submit">Edit</Button>
+                            <Button type="submit">Save</Button>
                         </Box>
                         
                     </form>
