@@ -17,6 +17,7 @@
 <h2>Dependencies</h2>
 - ReactJS - For handling and routing HTTP requests
 - Axios - For modeling and mapping mongoDB data to javascript
+- Cloudinary - for handling images /video uploads
 - Styled components - For handling css styles
 - Fontawesome - For adding icons to the application
 - Syncfusion - To implement a scheduler calendar
