@@ -14,7 +14,7 @@ import PageWrapper from "../../components/layouts/PageWrapper";
 import StyledLink from "../../components/layouts/StyledLink";
 import TextArea from "../../components/forms/Textarea";
 
-const URL = "/api/history"
+const URL = "/history"
  
 const HistoryPage = () => {
     const { id } = useParams();
