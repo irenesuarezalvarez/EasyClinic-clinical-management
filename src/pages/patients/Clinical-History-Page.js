@@ -9,7 +9,7 @@ import axiosApi from "../../utils/AxiosApi";
 import Box from "../../components/layouts/Box";
 import Button from "../../components/layouts/Button";
 import Card from "../../components/layouts/Card";
-import {StyledInput} from "../../components/forms/Input";
+import { StyledInput } from "../../components/forms/Input";
 import PageWrapper from "../../components/layouts/PageWrapper";
 import StyledLink from "../../components/layouts/StyledLink";
 import TextArea from "../../components/forms/Textarea";
@@ -29,9 +29,17 @@ const HistoryPage = () => {
     }, [])
 
     useEffect(()=>{
-        getHistory() 
+        getHistory()
+        setInput({
+            date: "",
+            notes:"",
+            content: "",
+            patient: id
+        })
+        renderHistoryForm()
+        
     }, [boolean])
-
+    console.log('hello you', input)
     const getHistory = async () =>{
         try{
             const response = await axiosApi.get(`${URL}/${id}`);
@@ -80,7 +88,50 @@ const HistoryPage = () => {
         } 
 
     }    
+    //Render history form
+    const renderHistoryForm = () => {
+        console.log('renders form')
+        return (
+            <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
+            <Box direction="row" padding="1rem">
+                <h4>Date: </h4>
+                <input
+                    name="date"
+                    required
+                    value={input.date} 
+                    placeholder="Date"
+                    onChange={handleChange}
+                    type="date"
+                />
+            </Box>
 
+            <Box radius="0">
+                <ImportantStyled
+                        name="notes"
+                        required
+                        value={input.notes} 
+                        placeholder="Notes"
+                        onChange={handleChange}
+                        type="text"
+                    />
+             
+                    <TextArea
+                        name="content"
+                        required
+                        value={input.content} 
+                        onChange={handleChange}
+                        type="text"
+                    /> 
+            </Box>
+
+            <Box width="100%" direction= "row" margin= "1rem 0 1.5rem" position="space-around">
+                <StyledLink to="/mypatients">Back</StyledLink>
+                <Button type="submit" onClick={(e) => createSession(e)}>Save</Button>
+            </Box>
+        </Card>
+
+        )
+    }
     //Render previous sessions
     const renderSessions = () => {
           return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
@@ -90,13 +141,13 @@ const HistoryPage = () => {
 
                     <Box direction="row">
                         <h3>Date: {date}</h3>
-                        <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" height="5rem" width="16rem" margin="0 0 0 1rem">
+                        <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" align="stretch" padding="15px"  width="16rem" margin="0 0 0 1rem">
                             {notes}
                         </Box>
                     </Box>
                    
                     <Box radius="0">
-                        <Box bgcolor="white" radius="0" shadow="0 0 20px rgba(0 0 0 / 15%)" height="15rem" width="25rem" margin="1rem">
+                        <Box bgcolor="white" radius="0" shadow="0 0 20px rgba(0 0 0 / 15%)" align="stretch" textalign="justify" padding="15px" width="25rem" margin="1rem">
                             {content}
                         </Box>
                     </Box>
@@ -115,44 +166,7 @@ const HistoryPage = () => {
     return (
         <PageWrapper>
             <Card title="Clinical History">
-                <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
-                        <Box direction="row" padding="1rem">
-                            <h4>Date: </h4>
-                            <input
-                                name="date"
-                                required
-                                value={input.date} 
-                                placeholder="Date"
-                                onChange={handleChange}
-                                type="date"
-                            />
-                        </Box>
-
-                    <Box radius="0">
-                        <ImportantStyled
-                                name="notes"
-                                required
-                                value={input.notes} 
-                                placeholder="Notes"
-                                onChange={handleChange}
-                                type = "text"
-                            />
-                     
-                            <TextArea
-                                name="content"
-                                required
-                                value={input.content} 
-                                onChange={handleChange}
-                                type="text"
-                            /> 
-                    </Box>
-
-                    <Box width="100%" direction= "row" margin= "1rem 0 1.5rem" position="space-around">
-                        <StyledLink to="/mypatients">Back</StyledLink>
-                        <Button type="submit" onClick={(e) => createSession(e)}>Save</Button>
-                    </Box>
-                </Card>
-
+                {renderHistoryForm()}
                 <article>
                   {renderSessions()} 
                 </article>
@@ -162,7 +176,7 @@ const HistoryPage = () => {
 };
 
 const ImportantStyled = styled(StyledInput)`
-    background-color:  #FFC300;
+    background-color: rgba(255, 195, 0);
 `
 
 export default HistoryPage;

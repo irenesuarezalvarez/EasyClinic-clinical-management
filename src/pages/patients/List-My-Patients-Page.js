@@ -4,12 +4,11 @@ import styled from "styled-components";
 
 import axiosApi from '../../utils/AxiosApi';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
-import Card from '../../components/layouts/Card';
-import Container from '../../components/layouts/Container';
 import StyledLink from '../../components/layouts/StyledLink';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import Box from '../../components/layouts/Box';
 
 const ListMyPatientsPage = () => {
     const [patients, setPatients] = useState([])
@@ -49,7 +48,7 @@ const ListMyPatientsPage = () => {
                             <FontAwesomeIcon icon={faInfoCircle}/>
                         </Button>
 
-                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/sessions/${_id}`}>
+                        <Button as={Link} radius="0" bgcolor="rgba(82, 189, 201)" hovercolor="rgba(45, 167, 175)" to={`/docs/${_id}`}>
                             <FontAwesomeIcon icon={faFolder}/>
                         </Button>
 
@@ -63,25 +62,24 @@ const ListMyPatientsPage = () => {
     }
 
     return (
-        <Container>
-            <Card>
-                <StyledTitle>My Patients</StyledTitle>
+        <Box bgcolor="white" margin="1rem auto" padding="1.5rem" width="90%">
+            <StyledTitle>My Patients</StyledTitle>
 
-                <NewBtnRight>
-                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
-                </NewBtnRight>
-                
-                <StyledTable>
-                    <thead>
-                        <tr>{renderHeader()}</tr>
-                    </thead>
-                    <tbody>
-                        {renderBody()}
-                    </tbody>
-                </StyledTable>
+            <NewBtnRight>
+                <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+            </NewBtnRight>
+            
+            <StyledTable>
+                <thead>
+                    <tr>{renderHeader()}</tr>
+                </thead>
+                <tbody>
+                    {renderBody()}
+                </tbody>
+            </StyledTable>
 
-            </Card>
-        </Container>
+        </Box>
+      
     )
 }
 

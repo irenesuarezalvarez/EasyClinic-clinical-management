@@ -13,7 +13,8 @@ import ListAllPatientsPage from "./pages/patients/List-All-Patients-Page";
 import ListMyPatientsPage from "./pages/patients/List-My-Patients-Page";
 import CreatePatientPage from "./pages/patients/Create-Patient-Page";
 import DetailsPage from "./pages/patients/Details-Patient-Page";
-import EditPatientPage from "./pages/patients/Edit-Patient-Page"
+import EditPatientPage from "./pages/patients/Edit-Patient-Page";
+import DocumentsPage from "./pages/patients/DocumentsPage"
 import HistoryPage from "./pages/patients/Clinical-History-Page";
 import Calendar from "./pages/generalPages/Calendar";
 import AppointmentsPage from "./pages/professionals/AppointmentsPage";
@@ -71,6 +72,10 @@ function App() {
             <Route path="/calendar">
               <Calendar/>
             </Route>
+
+            <PrivateRoute path="docs/:id">
+              <DocumentsPage/>
+            </PrivateRoute>
             
             <Route path="/appointment">
               <AppointmentsPage/>

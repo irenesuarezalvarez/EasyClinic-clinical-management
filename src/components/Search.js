@@ -80,7 +80,7 @@ const Searcher = ({deletePatient}) => {
                     onChange={handleChange}
                     type="text"
                 />
-                <Button radius="0 5px 5px 0" type="submit">Seach</Button>                 
+                <Button radius="0 5px 5px 0" type="submit">Search</Button>                 
             </SearchBar>
 
             <StyledRow>

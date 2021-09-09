@@ -13,24 +13,6 @@ export const SidebarProtectedData = [
 
     subNav: [
       {
-        title: 'Info',
-        path: '/details/:id',
-        icon: <FontAwesomeIcon icon={faInfo}/>,
-        cName: 'sub-nav'
-      },
-      {
-        title: 'Edit',
-        path: '/edit/:id',
-        icon: <FontAwesomeIcon icon={faEdit}/>,
-        cName: 'sub-nav'
-      },
-      {
-        title: 'Clinical History',
-        path: '/history',
-        icon: <FontAwesomeIcon icon={faFileMedicalAlt}/>,
-        cName: 'sub-nav'
-      },
-      {
         title: 'New Patient',
         path: '/createpatient',
         icon: <FontAwesomeIcon icon={faUserPlus}/>,

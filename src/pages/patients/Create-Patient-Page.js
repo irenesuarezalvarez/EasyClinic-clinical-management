@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
+import { AuthContext } from "../../utils/AuthContext.js";
 import axiosApi from "../../utils/AxiosApi";
 import Box from "../../components/layouts/Box.js";
 import Button from "../../components/layouts/Button.js";
@@ -13,6 +14,7 @@ import StyledImg from "./../../components/layouts/StyledImg.js";
 
 const CreatePatientPage = () => {
     const [input, setInput] = useState({});
+    const { role } = useContext(AuthContext);
     const [redirect, setRedirect] = useState(false); 
     const [professionals, setProfessionals] = useState([]);
     const [image, setImage] = useState("");
@@ -92,9 +94,13 @@ const CreatePatientPage = () => {
         } 
   } 
 
-  if(redirect){
-    return <Redirect to='/patients'/>
-  }
+  //Redirect
+    if(redirect && role === "admin"){
+        return <Redirect to='/patients'/>
+    }
+    if(redirect && role === "prof"){
+        return <Redirect to='/mypatients'/>
+    }
 
   return (
     <PageWrapper>

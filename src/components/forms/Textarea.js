@@ -8,9 +8,9 @@ const TextArea = ({ name, onChange, children }) => (
 );
 
 const TextAreaContainer = styled.textarea`
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
+  resize: none; 
+  width: 25rem;
+  height: 14rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;

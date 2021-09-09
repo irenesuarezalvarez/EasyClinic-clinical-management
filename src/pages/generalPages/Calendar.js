@@ -100,7 +100,7 @@ const getApppointments = async () =>{
     ResourceId: 3
   }]
 
-  console.log('Prof start', prof3.StartTime)
+  /* console.log('Prof start', prof3.StartTime) */
   /* const eventTemplate = ({Subject}) =>{
     return(<div className="template-wrap">{Subject}</div>);
   }
@@ -137,7 +137,7 @@ const getApppointments = async () =>{
     const resourceData = professionals.filter((coll) => (professionals.indexOf(coll)+1) === value );
    
    if (args.checked) {
-      console.log('Resourcedata', resourceData[0])
+/*       console.log('Resourcedata', resourceData[0]) */
        scheduleObj.addResource(resourceData[0], 'Resources', value - 1); 
     }
     else {
@@ -146,7 +146,7 @@ const getApppointments = async () =>{
    
     
 }
-console.log('-->', app)
+/* console.log('-->', app) */
 const renderApp = () => {
   return app.length > 0 && app.map(({subject, StartTime}) => {
       return(
@@ -171,10 +171,10 @@ const renderProfessionalChekbox = () =>{
 /* eventSettings={ { dataSource: data } } */
   return(
   <div>
-                    <div>
+                   {/*  <div>
                       Render app:
                       {renderApp()}
-                    </div>
+                    </div> */}
       <div>
         <tr style={{ height: '50px' }}>
             <td style={{ width: '100%' }}>

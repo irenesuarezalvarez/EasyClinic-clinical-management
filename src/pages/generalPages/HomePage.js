@@ -1,6 +1,3 @@
-/* IN CONSTRUCTION */
-/* IN CONSTRUCTION */
-/* IN CONSTRUCTION */
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -14,45 +11,35 @@ const HomePage = () => {
   return (
     <Box>
         <HeaderStyled>
-           {/*  <Box bgcolor="rgba( 255, 255, 255, 0.50)" radius="25px">
-                <StyledLogo src="../images/EasyClinic.png" alt="Easy Clinic Logo"/>
-            </Box> */}
-            <Box></Box>
-            
+            <Box bgcolor="rgba(255, 255, 255, 0.70)" radius="25px" width="50%" height="25%" margin="1rem 4rem">
+                <HeaderTitle>Welcome to</HeaderTitle>
+                <LogoText src="../images/EasyClinic.png" alt="Easy Clinic Logo"/>
+            </Box> 
+          
             <LoginBox>
                 <Login/>
                 <Box padding= "20px">
                     <span>I don't have an account </span>
-                    <StyledLink to="/signup">Sign up</StyledLink>
+                    <StyledLinkRed to="/signup">Sign up</StyledLinkRed>
                 </Box>
             </LoginBox>
         </HeaderStyled>
-        <Box>
-            <section>
-                <h1>Easy management of your Clinic</h1>
-                <article>
-                    Make your daily work management clear and easier with the clearest app of the market
+       
+        <SectionBgUrl >
+            <Box padding="1rem 2rem">
+                <LogoImg src="../images/EasyclinicLogo.png" alt="Logo"/>
+                <h2>Join us!</h2>
+                <article>An easy way to manage your clinic in order to make professional’s work easier and efficient.
                 </article>
+                <Box direction="row" margin="1rem">
+                    <StyledLinkBlack to="/login">Log in -</StyledLinkBlack>
+                    <StyledLinkBlack to="/signup">Create an account for free</StyledLinkBlack>
+                </Box>
+            </Box>
 
-                <div>
-                    <Link to="/login">Log in</Link>
-                    <Link to="/signup">Create and account for free</Link>
-                </div>
-            </section>
-        </Box>
+        </SectionBgUrl>
         <Box>
-            
-            <SectionBgUrl>
-                <IconImg src="images/triangle-hexagon.svg" alt="Triangle Hexagon"/>
-                <h2>Bring the best of open source to your company</h2>
-                <article>npm is the tool used by over 11,000,000 JavaScript developers around the world. Your developers already use it. Your company depends on it.
-                    Create an Org and get more out of the tools your team already knows and loves.
-                </article>
-            </SectionBgUrl>
-
-        </Box>
-        <Box>
-            <Box direction="row" bgcolor="rgb(255, 160, 122)" padding="1rem" wrap="no-wrap">
+            <Box direction="row" bgcolor="rgba(225, 183, 65)" padding="1rem" wrap="no-wrap">
                
                     <Box padding="0.5rem" width="100%" height="100%" flex="4">
                         <IconImg src="../images/agenda.jpg" alt="Agenda"/>
@@ -80,10 +67,12 @@ const HomePage = () => {
             </Box>
         </Box>
         <footer>
-            <Box>
-                <span>Copyright © 2017 revera - Just another demo Sites site. </span>
+            <Box padding="1rem">
+                <span>Project created by
+                    <StyledLinkBlack to={{ pathname: "https://github.com/irenesuarezalvarez"}} target="_blank" >Irene Suárez</StyledLinkBlack>
+                </span>
             </Box>
-        </footer>
+        </footer> 
     </Box>
   );
 };
@@ -92,42 +81,55 @@ const HomePage = () => {
 const HeaderStyled = styled.header`
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center; 
+    justify-content: center;
+    align-items: flex-start; 
     background-image: url("../images/clinic-management.jpg");
     width: 100%; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: "blue";
 `;
 
+const HeaderTitle =  styled.h1`
+    color: white;
+    font-size: 0.8rem;
+`
+const LogoText = styled.img`
+    height: 5rem;
+`
 const SectionBgUrl = styled.section`
     background-image: url("../images/cool-background.png");
     width: 100%; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 `
-
-
-const StyledLogo = styled.img`
-    height: 19rem;
+const LogoImg = styled.img`
+    height: 10rem;
     margin: 1rem;
     padding: 1rem;
 `
-
 const LoginBox = styled(StyledBox)`
     background-color: ${props => props.theme.color.transparentWhite};
     padding: 1.5rem;
+    width: 300px;
 `;
-
-const StyledLink = styled(Link)`
+const StyledLinkRed = styled(Link)`
     padding-left: 10px;
     text-decoration: none;
-    color:red;
+    color: red;
     &:hover{
         color: black;
+}
+`
+
+const StyledLinkBlack = styled(Link)`
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+    &:hover{
+        color: blue;
 }
 `
 

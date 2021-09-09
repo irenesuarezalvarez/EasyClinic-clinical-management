@@ -34,6 +34,7 @@ const Login = () => {
 
 
     try{
+    
       const data = await logIn(checkUser);
       if(data.status === 200){
         setRedirect(true)       

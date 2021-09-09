@@ -5,8 +5,6 @@ import styled from "styled-components";
 import axiosApi from '../../utils/AxiosApi';
 import Box from '../../components/layouts/Box';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
-import Card from '../../components/layouts/Card';
-import Container from '../../components/layouts/Container';
 import Searcher from '../../components/Search';
 import StyledLink from '../../components/layouts/StyledLink';
 
@@ -86,27 +84,26 @@ const ListAllPatientsPage = () => {
 
   
     return (
-        <Container>
-            <Card>
-                <StyledTitle>List of Patients</StyledTitle>
-               
-                <NewBtnRight>
-                    <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
-                </NewBtnRight>
-       
-                <Searcher deletePatient = {deletePatient}/>
+        <Box bgcolor="white" margin="1rem auto" padding="1.5rem" width="90%">
+            <StyledTitle>List of Patients</StyledTitle>
+            
+            <NewBtnRight>
+                <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+            </NewBtnRight>
+    
+            <Searcher deletePatient = {deletePatient}/>
 
-                <StyledTable>
-                    <thead>
-                        <tr>{renderHeader()}</tr>
-                    </thead>
-                    <tbody>
-                        {renderBody()}
-                    </tbody>
-                </StyledTable>
+            <StyledTable>
+                <thead>
+                    <tr>{renderHeader()}</tr>
+                </thead>
+                <tbody>
+                    {renderBody()}
+                </tbody>
+            </StyledTable>
 
-            </Card>
-        </Container>
+        </Box>
+        
     )
 }
 
