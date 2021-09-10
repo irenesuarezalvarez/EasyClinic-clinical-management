@@ -26,7 +26,7 @@ const AppointmentsPage = () => {
                 setProfessionals([...professionals]);
             }
             catch(err){
-                console.log(err)
+                console.log(err);
             }     
     };
 
@@ -56,9 +56,9 @@ const AppointmentsPage = () => {
             const result = await axiosApi.post('/appointments', newAppointment)
             const data = await result;
             setRedirect(data.status === 200);
-            console.log('New appointment was created', newAppointment)
+            console.log('New appointment was created', newAppointment);
         } catch (err) {
-            console.error(err)
+            console.error(err);
         } 
   } 
 
@@ -71,8 +71,8 @@ const AppointmentsPage = () => {
         <form onSubmit={createPatient}>
             <Card title="Appointment">
                 <Input
-                    label="Subject "
-                    name= "subject"
+                    label="Subject"
+                    name="subject"
                     required
                     value={input.subject} 
                     placeholder="subject"
@@ -80,7 +80,7 @@ const AppointmentsPage = () => {
                     type="text"
                 />
                 <Input
-                    label="startTime "
+                    label="startTime"
                     name="startTime"
                     required
                     value={input.startTime} 
@@ -89,7 +89,7 @@ const AppointmentsPage = () => {
                     type="text"
                 />
                 <Input
-                    label="endTime "
+                    label="endTime"
                     name="endTime"
                     required
                     value={input.endTime} 
@@ -118,8 +118,7 @@ const AppointmentsPage = () => {
 
             <Box margin="1rem" padding="1rem">
                 <Button type="submit">Create</Button>
-            </Box>
-            
+            </Box>  
         </form>
     </PageWrapper>
   );

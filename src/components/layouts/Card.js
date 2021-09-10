@@ -17,7 +17,7 @@ const Card = ({ width, height, bgcolor, margin, title, children }) => {
 
 const CardContainer = styled.fieldset`
   width: ${({width})=> width};
-  height: ${({height})=> height} ;
+  height: ${({height})=> height};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ const CardContainer = styled.fieldset`
   margin: ${({margin})=> margin};
   border-radius: 4px;
   border: 1px solid black;
-  box-shadow: 0 0 20px ${props => props.theme.color.boxshadow};;
+  box-shadow: 0 0 20px ${props => props.theme.color.boxshadow};
   &:not(:last-of-type) {
     margin-bottom: 2rem;
   }

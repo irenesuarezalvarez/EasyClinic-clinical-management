@@ -65,32 +65,32 @@ const getApppointments = async () =>{
   //Collections
   const mycalendar = []
   const prof1 =[{
-  Id: 2,
-  Subject: 'Guido',
-  StartTime: new Date(2021, 8, 15, 10, 0),
-  EndTime: new Date(2021, 8, 15, 12, 30),
-  ResourceId: 1
-  },
-  {
-  Id: 2,
-  Subject: 'Baba',
-  StartTime: new Date(2021, 8, 17, 10, 0),
-  EndTime: new Date(2021, 8, 17, 12, 30),
-  ResourceId: 1
+      Id: 2,
+      Subject: 'Guido',
+      StartTime: new Date(2021, 8, 15, 10, 0),
+      EndTime: new Date(2021, 8, 15, 12, 30),
+      ResourceId: 1
+    },
+    {
+      Id: 2,
+      Subject: 'Baba',
+      StartTime: new Date(2021, 8, 17, 10, 0),
+      EndTime: new Date(2021, 8, 17, 12, 30),
+      ResourceId: 1
   }]
   const prof2 =[{
-    Id: 2,
-    Subject: 'Irene',
-    StartTime: new Date(2021, 8, 14, 13, 0),
-    EndTime: new Date(2021, 8, 14, 14, 30),
-    ResourceId: 2
-  },
-  {
-    Id: 2,
-    Subject: 'Pepe',
-    StartTime: new Date(2021, 8, 15, 13, 0),
-    EndTime: new Date(2021, 8, 15, 14, 30),
-    ResourceId: 2
+      Id: 2,
+      Subject: 'Irene',
+      StartTime: new Date(2021, 8, 14, 13, 0),
+      EndTime: new Date(2021, 8, 14, 14, 30),
+      ResourceId: 2
+    },
+    {
+      Id: 2,
+      Subject: 'Pepe',
+      StartTime: new Date(2021, 8, 15, 13, 0),
+      EndTime: new Date(2021, 8, 15, 14, 30),
+      ResourceId: 2
   }]
   const prof3 =[  {
     Id: 2,
@@ -132,7 +132,6 @@ const getApppointments = async () =>{
  
 
   function onChange(args){
-    
     const value = parseInt(args.event.target.getAttribute('value'), 10);
     const resourceData = professionals.filter((coll) => (professionals.indexOf(coll)+1) === value );
    
@@ -146,6 +145,7 @@ const getApppointments = async () =>{
    
     
 }
+
 /* console.log('-->', app) */
 const renderApp = () => {
   return app.length > 0 && app.map(({subject, StartTime}) => {
@@ -180,7 +180,6 @@ const renderProfessionalChekbox = () =>{
             <td style={{ width: '100%' }}>
               {renderProfessionalChekbox()}
 
-              
                 {/*  <CheckBoxComponent value='0' id='personal' checked={true} label='My Calendar' disabled={true} change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='2' checked={false} label='Stella' change={onChange.bind()}></CheckBoxComponent>
                 <CheckBoxComponent value='3' id='birthdays' checked={false} label='Juana' change={onChange.bind()}></CheckBoxComponent>
@@ -234,5 +233,6 @@ const StyledArticle = styled.article`
   box-shadow: 0 0 20px ${props => props.theme.color.boxshadow};;
   width: 80%;
   margin: 2rem auto;
-`
+`;
+
 export default Calendar;

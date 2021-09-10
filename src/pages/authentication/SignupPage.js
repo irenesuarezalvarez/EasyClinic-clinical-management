@@ -107,11 +107,9 @@ const SignupPage = () => {
             <Box margin="1rem" padding="1rem">
               <Button type="submit">Create account</Button>
             </Box>
-           
           </Card>
         </form>
     </PageWrapper>
-
   );
 }
 

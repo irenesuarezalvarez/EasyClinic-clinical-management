@@ -37,17 +37,16 @@ const HistoryPage = () => {
             patient: id
         })
         renderHistoryForm()
-        
     }, [boolean])
-    console.log('hello you', input)
+  
     const getHistory = async () =>{
         try{
             const response = await axiosApi.get(`${URL}/${id}`);
             const data = await response.data
-            setHistory(data.history)
+            setHistory(data.history);
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }
     } 
        
@@ -88,9 +87,9 @@ const HistoryPage = () => {
         } 
 
     }    
+
     //Render history form
     const renderHistoryForm = () => {
-        console.log('renders form')
         return (
             <Card as={"form"} bgcolor="rgba(197, 225, 232)" margin="0 0 1rem 0" width="100%">
             <Box direction="row" padding="1rem">
@@ -129,16 +128,14 @@ const HistoryPage = () => {
                 <Button type="submit" onClick={(e) => createSession(e)}>Save</Button>
             </Box>
         </Card>
-
         )
     }
+
     //Render previous sessions
     const renderSessions = () => {
           return history.length > 0 && history.map(({ date, notes, content, _id, patient }) => {
-           
             return (
                 <Card bgcolor="rgba(232, 236, 237)" width="100%" key={_id}>
-
                     <Box direction="row">
                         <h3>Date: {date}</h3>
                         <Box bgcolor="rgba(255, 195, 0)" shadow="0 0 20px rgba(0 0 0 / 15%)" align="stretch" padding="15px"  width="16rem" margin="0 0 0 1rem">
@@ -177,7 +174,6 @@ const HistoryPage = () => {
 
 const ImportantStyled = styled(StyledInput)`
     background-color: rgba(255, 195, 0);
-`
-
+`;
 export default HistoryPage;
 

@@ -22,7 +22,7 @@ const AuthProvider = ({children}) =>{
       return data
 
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } 
 
     return(
@@ -45,7 +45,7 @@ const AuthProvider = ({children}) =>{
       }
      
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } 
     return data
   }
@@ -59,7 +59,7 @@ const AuthProvider = ({children}) =>{
       setRole(undefined);
     }
     catch (err) {
-      console.error(err)
+      console.error(err);
     } 
     return data
   }

@@ -8,13 +8,13 @@ import Button, { NewBtnRight } from '../../components/layouts/Button';
 import Searcher from '../../components/Search';
 import StyledLink from '../../components/layouts/StyledLink';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus, faCalendar, faEdit, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 const URL = '/patients/all'
 
 const ListAllPatientsPage = () => {
-    const [patients, setPatients] = useState([])
+    const [patients, setPatients] = useState([]);
     const [boolean, setBoolean] = useState(false);
 
     const toogleBoolean = () => setBoolean(!boolean);
@@ -31,10 +31,10 @@ const ListAllPatientsPage = () => {
         try{
             const response = await axiosApi.get(URL);
             const data = await response.data
-            setPatients(data)
+            setPatients(data);
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }  
     }
     
@@ -43,9 +43,9 @@ const ListAllPatientsPage = () => {
             await axiosApi.delete(`${URL}/${id}/${professional}`)
             const del = patients.filter(patient => id !== patient.id)
             toogleBoolean()
-            setPatients(del)
+            setPatients(del);
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }  
     }  
    
@@ -88,10 +88,14 @@ const ListAllPatientsPage = () => {
             <StyledTitle>List of Patients</StyledTitle>
             
             <NewBtnRight>
-                <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                <StyledLink to="/createpatient">New
+                    <StyledSpan>
+                        <FontAwesomeIcon icon={faUserPlus} />
+                    </StyledSpan>
+                </StyledLink>
             </NewBtnRight>
     
-            <Searcher deletePatient = {deletePatient}/>
+            <Searcher deletePatient={deletePatient}/>
 
             <StyledTable>
                 <thead>
@@ -101,9 +105,7 @@ const ListAllPatientsPage = () => {
                     {renderBody()}
                 </tbody>
             </StyledTable>
-
         </Box>
-        
     )
 }
 

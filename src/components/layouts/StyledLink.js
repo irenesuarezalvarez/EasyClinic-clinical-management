@@ -28,6 +28,5 @@ const LinkIcon = styled(Link)`
   &:hover{
     background-color:rgba(28, 130, 112 );
   }
-`;
-
+`
 export default StyledLink;

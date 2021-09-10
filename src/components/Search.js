@@ -63,7 +63,9 @@ const Searcher = ({deletePatient}) => {
     return(
         <StyledArt>
             <SearchBar onSubmit={searchPatient}>              
-                <IconDiv><FontAwesomeIcon icon={faSearch} /></IconDiv>
+                <IconDiv>
+                    <FontAwesomeIcon icon={faSearch}/>
+                </IconDiv>
                 <SearchInput
                     name="name"
                     required
@@ -92,7 +94,8 @@ const Searcher = ({deletePatient}) => {
 
 const StyledArt= styled.article`
     width: 100%
-`
+`;
+
 const SearchDiv = styled(StyledBox)`
     width: 100%;
     padding: 0.5rem;
@@ -101,8 +104,9 @@ const SearchDiv = styled(StyledBox)`
     flex-direction: row;
     justify-content: space-around;
     box-shadow: 0 0 20px ${props => props.theme.color.buttonshadow};
-    background-color: white; ${'' /*  rgba(222, 232, 249 ) */}
-`
+    background-color: white;
+`;
+
 const Styledtd = styled.td`
     background-color: secondary_light;
     padding: 0.9rem;
@@ -111,7 +115,8 @@ const Styledtd = styled.td`
 
 const StyledRow = styled(StyledBox)`
     width: 100%;   
-`
+`;
+
 const SearchBar = styled.form`
     width: 100%;
     display: flex;
@@ -121,15 +126,17 @@ const SearchBar = styled.form`
     border-radius: 5px;
     padding: 1rem;
     box-shadow: 0 0 20px rgba(0 0 0 / 15%);
-`
+`;
+
 const IconDiv = styled.div`
     padding: 0.7rem;
     border-radius: 5px 0px 0px 5px;
     background-color: lightgrey;
     height: calc(1.5em + 0.75rem + 2px);
-`
+`;
+
 const SearchInput = styled(StyledInput)`
     border-radius: 0;
-`
+`;
 
 export default Searcher;

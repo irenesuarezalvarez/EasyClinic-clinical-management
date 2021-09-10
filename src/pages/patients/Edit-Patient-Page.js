@@ -33,11 +33,11 @@ const EditPatientPage = () => {
     const getPatient = async () => {
         try{
             const response = await axiosApi.get(`/patients/edit/${id}`);
-            setPatient(response.data)
-            setImage(response.data.media)
+            setPatient(response.data);
+            setImage(response.data.media);
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }
     }
     
@@ -49,7 +49,7 @@ const EditPatientPage = () => {
             setProfessionals([...professionals]); 
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }
        
     }
@@ -60,9 +60,9 @@ const EditPatientPage = () => {
         try {
             const response =  await axiosApi.post(`/patients/edit/${id}`, input)
             const status = await response.status 
-            setRedirect(status === 200) 
+            setRedirect(status === 200); 
         } catch (err) {
-            console.error(err)
+            console.error(err);
         } 
     } 
 
@@ -92,7 +92,6 @@ const EditPatientPage = () => {
         addImageToInput(mediaUrl)
     };
   
-    
     //Redirect
     if(redirect && role === "admin"){
         return <Redirect to='/patients'/>
@@ -147,7 +146,7 @@ const EditPatientPage = () => {
                             />
                             <Input
                                 label="Email "
-                                name= "email"
+                                name="email"
                                 required
                                 defaultValue={email} 
                                 onChange={handleChange}
@@ -162,28 +161,28 @@ const EditPatientPage = () => {
                                 type ="number"
                             />
                             <Input
-                                label="Address "
-                                name= "address"
+                                label="Address"
+                                name="address"
                                 defaultValue={address} 
                                 onChange={handleChange}
                                 type="text"
                             />
                             <Input
-                                label="City "
+                                label="City"
                                 name="city"
                                 defaultValue={city} 
                                 onChange={handleChange}
                                 type="text"
                             />
                             <Input
-                                label="State "
+                                label="State"
                                 name="state"
                                 defaultValue={state} 
                                 onChange={handleChange}
                                 type="text"
                             />
                             <Input
-                                label="Postal code "
+                                label="Postal code"
                                 name="postal"
                                 required
                                 defaultValue={postal} 
@@ -194,7 +193,7 @@ const EditPatientPage = () => {
 
                         <Card title="Contact Person">
                             <Input
-                                label="Name "
+                                label="Name"
                                 name="contactname"
                                 required
                                 defaultValue={contactname} 
@@ -202,7 +201,7 @@ const EditPatientPage = () => {
                                 type="text"
                             />
                             <Input
-                                label="Surname "
+                                label="Surname"
                                 name="contactsurname"
                                 required
                                 defaultValue={contactsurname} 
@@ -210,7 +209,7 @@ const EditPatientPage = () => {
                                 type="text"
                             />
                             <Input
-                                label="Email "
+                                label="Email"
                                 name="contactemail"
                                 required
                                 defaultValue={contactemail} 
@@ -256,7 +255,6 @@ const EditPatientPage = () => {
 
                             <Button type="submit">Save</Button>
                         </Box>
-                        
                     </form>
                 }
             </div>
@@ -268,6 +266,6 @@ const EditPatientPage = () => {
             <div>{renderPatient()}</div>    
         </PageWrapper>
     )
-  }
+}
 
 export default EditPatientPage;

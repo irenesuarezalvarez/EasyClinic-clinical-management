@@ -14,5 +14,6 @@ const StyledImg= styled.img`
     border:10px solid #666;
     object-fit: cover;
     margin: 1rem 0.5rem;
-`
+`;
+
 export default IconImg;

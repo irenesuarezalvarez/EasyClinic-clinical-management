@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import axiosApi from "../../utils/AxiosApi.js";
-import Box, {StyledBox} from "../../components/layouts/Box.js";
+import Box, { StyledBox } from "../../components/layouts/Box.js";
 import StyledLink from "../../components/layouts/StyledLink.js";
 import StyledImg from "../../components/layouts/StyledImg.js";
 import Title from "../../components/layouts/Title.js";
@@ -131,12 +131,12 @@ const DetailsPage = () => {
                         </StyledSection>
                         
                         <Box direction ="row" margin="1rem" padding="1rem">
-                                <Padding>
-                                    <StyledLink to="/mypatients">Back</StyledLink>
-                                </Padding>
-                                <Padding>
-                                    <StyledLink to={`/edit/${id}`} >Edit</StyledLink>
-                                </Padding>
+                            <Padding>
+                                <StyledLink to="/mypatients">Back</StyledLink>
+                            </Padding>
+                            <Padding>
+                                <StyledLink to={`/edit/${id}`} >Edit</StyledLink>
+                            </Padding>
                         </Box>
                     </Box>
                 }
@@ -160,8 +160,10 @@ const StyledSection = styled(StyledBox)`
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(0 0 0 / 15%);
-`
+`;
+
 const Padding = styled.div`
     padding: 0.7rem;
-`
+`;
+
 export default DetailsPage;

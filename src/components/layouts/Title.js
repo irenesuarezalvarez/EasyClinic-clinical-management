@@ -8,6 +8,7 @@ const Title = ({children}) => {
         </StyledTitle>
     )
 }
+
 const StyledTitle = styled.h2`
     display:flex;
     justify-content: center;

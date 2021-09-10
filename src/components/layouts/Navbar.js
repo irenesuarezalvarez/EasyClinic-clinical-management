@@ -1,3 +1,4 @@
+/* NOT USED */
 import { Link, Redirect } from "react-router-dom"; 
 import React, { useContext, useState } from "react"; 
 import styled from "styled-components";
@@ -21,7 +22,7 @@ function Navbar() {
       setRedirect(result === 200)
     }
     catch(err){
-      console.log(err)
+      console.log(err);
     }
   } 
 
@@ -30,7 +31,6 @@ function Navbar() {
   }
 
   return (
-    
     <StyledNavbar>
         <Box margin="1rem">
           <FontAwesomeIcon icon={faBars} />
@@ -57,7 +57,8 @@ const StyledLogo = styled.img`
   height: 50px;
   padding: 5px;
   margin: 5px 25px ;
-`
+`;
+
 const StyledUl = styled.ul`
   list-style-type: none;
   margin: 0;
@@ -65,21 +66,24 @@ const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
+
 const StyledNavbar = styled.nav`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    background:${props => props.theme.color.navbar};
-    box-shadow: 0 0 20px black;
-`
- const StyledLink = styled(Link)`
-    color: black;
-    text-decoration: none;
-    padding: 5px;
-    margin: 5px 10px ;
- `
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  background:${props => props.theme.color.navbar};
+  box-shadow: 0 0 20px black;
+`;
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+  margin: 5px 10px ;
+`;
+
 export default Navbar;
 
  

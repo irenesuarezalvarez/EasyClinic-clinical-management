@@ -21,7 +21,7 @@ const Sidebar = () => {
             await logOut()
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }
     } 
 
@@ -133,7 +133,8 @@ const SidebarLabel = styled(Link)`
 
 const StyledSpan = styled.span`
     margin-left: 0.8rem;
-`
+`;
+
 const StyledBtn = styled.button`
     margin: 0;
     padding: 0;
@@ -148,5 +149,6 @@ const StyledBtn = styled.button`
     height: 60px;
     text-decoration: none;
     font-size: 19px;
-`
+`;
+
 export default Sidebar;

@@ -53,7 +53,6 @@ const StyledSelect = styled.select`
  
   appearance: none;
 
-
   background-image:
     linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%),
@@ -80,7 +79,6 @@ const StyledSelect = styled.select`
     background-color: grey;
   }
 `;
-
 const LabelText = styled.span`
   cursor: pointer;
   font-size: 1rem;

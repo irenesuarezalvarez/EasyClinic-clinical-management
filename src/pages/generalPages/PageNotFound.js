@@ -21,9 +21,11 @@ const PageNotFound = () => {
 }
 
 const StyledH1 = styled.h1`
-color: rgba(57, 81, 101);
-`
+  color: rgba(57, 81, 101);
+`;
+
 const StyledSpan = styled.span`
   color: rgba(57, 81, 101);
-`
+`;
+
 export default PageNotFound;

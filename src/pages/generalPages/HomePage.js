@@ -77,7 +77,6 @@ const HomePage = () => {
   );
 };
 
-
 const HeaderStyled = styled.header`
     display: flex;
     flex-direction: row;
@@ -94,35 +93,40 @@ const HeaderStyled = styled.header`
 const HeaderTitle =  styled.h1`
     color: white;
     font-size: 0.8rem;
-`
+`;
+
 const LogoText = styled.img`
     height: 5rem;
-`
+`;
+
 const SectionBgUrl = styled.section`
     background-image: url("../images/cool-background.png");
     width: 100%; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-`
+`;
+
 const LogoImg = styled.img`
     height: 10rem;
     margin: 1rem;
     padding: 1rem;
-`
+`;
+
 const LoginBox = styled(StyledBox)`
     background-color: ${props => props.theme.color.transparentWhite};
     padding: 1.5rem;
     width: 300px;
 `;
+
 const StyledLinkRed = styled(Link)`
     padding-left: 10px;
     text-decoration: none;
     color: red;
     &:hover{
         color: black;
-}
-`
+    }
+`;
 
 const StyledLinkBlack = styled(Link)`
     padding-left: 10px;
@@ -130,7 +134,7 @@ const StyledLinkBlack = styled(Link)`
     color: black;
     &:hover{
         color: blue;
-}
-`
+    }
+`;
 
 export default HomePage;

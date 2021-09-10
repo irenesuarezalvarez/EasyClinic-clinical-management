@@ -9,10 +9,9 @@ import Input from "./forms/Input.js";
 
 
 const Login = () => {
-  const { logIn, role } = useContext(AuthContext)
+  const { logIn, role } = useContext(AuthContext);
   const [input, setInput] = useState({});
   const [redirect, setRedirect] = useState(false);
-  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,14 +31,13 @@ const Login = () => {
       password: input.password
     }
 
-
     try{
     
       const data = await logIn(checkUser);
       if(data.status === 200){
         setRedirect(true)       
       }else{
-        alert('Please provide the right credentials')
+        alert('Please provide the right credentials');
       }
     }
     catch(error){

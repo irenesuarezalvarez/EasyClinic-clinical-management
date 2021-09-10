@@ -1,3 +1,4 @@
+/* KEEP COMMENTS FOR DEPLOYMENT TRIAL */
 import axios from "axios";
 
 const axiosApi = axios.create({
@@ -5,10 +6,8 @@ const axiosApi = axios.create({
   withCredentials: true,
 
  /*  headers: {
-
   timeout: 10000,
   headers: {
-
     'Content-Type': 'application/json'
   }, */
 });

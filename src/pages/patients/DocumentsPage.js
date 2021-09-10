@@ -29,7 +29,7 @@ const DocumentPage = () => {
                 setDoc([...doc]); 
             }
             catch(err){
-                console.log(err)
+                console.log(err);
             }
         }
     }); 
@@ -45,7 +45,7 @@ const DocumentPage = () => {
         setMediaPreview(window.URL.createObjectURL(doc));
     
         const response = await axios.post(
-            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"/*  "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload"*/, 
+            "https://api.cloudinary.com/v1_1/dubwqkgru/image/upload", 
             data
         );
         const mediaUrl = await response.data.url;
@@ -63,14 +63,14 @@ const DocumentPage = () => {
         try {
             const result = await axiosApi.post('/patients/doc', newDoc)
             const data = await result;
-            setRedirect(data.status === 200) 
-            console.log('New doc was uploaded', newDoc)
+            setRedirect(data.status === 200);
+            console.log('New doc was uploaded', newDoc);
         } catch (err) {
-            console.error(err)
+            console.error(err);
         } 
   } 
 
-  //Redirect
+    //Redirect
     if(redirect && role === "admin"){
         return <Redirect to='/patients'/>
     }
@@ -92,6 +92,7 @@ const DocumentPage = () => {
                 
                 {mediaPreview && <StyledImg width="10rem" src={mediaPreview} alt="Media preview" />}
             </Card>
+
             <Box margin="1rem" padding="1rem">
                 <Button type="submit">Create</Button>
             </Box>
@@ -100,4 +101,4 @@ const DocumentPage = () => {
   );
 };
 
-export default DocumentPage
+export default DocumentPage;

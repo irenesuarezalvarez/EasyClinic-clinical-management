@@ -6,8 +6,8 @@ import axiosApi from '../../utils/AxiosApi';
 import Button, { NewBtnRight } from '../../components/layouts/Button';
 import StyledLink from '../../components/layouts/StyledLink';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle, faFolder, faFileAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import Box from '../../components/layouts/Box';
 
 const ListMyPatientsPage = () => {
@@ -23,7 +23,7 @@ const ListMyPatientsPage = () => {
             setPatients(response.data.patients)
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }       
     }
 
@@ -43,7 +43,6 @@ const ListMyPatientsPage = () => {
                     <Styledtd>{surname}</Styledtd>
                     <Styledtd>{name}</Styledtd>
                     <Styledtd>
-                   
                         <Button as={Link} radius="5px 0 0 5px" bgcolor=" rgba(225, 183, 65)" hovercolor="rgba(187, 135, 20)" to={`/details/${_id}`}>
                             <FontAwesomeIcon icon={faInfoCircle}/>
                         </Button>
@@ -66,7 +65,11 @@ const ListMyPatientsPage = () => {
             <StyledTitle>My Patients</StyledTitle>
 
             <NewBtnRight>
-                <StyledLink to="/createpatient">New<StyledSpan><FontAwesomeIcon icon={faUserPlus} /></StyledSpan></StyledLink>
+                <StyledLink to="/createpatient">New
+                    <StyledSpan>
+                        <FontAwesomeIcon icon={faUserPlus}/>
+                    </StyledSpan>
+                </StyledLink>
             </NewBtnRight>
             
             <StyledTable>
@@ -77,9 +80,7 @@ const ListMyPatientsPage = () => {
                     {renderBody()}
                 </tbody>
             </StyledTable>
-
         </Box>
-      
     )
 }
 

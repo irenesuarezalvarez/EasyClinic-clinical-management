@@ -32,7 +32,7 @@ function App() {
           </OutsideListener>
       
           <Switch>
-        
+          
             <Route exact path="/">
               <HomePage/>
             </Route>

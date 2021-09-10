@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+
 import { AuthContext } from "../utils/AuthContext";
 
 const useOutsideListener = (ref) => {
-    const contextAuth = useContext(AuthContext)
-    const { setSidebar } = contextAuth;
+  const contextAuth = useContext(AuthContext)
+  const { setSidebar } = contextAuth;
 
   useEffect(() => {
     function handleClickOutside(event) {
